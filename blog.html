@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — MedPREP</title>
+  <meta name="description" content="MedPREP Blog — exam tips, announcements, pathway guides and MedPREP updates for Pakistani medical students." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E2C47A;
+      --gold-dim: rgba(201,168,76,0.12);
+      --gold-border: rgba(201,168,76,0.25);
+      --gold-border-strong: rgba(201,168,76,0.6);
+      --black: #000000;
+      --surface: #0a0a0a;
+      --surface-2: #0f0f0f;
+      --surface-3: #141414;
+      --surface-4: #181818;
+      --white: #ffffff;
+      --text-primary: #ffffff;
+      --text-secondary: #999999;
+      --text-muted: #555555;
+      --text-faint: #2e2e2e;
+      --border: rgba(255,255,255,0.07);
+      --border-focus: rgba(201,168,76,0.5);
+      --radius: 10px;
+      --radius-lg: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .gold { color: var(--gold); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold-border) 30%, var(--gold-border) 70%, transparent 100%);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold-dim);
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
+      padding: 5px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      margin-bottom: 20px;
+    }
+    .tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+    .coming-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold-dim);
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
+      padding: 4px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .cat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .cat-announcement { background: rgba(99,179,237,0.12); color: #63b3ed; border: 1px solid rgba(99,179,237,0.25); }
+    .cat-pathway      { background: rgba(154,230,180,0.12); color: #68d391; border: 1px solid rgba(154,230,180,0.25); }
+    .cat-update       { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold-border); }
+    .cat-tips         { background: rgba(252,182,159,0.12); color: #fc8181; border: 1px solid rgba(252,182,159,0.25); }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--gold);
+      border: 1.5px solid var(--gold-border-strong);
+      padding: 13px 28px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-secondary:hover { border-color: var(--gold); background: var(--gold-dim); transform: translateY(-1px); }
+
+    /* ── NAVBAR ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-name { font-size: 18px; font-weight: 600; color: var(--white); }
+    .nav-logo-name span { color: var(--gold); }
+    .nav-logo-sub { font-size: 10px; color: var(--text-faint); letter-spacing: 1px; text-transform: uppercase; display: block; margin-top: 1px; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--gold); }
+
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-secondary); }
+
+    .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: rgba(0,0,0,0.97); border-bottom: 1px solid var(--border); padding: 24px 20px; z-index: 999; flex-direction: column; gap: 16px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--text-secondary); text-decoration: none; font-size: 15px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+
+    /* ── HERO ── */
+    .page-hero {
+      padding-top: 140px;
+      padding-bottom: 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .hero-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.8;
+      max-width: 440px;
+    }
+
+    /* ── NEWSLETTER CARD ── */
+    .newsletter-card {
+      background: var(--surface-2);
+      border: 1px solid var(--gold-border-strong);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .newsletter-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .newsletter-title {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .newsletter-desc {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .newsletter-input {
+      width: 100%;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 11px 14px;
+      font-size: 13px;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .newsletter-input::placeholder { color: var(--text-faint); }
+    .newsletter-input:focus { border-color: var(--border-focus); }
+
+    .newsletter-btn {
+      width: 100%;
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 11px 20px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+    .newsletter-btn:hover { background: var(--gold-light); }
+    .newsletter-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .newsletter-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    .newsletter-success {
+      display: none;
+      text-align: center;
+      padding: 16px 0;
+    }
+
+    .newsletter-success.show { display: block; }
+
+    .newsletter-success-icon {
+      font-size: 32px;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .newsletter-success-text {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .newsletter-success-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── CATEGORIES BAR ── */
+    .categories-bar {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      position: sticky;
+      top: 68px;
+      z-index: 100;
+    }
+
+    .categories-inner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .categories-inner::-webkit-scrollbar { display: none; }
+
+    .cat-filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border-radius: var(--radius);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .cat-filter-btn:hover { color: var(--text-secondary); border-color: var(--gold-border); }
+    .cat-filter-btn.active { background: var(--gold-dim); color: var(--gold); border-color: var(--gold-border); }
+
+    /* ── MAIN LAYOUT ── */
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 32px;
+      padding: 64px 0 88px;
+      align-items: start;
+    }
+
+    /* ── COMING SOON BANNER ── */
+    .coming-banner {
+      background: var(--surface-2);
+      border: 1px solid var(--gold-border-strong);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .coming-banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .coming-banner-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: 1.5px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: var(--gold);
+      margin: 0 auto 20px;
+    }
+
+    .coming-banner-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .coming-banner-desc {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.75;
+      max-width: 400px;
+      margin: 0 auto 24px;
+    }
+
+    /* ── GHOST POST CARDS ── */
+    .ghost-posts {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    .ghost-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.97) 100%);
+      border-radius: var(--radius-lg);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .post-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      transition: border-color 0.25s, transform 0.2s;
+      filter: blur(3px);
+      opacity: 0.6;
+    }
+
+    .post-card:hover { border-color: var(--gold-border); transform: translateY(-2px); }
+
+    .post-thumb {
+      background: var(--surface-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      color: var(--text-faint);
+      min-height: 140px;
+    }
+
+    .post-body { padding: 20px 22px; }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .post-date { font-size: 11px; color: var(--text-muted); }
+
+    .post-title {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .post-excerpt {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.65;
+      margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .post-author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .author-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: sticky;
+      top: 116px;
+    }
+
+    .sidebar-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .sidebar-cat-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    .sidebar-cat-item:last-child { border-bottom: none; }
+
+    .sidebar-cat-count {
+      background: var(--surface-3);
+      color: var(--text-muted);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+
+    .sidebar-author-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-author-item:last-child { border-bottom: none; }
+
+    .sidebar-author-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--gold);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .sidebar-author-name { font-size: 13px; font-weight: 500; }
+    .sidebar-author-role { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+
+    .sidebar-coming {
+      font-size: 11px;
+      color: var(--text-faint);
+      font-style: italic;
+      text-align: center;
+      padding: 8px 0;
+    }
+
+    /* ── WHAT TO EXPECT ── */
+    .expect-section {
+      background: var(--surface);
+      padding: 88px 0;
+    }
+
+    .expect-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .expect-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .expect-card:hover { border-color: var(--gold-border); transform: translateY(-2px); }
+
+    .expect-icon {
+      width: 46px;
+      height: 46px;
+      background: var(--gold-dim);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .expect-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .expect-desc { color: var(--text-secondary); font-size: 13px; line-height: 1.7; }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 88px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      max-width: 400px;
+      margin: 0 auto 32px;
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── FOOTER ── */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 48px 0 28px; }
+    .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand-name { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+    .footer-brand-name span { color: var(--gold); }
+    .footer-brand-sub { font-size: 10px; color: var(--text-faint); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .footer-brand-desc { color: var(--text-muted); font-size: 12px; line-height: 1.7; }
+    .footer-col-title { font-size: 11px; font-weight: 600; color: var(--text-secondary); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-bottom p { color: var(--text-faint); font-size: 12px; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── SPINNER ── */
+    .spinner { width: 14px; height: 14px; border: 2px solid rgba(0,0,0,0.3); border-top-color: #000; border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 36px; }
+      .blog-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .post-card { grid-template-columns: 1fr; }
+      .post-thumb { min-height: 100px; }
+      .expect-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .nav-links, .nav-links + a { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      .hero-title { font-size: 32px; }
+      .expect-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .cta-title { font-size: 28px; }
+      .coming-banner { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="MedPREP home">
+        <svg width="30" height="30" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect width="36" height="36" rx="8" fill="rgba(201,168,76,0.1)"/>
+          <polygon points="18,5 9,17 14,17 11,31 18,20 25,31 22,17 27,17" fill="#C9A84C" opacity="0.25"/>
+          <text x="18" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#C9A84C" font-family="serif">M</text>
+        </svg>
+        <div>
+          <div class="nav-logo-name">Med<span>PREP</span></div>
+          <span class="nav-logo-sub">by Exonovo</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="features.html">Features</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <a href="register.html" class="btn-primary" style="padding: 10px 22px; font-size: 13px;">Register Now</a>
+
+      <button class="nav-hamburger" aria-label="Open menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="features.html">Features</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="register.html" class="btn-primary" style="justify-content: center; margin-top: 8px;">Register Now</a>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section class="page-hero" aria-label="Blog">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero-inner">
+
+        <div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+            <div class="tag" style="margin-bottom: 0;">MedPREP Blog</div>
+            <div class="coming-badge">
+              <i class="ti ti-clock" style="font-size: 11px;" aria-hidden="true"></i>
+              Launching soon
+            </div>
+          </div>
+          <h1 class="hero-title">
+            Insights for<br/><span class="gold">Future Doctors.</span>
+          </h1>
+          <p class="hero-desc">
+            Exam announcements, result dates, pathway guides for USMLE and AMC, MedPREP updates, and expert articles — written by medical educators, senior students, and doctors who have been where you are.
+          </p>
+        </div>
+
+        <!-- Newsletter card -->
+        <div class="newsletter-card reveal">
+          <div class="newsletter-icon" aria-hidden="true">
+            <i class="ti ti-mail"></i>
+          </div>
+          <div class="newsletter-title">Get Notified First</div>
+          <p class="newsletter-desc">Subscribe and be the first to know when we publish — exam schedules, result announcements, pathway guides and more.</p>
+
+          <div id="newsletter-form-wrap">
+            <div class="newsletter-form">
+              <input class="newsletter-input" type="text" id="nl-name" placeholder="Your name" autocomplete="name" />
+              <input class="newsletter-input" type="email" id="nl-email" placeholder="Your email address" autocomplete="email" />
+              <button class="newsletter-btn" id="nl-btn" onclick="subscribeNewsletter()">
+                <span id="nl-btn-text">Subscribe — It's Free</span>
+                <div class="spinner" id="nl-spinner"></div>
+                <i class="ti ti-arrow-right" id="nl-btn-icon" aria-hidden="true"></i>
+              </button>
+            </div>
+            <p class="newsletter-note" style="margin-top: 10px;">No spam. Unsubscribe any time.</p>
+            <div id="nl-error" style="display:none; color: #e05252; font-size: 11px; margin-top: 8px; text-align: center;"></div>
+          </div>
+
+          <div class="newsletter-success" id="nl-success" role="status" aria-live="polite">
+            <div class="newsletter-success-icon" aria-hidden="true">✓</div>
+            <div class="newsletter-success-text">You're subscribed!</div>
+            <div class="newsletter-success-sub">We'll notify you when new posts go live.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CATEGORIES BAR ── -->
+  <nav class="categories-bar" aria-label="Blog categories">
+    <div class="container">
+      <div class="categories-inner">
+        <button class="cat-filter-btn active" onclick="filterCat(this, 'all')">
+          <i class="ti ti-layout-grid" aria-hidden="true"></i> All Posts
+        </button>
+        <button class="cat-filter-btn" onclick="filterCat(this, 'announcement')">
+          <i class="ti ti-speakerphone" aria-hidden="true"></i> Announcements
+        </button>
+        <button class="cat-filter-btn" onclick="filterCat(this, 'pathway')">
+          <i class="ti ti-map" aria-hidden="true"></i> Pathways
+        </button>
+        <button class="cat-filter-btn" onclick="filterCat(this, 'update')">
+          <i class="ti ti-sparkles" aria-hidden="true"></i> MedPREP Updates
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── BLOG LAYOUT ── -->
+  <div style="background: var(--black); padding: 0;">
+    <div class="container">
+      <div class="blog-layout">
+
+        <!-- ── MAIN CONTENT ── -->
+        <main aria-label="Blog posts">
+
+          <!-- Coming soon banner -->
+          <div class="coming-banner reveal">
+            <div class="coming-banner-icon" aria-hidden="true">
+              <i class="ti ti-pencil"></i>
+            </div>
+            <h2 class="coming-banner-title">
+              First Posts <span class="gold">Coming Soon</span>
+            </h2>
+            <p class="coming-banner-desc">
+              We are preparing our first articles — KMU exam schedules, MedPREP launch announcements, and a complete guide to USMLE for Pakistani medical students. Subscribe above to be notified the moment they go live.
+            </p>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+              <a href="#newsletter-form-wrap" class="btn-primary" style="padding: 11px 24px; font-size: 13px;">
+                <i class="ti ti-mail" aria-hidden="true"></i>
+                Subscribe for Updates
+              </a>
+              <a href="contact.html" class="btn-secondary" style="padding: 10px 20px; font-size: 13px;">
+                Suggest a Topic
+              </a>
+            </div>
+          </div>
+
+          <!-- Ghost post cards -->
+          <div class="ghost-posts reveal">
+            <div class="ghost-overlay" aria-hidden="true"></div>
+
+            <!-- Ghost Post 1 -->
+            <article class="post-card" aria-hidden="true">
+              <div class="post-thumb">📋</div>
+              <div class="post-body">
+                <div class="post-meta">
+                  <span class="cat-pill cat-announcement">
+                    <i class="ti ti-speakerphone" style="font-size:10px;"></i> Announcement
+                  </span>
+                  <span class="post-date">Coming soon</span>
+                </div>
+                <div class="post-title">KMU Professional Exam Schedule 2025 — Dates, Centres & Everything You Need to Know</div>
+                <p class="post-excerpt">Complete breakdown of the KMU professional examination schedule including venue details, roll number slip collection and important dates students need to track.</p>
+                <div class="post-author">
+                  <div class="author-avatar">MA</div>
+                  <span>Muhammad Abbas · MedPREP</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Ghost Post 2 -->
+            <article class="post-card" aria-hidden="true">
+              <div class="post-thumb">🌍</div>
+              <div class="post-body">
+                <div class="post-meta">
+                  <span class="cat-pill cat-pathway">
+                    <i class="ti ti-map" style="font-size:10px;"></i> Pathways
+                  </span>
+                  <span class="post-date">Coming soon</span>
+                </div>
+                <div class="post-title">USMLE Step 1 — A Complete Roadmap for Pakistani Medical Students</div>
+                <p class="post-excerpt">From eligibility and registration to study resources and timelines — everything a Pakistani MBBS graduate needs to know before starting their USMLE journey.</p>
+                <div class="post-author">
+                  <div class="author-avatar">G</div>
+                  <span>Guest Author · Doctor practicing in the USA</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Ghost Post 3 -->
+            <article class="post-card" aria-hidden="true">
+              <div class="post-thumb">🚀</div>
+              <div class="post-body">
+                <div class="post-meta">
+                  <span class="cat-pill cat-update">
+                    <i class="ti ti-sparkles" style="font-size:10px;"></i> MedPREP Update
+                  </span>
+                  <span class="post-date">Coming soon</span>
+                </div>
+                <div class="post-title">MedPREP is Live — Here is Everything the App Can Do For You</div>
+                <p class="post-excerpt">A full walkthrough of every MedPREP feature — from the 360° Topic View to auto-generated flashcards — and how to use each one to maximise your exam preparation.</p>
+                <div class="post-author">
+                  <div class="author-avatar">MA</div>
+                  <span>Muhammad Abbas · Founder, MedPREP</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </main>
+
+        <!-- ── SIDEBAR ── -->
+        <aside class="sidebar reveal" aria-label="Blog sidebar">
+
+          <!-- Categories -->
+          <div class="sidebar-card">
+            <div class="sidebar-title">Categories</div>
+            <div class="sidebar-cat-item">
+              <span><i class="ti ti-speakerphone" style="font-size: 13px; color: #63b3ed; margin-right: 6px;" aria-hidden="true"></i>Announcements</span>
+              <span class="sidebar-cat-count">—</span>
+            </div>
+            <div class="sidebar-cat-item">
+              <span><i class="ti ti-map" style="font-size: 13px; color: #68d391; margin-right: 6px;" aria-hidden="true"></i>Pathways</span>
+              <span class="sidebar-cat-count">—</span>
+            </div>
+            <div class="sidebar-cat-item">
+              <span><i class="ti ti-sparkles" style="font-size: 13px; color: var(--gold); margin-right: 6px;" aria-hidden="true"></i>MedPREP Updates</span>
+              <span class="sidebar-cat-count">—</span>
+            </div>
+            <p class="sidebar-coming">Posts coming soon</p>
+          </div>
+
+          <!-- Authors -->
+          <div class="sidebar-card">
+            <div class="sidebar-title">Our Authors</div>
+
+            <div class="sidebar-author-item">
+              <div class="sidebar-author-avatar">MA</div>
+              <div>
+                <div class="sidebar-author-name">Muhammad Abbas</div>
+                <div class="sidebar-author-role">Founder · 4th Year MBBS, AMC</div>
+              </div>
+            </div>
+
+            <div class="sidebar-author-item" style="opacity: 0.5;">
+              <div class="sidebar-author-avatar" style="border-style: dashed;">+</div>
+              <div>
+                <div class="sidebar-author-name" style="color: var(--text-muted);">Guest Authors</div>
+                <div class="sidebar-author-role">Professors, Senior Students, Doctors</div>
+              </div>
+            </div>
+
+            <p class="sidebar-coming">Want to write for MedPREP? <a href="contact.html" style="color: var(--gold); text-decoration: none;">Contact us</a></p>
+          </div>
+
+          <!-- About the blog -->
+          <div class="sidebar-card">
+            <div class="sidebar-title">About This Blog</div>
+            <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+              The MedPREP Blog publishes exam announcements, pathway guides, and platform updates — written by medical students and doctors who understand what you are going through.
+            </p>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── WHAT TO EXPECT ── -->
+  <section class="expect-section" aria-label="What to expect from the blog">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 52px;" class="reveal">
+        <div class="tag">What We'll Publish</div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 12px;">
+          Content That Actually<br/><span class="gold">Helps You Prepare.</span>
+        </h2>
+        <p style="color: var(--text-secondary); font-size: 14px; max-width: 440px; margin: 0 auto; line-height: 1.75;">
+          Every post will be focused, practical, and directly relevant to where you are in your medical journey.
+        </p>
+      </div>
+
+      <div class="expect-grid reveal">
+
+        <div class="expect-card">
+          <div class="expect-icon" aria-hidden="true"><i class="ti ti-speakerphone"></i></div>
+          <div class="expect-title">Exam Announcements</div>
+          <p class="expect-desc">KMU professional exam dates, result announcements, schedule updates, and everything you need to know — published the moment it is confirmed.</p>
+        </div>
+
+        <div class="expect-card">
+          <div class="expect-icon" aria-hidden="true"><i class="ti ti-map"></i></div>
+          <div class="expect-title">Pathway Guides</div>
+          <p class="expect-desc">Step-by-step guides for USMLE, AMC, and Germany — written by Pakistani doctors who have qualified and are now practicing abroad.</p>
+        </div>
+
+        <div class="expect-card">
+          <div class="expect-icon" aria-hidden="true"><i class="ti ti-sparkles"></i></div>
+          <div class="expect-title">MedPREP Updates</div>
+          <p class="expect-desc">New features, improvements, and announcements from the MedPREP team — so you always know what the platform can do for you.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── CTA ── -->
+  <section class="cta-section" aria-label="Subscribe CTA">
+    <div class="container">
+      <div class="reveal">
+        <div class="tag">Stay Updated</div>
+        <h2 class="cta-title">
+          Never Miss an<br/><span class="gold">Important Update.</span>
+        </h2>
+        <p class="cta-desc">
+          Exam dates. Result announcements. Pathway guides. Subscribe and we will bring them to your inbox.
+        </p>
+        <div class="cta-actions">
+          <a href="register.html" class="btn-primary" style="padding: 16px 40px; font-size: 15px;">
+            Register for MedPREP
+            <i class="ti ti-arrow-right" aria-hidden="true"></i>
+          </a>
+          <a href="contact.html" class="btn-secondary" style="padding: 15px 28px; font-size: 15px;">
+            Suggest a Topic
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">Med<span>PREP</span></div>
+          <div class="footer-brand-sub">by Exonovo</div>
+          <p class="footer-brand-desc">Pakistan's most comprehensive exam preparation platform. Built for KMU. Expanding across Pakistan.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Platform</div>
+          <ul class="footer-links">
+            <li><a href="features.html">Features</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="pathways.html">Pathways</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Legal</div>
+          <ul class="footer-links">
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+          </ul>
+          <div style="margin-top: 20px;">
+            <div class="footer-col-title">Support</div>
+            <a href="https://wa.me/923009012548" target="_blank" rel="noopener"
+              style="color: var(--text-muted); font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+              <i class="ti ti-brand-whatsapp" style="color: #25D366;" aria-hidden="true"></i>
+              WhatsApp Support
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 MedPREP by Exonovo. All rights reserved.</p>
+        <p>Built for KMU. Expanding across Pakistan.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/923009012548" target="_blank" rel="noopener" aria-label="WhatsApp Support"
+    style="position:fixed;bottom:28px;right:28px;z-index:900;background:#25D366;color:#fff;
+    width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:22px;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:transform 0.2s;">
+    <i class="ti ti-brand-whatsapp"></i>
+  </a>
+
+  <script>
+    // ── MOBILE MENU ──
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    }
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('mobile-menu');
+      const hamburger = document.querySelector('.nav-hamburger');
+      if (!menu.contains(e.target) && !hamburger.contains(e.target)) menu.classList.remove('open');
+    });
+
+    // ── REVEAL ──
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(function(el) { observer.observe(el); });
+
+    // ── CATEGORY FILTER ──
+    function filterCat(btn, cat) {
+      document.querySelectorAll('.cat-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+    }
+
+    // ── NEWSLETTER SUBSCRIBE ──
+    function subscribeNewsletter() {
+      const name  = document.getElementById('nl-name').value.trim();
+      const email = document.getElementById('nl-email').value.trim();
+      const errEl = document.getElementById('nl-error');
+      const btn   = document.getElementById('nl-btn');
+      const btnText = document.getElementById('nl-btn-text');
+      const spinner = document.getElementById('nl-spinner');
+      const icon    = document.getElementById('nl-btn-icon');
+
+      errEl.style.display = 'none';
+
+      if (!name) { errEl.textContent = 'Please enter your name.'; errEl.style.display = 'block'; return; }
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRe.test(email)) { errEl.textContent = 'Please enter a valid email address.'; errEl.style.display = 'block'; return; }
+
+      btn.disabled = true;
+      btnText.textContent = 'Subscribing...';
+      icon.style.display = 'none';
+      spinner.style.display = 'block';
+
+      const payload = {
+        '01_Type':  'Newsletter Subscription',
+        '02_Name':  name,
+        '03_Email': email,
+        '04_Time':  new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })
+      };
+
+      fetch('https://formspree.io/f/mwvdpkqd', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(function(res) {
+        if (res.ok) {
+          document.getElementById('newsletter-form-wrap').style.display = 'none';
+          document.getElementById('nl-success').classList.add('show');
+        } else {
+          throw new Error('Failed');
+        }
+      })
+      .catch(function() {
+        errEl.textContent = 'Something went wrong. Please try again.';
+        errEl.style.display = 'block';
+      })
+      .finally(function() {
+        btn.disabled = false;
+        btnText.textContent = 'Subscribe — It\'s Free';
+        spinner.style.display = 'none';
+        icon.style.display = 'inline-flex';
+      });
+    }
+
+    // Allow Enter key on newsletter inputs
+    ['nl-name', 'nl-email'].forEach(function(id) {
+      document.getElementById(id).addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') subscribeNewsletter();
+      });
+    });
+  </script>
+</body>
+</html>

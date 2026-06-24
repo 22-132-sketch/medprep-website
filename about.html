@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — MedPREP by Exonovo</title>
+  <meta name="description" content="The story behind MedPREP — built by a Pakistani medical student who wanted to change how future doctors prepare for their exams." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E2C47A;
+      --gold-dim: rgba(201,168,76,0.12);
+      --gold-border: rgba(201,168,76,0.25);
+      --gold-border-strong: rgba(201,168,76,0.6);
+      --black: #000000;
+      --surface: #0a0a0a;
+      --surface-2: #0f0f0f;
+      --surface-3: #141414;
+      --white: #ffffff;
+      --text-primary: #ffffff;
+      --text-secondary: #999999;
+      --text-muted: #555555;
+      --text-faint: #2e2e2e;
+      --border: rgba(255,255,255,0.07);
+      --radius: 10px;
+      --radius-lg: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .gold { color: var(--gold); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+    .container-narrow { max-width: 720px; margin: 0 auto; padding: 0 40px; }
+    .section { padding: 88px 0; }
+    .section-alt  { background: var(--surface); }
+    .section-alt2 { background: var(--surface-2); }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold-border) 30%, var(--gold-border) 70%, transparent 100%);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold-dim);
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
+      padding: 5px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      margin-bottom: 20px;
+    }
+    .tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--gold);
+      border: 1.5px solid var(--gold-border-strong);
+      padding: 13px 28px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-secondary:hover { border-color: var(--gold); background: var(--gold-dim); transform: translateY(-1px); }
+
+    /* ── NAVBAR ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-name { font-size: 18px; font-weight: 600; color: var(--white); }
+    .nav-logo-name span { color: var(--gold); }
+    .nav-logo-sub { font-size: 10px; color: var(--text-faint); letter-spacing: 1px; text-transform: uppercase; display: block; margin-top: 1px; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--gold); }
+
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-secondary); }
+
+    .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: rgba(0,0,0,0.97); border-bottom: 1px solid var(--border); padding: 24px 20px; z-index: 999; flex-direction: column; gap: 16px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--text-secondary); text-decoration: none; font-size: 15px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+
+    /* ── HERO ── */
+    .page-hero {
+      padding-top: 148px;
+      padding-bottom: 88px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    /* ── FOUNDER CARD ── */
+    .founder-card {
+      background: var(--surface-2);
+      border: 1px solid var(--gold-border-strong);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+
+    .founder-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .founder-card-inner {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .founder-avatar-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .founder-avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: 2px solid var(--gold-border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      color: var(--gold);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .founder-avatar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(201,168,76,0.15), transparent 70%);
+    }
+
+    .founder-name {
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .founder-role {
+      font-size: 12px;
+      color: var(--gold);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .founder-uni {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .founder-story-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .founder-story-tag::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--gold-border);
+    }
+
+    .founder-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .founder-quote span { color: var(--gold); }
+
+    .founder-body {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    .founder-body p + p { margin-top: 16px; }
+
+    .founder-body strong { color: var(--white); font-weight: 500; }
+
+    /* ── MISSION SECTION ── */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .mission-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+
+    .mission-card:hover {
+      border-color: var(--gold-border);
+      transform: translateY(-2px);
+    }
+
+    .mission-card-gold {
+      border-color: var(--gold-border-strong);
+      background: var(--surface-3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mission-card-gold::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .mission-icon {
+      width: 46px;
+      height: 46px;
+      background: var(--gold-dim);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    .mission-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .mission-desc {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    /* ── PHILOSOPHY SECTION ── */
+    .philosophy-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .philosophy-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .philosophy-body {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .philosophy-body p + p { margin-top: 18px; }
+    .philosophy-body strong { color: var(--white); font-weight: 500; }
+
+    .philosophy-highlight {
+      background: var(--gold-dim);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 20px 24px;
+      margin: 28px 0;
+    }
+
+    .philosophy-highlight p {
+      color: var(--white);
+      font-size: 16px;
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    .philosophy-highlight cite {
+      display: block;
+      font-size: 12px;
+      color: var(--gold);
+      font-style: normal;
+      margin-top: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── EXONOVO SECTION ── */
+    .exonovo-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .exonovo-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .exonovo-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .exonovo-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .exonovo-desc p + p { margin-top: 14px; }
+
+    .exonovo-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .exonovo-logo-box {
+      background: var(--surface-3);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    .exonovo-logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+
+    .exonovo-logo-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .exonovo-product-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .exonovo-product {
+      background: var(--surface-3);
+      border: 1px solid var(--gold-border-strong);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .exonovo-product-name {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .exonovo-product-badge {
+      background: var(--gold);
+      color: #000;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 100px;
+    }
+
+    .exonovo-product-soon {
+      border-color: var(--border);
+      opacity: 0.5;
+    }
+
+    .exonovo-product-badge-soon {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      font-size: 10px;
+      padding: 2px 9px;
+      border-radius: 100px;
+    }
+
+    /* ── VALUES ── */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .value-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      text-align: center;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+
+    .value-card:hover { border-color: var(--gold-border); transform: translateY(-2px); }
+
+    .value-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--gold);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .value-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .value-desc {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 100px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      max-width: 400px;
+      margin: 0 auto 36px;
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── FOOTER ── */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 48px 0 28px; }
+    .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand-name { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+    .footer-brand-name span { color: var(--gold); }
+    .footer-brand-sub { font-size: 10px; color: var(--text-faint); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .footer-brand-desc { color: var(--text-muted); font-size: 12px; line-height: 1.7; }
+    .footer-col-title { font-size: 11px; font-weight: 600; color: var(--text-secondary); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-bottom p { color: var(--text-faint); font-size: 12px; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .founder-card-inner { grid-template-columns: 1fr; gap: 32px; }
+      .founder-avatar-wrap { flex-direction: row; align-items: center; }
+      .founder-avatar { width: 80px; height: 80px; font-size: 28px; }
+      .mission-grid { grid-template-columns: 1fr; }
+      .exonovo-card { grid-template-columns: 1fr; gap: 32px; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .nav-links, .nav-links + a { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      .container-narrow { padding: 0 20px; }
+      .section { padding: 64px 0; }
+      .founder-card { padding: 28px 20px; }
+      .exonovo-card { padding: 28px 20px; }
+      .founder-quote { font-size: 18px; }
+      .philosophy-title { font-size: 26px; }
+      .values-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .cta-title { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="MedPREP home">
+        <svg width="30" height="30" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect width="36" height="36" rx="8" fill="rgba(201,168,76,0.1)"/>
+          <polygon points="18,5 9,17 14,17 11,31 18,20 25,31 22,17 27,17" fill="#C9A84C" opacity="0.25"/>
+          <text x="18" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#C9A84C" font-family="serif">M</text>
+        </svg>
+        <div>
+          <div class="nav-logo-name">Med<span>PREP</span></div>
+          <span class="nav-logo-sub">by Exonovo</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="features.html">Features</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <a href="register.html" class="btn-primary" style="padding: 10px 22px; font-size: 13px;">Register Now</a>
+
+      <button class="nav-hamburger" aria-label="Open menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="features.html">Features</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="register.html" class="btn-primary" style="justify-content: center; margin-top: 8px;">Register Now</a>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section class="page-hero" aria-label="About MedPREP">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container" style="position: relative; z-index: 1;">
+
+      <div class="tag">Our Story</div>
+
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 700; line-height: 1.15; margin-bottom: 16px; max-width: 700px;">
+        Built by a Medical Student.<br/><span class="gold">For Medical Students.</span>
+      </h1>
+
+      <p style="color: var(--text-secondary); font-size: 15px; max-width: 560px; line-height: 1.8; margin-bottom: 56px;">
+        MedPREP was not built in a boardroom. It was built by someone sitting in the same lecture halls, facing the same exams, and asking the same question you are probably asking right now — <em style="color: var(--white);">"Is there a smarter way to do this?"</em>
+      </p>
+
+      <!-- Founder Card -->
+      <div class="founder-card reveal">
+        <div class="founder-card-inner">
+
+          <div class="founder-avatar-wrap">
+            <div class="founder-avatar" aria-label="Muhammad Abbas, Founder">
+              MA
+            </div>
+            <div>
+              <div class="founder-name">Muhammad Abbas</div>
+              <div class="founder-role">Founder & CEO, Exonovo<br/>4th Year MBBS</div>
+              <div class="founder-uni">Ayub Medical College<br/>Batch '28</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="founder-story-tag">The Founder's Story</div>
+
+            <div class="founder-quote">
+              "Most students work hard.<br/>
+              <span>MedPREP helps them work smart.</span>"
+            </div>
+
+            <div class="founder-body">
+              <p>
+                I have watched my fellow medical students — brilliant, hardworking people — spend weeks covering topics that are not even in the syllabus, while unknowingly leaving out topics that are. The problem was never effort. <strong>The problem was direction.</strong>
+              </p>
+              <p>
+                I always believed in one principle: <strong>know exactly what you are going to be tested on, and master it completely.</strong> Do not scatter your energy across everything. Cover your syllabus — every topic of it — but cover it with full command. That focused, intentional approach to studying is what separates students who pass confidently from those who leave the exam hall unsure.
+              </p>
+              <p>
+                I wanted to build the platform I wished I had — one that tells you exactly what is in your syllabus, tracks what you have covered, shows you where your gaps are, and gives you the best possible MCQ preparation in one place. <strong>That is MedPREP.</strong>
+              </p>
+              <p>
+                I am still a student. I am building this while studying the same subjects you are. That means every feature in MedPREP exists because I needed it, or a fellow student needed it. This is not a product made by people far removed from your reality. <strong>This is built from inside your world.</strong>
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── PHILOSOPHY ── -->
+  <section class="section section-alt" aria-label="Our philosophy">
+    <div class="container-narrow">
+      <div class="reveal">
+        <div class="tag">Our Philosophy</div>
+        <div class="philosophy-wrap">
+          <h2 class="philosophy-title">
+            Do What You Will<br/><span class="gold">Be Tested On.</span><br/>Master It Completely.
+          </h2>
+
+          <div class="philosophy-body">
+            <p>
+              Pakistani medical students are among the most hardworking in the world. The problem is rarely a lack of effort — it is a lack of <strong>structured, targeted preparation.</strong>
+            </p>
+            <p>
+              Students cover chapters that fall outside the syllabus while leaving entire topics unread. They revise what is familiar rather than what is weak. They practice MCQs without understanding why they got them wrong. And they enter exam halls having worked hard — but not having worked <strong>smart.</strong>
+            </p>
+          </div>
+
+          <div class="philosophy-highlight">
+            <p>"Your syllabus is your contract with the examiner. Cover every topic in it. Not one more, not one less — but with 100% command on every single one."</p>
+            <cite>— Muhammad Abbas, Founder, MedPREP</cite>
+          </div>
+
+          <div class="philosophy-body">
+            <p>
+              MedPREP is built entirely around this philosophy. Your syllabus is the foundation. Every note, every MCQ, every tracker, every feature is designed to ensure you cover <strong>what matters — completely.</strong>
+            </p>
+            <p>
+              Smart work does not mean less work. It means the right work, done deeply, tracked carefully, and revised intelligently. That is the environment MedPREP creates for every student who uses it.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── MISSION ── -->
+  <section class="section" aria-label="Our mission">
+    <div class="container">
+      <div class="section-header reveal" style="text-align: center; margin-bottom: 56px;">
+        <div class="tag">Our Mission</div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 12px;">
+          Give Every Medical Student<br/><span class="gold">the Environment They Deserve.</span>
+        </h2>
+        <p style="color: var(--text-secondary); font-size: 14px; max-width: 480px; margin: 0 auto; line-height: 1.75;">
+          Pakistan produces thousands of medical graduates every year. MedPREP exists to ensure that every single one of them has access to world-class exam preparation — regardless of where they study or what resources they have.
+        </p>
+      </div>
+
+      <div class="mission-grid reveal">
+
+        <div class="mission-card mission-card-gold">
+          <div class="mission-icon" aria-hidden="true"><i class="ti ti-flag"></i></div>
+          <div class="mission-title">Right Now — KMU</div>
+          <p class="mission-desc">MedPREP launches with a complete, syllabus-aligned platform built specifically for Khyber Medical University students. Every note, every MCQ, every feature is calibrated to your syllabus, your exams, your professional year.</p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon" aria-hidden="true"><i class="ti ti-map"></i></div>
+          <div class="mission-title">Tomorrow — All of Pakistan</div>
+          <p class="mission-desc">UHS, Rawalpindi Medical University, DOW, Aga Khan and every medical institution across Pakistan. The plan is to expand university by university until no medical student in Pakistan is left without world-class preparation tools.</p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon" aria-hidden="true"><i class="ti ti-world"></i></div>
+          <div class="mission-title">The Bigger Dream — Beyond Pakistan</div>
+          <p class="mission-desc">Pakistani doctors are practicing in Australia, the UK, the USA, and Germany. MedPREP will build the pathway — USMLE prep, AMC guidance, and mentorship from doctors who have already made it — so the next generation can too.</p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon" aria-hidden="true"><i class="ti ti-heart"></i></div>
+          <div class="mission-title">The Core Promise</div>
+          <p class="mission-desc">Every student who joins MedPREP deserves to walk into their exam knowing they have covered what matters, understood it deeply, and prepared in the smartest possible way. That promise does not change as we grow.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── VALUES ── -->
+  <section class="section section-alt" aria-label="Our values">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 52px;" class="reveal">
+        <div class="tag">What We Stand For</div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; line-height: 1.2;">
+          Three Things We Will<br/><span class="gold">Never Compromise On.</span>
+        </h2>
+      </div>
+
+      <div class="values-grid reveal">
+
+        <div class="value-card">
+          <div class="value-num">01</div>
+          <div class="value-title">Syllabus Integrity</div>
+          <p class="value-desc">Every piece of content on MedPREP is mapped to your official university syllabus. Nothing outside it. Everything within it — covered completely.</p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-num">02</div>
+          <div class="value-title">Content Quality</div>
+          <p class="value-desc">Every MCQ has a verified explanation, trap identification, and a high-yield pearl. Every note is accurate, structured, and clinically relevant. No filler. No shortcuts.</p>
+        </div>
+
+        <div class="value-card">
+          <div class="value-num">03</div>
+          <div class="value-title">Student First</div>
+          <p class="value-desc">Every decision — pricing, features, design — is made with one question: does this genuinely help the student? If it does not, it does not belong in MedPREP.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── EXONOVO ── -->
+  <section class="section" aria-label="About Exonovo">
+    <div class="container">
+      <div class="exonovo-card reveal">
+
+        <div>
+          <div class="exonovo-label">The Company Behind MedPREP</div>
+          <h2 class="exonovo-title">
+            Exonovo —<br/><span class="gold">Built to Build.</span>
+          </h2>
+          <div class="exonovo-desc">
+            <p>
+              Exonovo is the company that builds MedPREP. The name represents a commitment to creating things from nothing — ideas turned into products that genuinely matter.
+            </p>
+            <p>
+              MedPREP is Exonovo's first product — and it is the foundation. As MedPREP grows, establishes itself, and earns the trust of Pakistan's medical community, Exonovo will grow alongside it — expanding into new products and new domains, Insha Allah.
+            </p>
+            <p>
+              The vision is bigger than one app. But every great vision starts with one product done right. MedPREP is that product.
+            </p>
+          </div>
+        </div>
+
+        <div class="exonovo-visual">
+          <div class="exonovo-logo-box">
+            <div class="exonovo-logo-name">EXONOVO</div>
+            <div class="exonovo-logo-sub">Building What Matters</div>
+          </div>
+
+          <div class="exonovo-product-row">
+            <div class="exonovo-product">
+              <span class="exonovo-product-name">MedPREP</span>
+              <span class="exonovo-product-badge">Live Now</span>
+            </div>
+            <div class="exonovo-product exonovo-product-soon">
+              <span class="exonovo-product-name" style="color: var(--text-muted);">Next Product</span>
+              <span class="exonovo-product-badge-soon">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── CTA ── -->
+  <section class="cta-section section-alt2" aria-label="Call to action">
+    <div class="container">
+      <div class="reveal">
+        <div class="tag">Join MedPREP</div>
+        <h2 class="cta-title">
+          Be Part of<br/><span class="gold">Where It Begins.</span>
+        </h2>
+        <p class="cta-desc">
+          MedPREP is launching now. Join as a founding student — PKR 1,500 for full session access, this year only.
+        </p>
+        <div class="cta-actions">
+          <a href="register.html" class="btn-primary" style="padding: 16px 40px; font-size: 15px;">
+            Register Now — PKR 1,500
+            <i class="ti ti-arrow-right" aria-hidden="true"></i>
+          </a>
+          <a href="features.html" class="btn-secondary" style="padding: 15px 28px; font-size: 15px;">
+            Explore Features
+          </a>
+        </div>
+        <p style="color: var(--text-faint); font-size: 12px; margin-top: 20px; position: relative; z-index: 1;">
+          Built for KMU students &nbsp;&bull;&nbsp; Expanding across Pakistan &nbsp;&bull;&nbsp; By Exonovo
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">Med<span>PREP</span></div>
+          <div class="footer-brand-sub">by Exonovo</div>
+          <p class="footer-brand-desc">Pakistan's most comprehensive exam preparation platform. Built for KMU. Expanding across Pakistan.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Platform</div>
+          <ul class="footer-links">
+            <li><a href="features.html">Features</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="pathways.html">Pathways</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Legal</div>
+          <ul class="footer-links">
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+          </ul>
+          <div style="margin-top: 20px;">
+            <div class="footer-col-title">Support</div>
+            <a href="https://wa.me/923009012548" target="_blank" rel="noopener" style="color: var(--text-muted); font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+              <i class="ti ti-brand-whatsapp" style="color: #25D366;" aria-hidden="true"></i>
+              WhatsApp Support
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 MedPREP by Exonovo. All rights reserved.</p>
+        <p>Built for KMU. Expanding across Pakistan.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/923009012548" target="_blank" rel="noopener" aria-label="WhatsApp Support"
+    style="position:fixed;bottom:28px;right:28px;z-index:900;background:#25D366;color:#fff;
+    width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:22px;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:transform 0.2s;">
+    <i class="ti ti-brand-whatsapp"></i>
+  </a>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    }
+
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('mobile-menu');
+      const hamburger = document.querySelector('.nav-hamburger');
+      if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+        menu.classList.remove('open');
+      }
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(function(el) { observer.observe(el); });
+  </script>
+</body>
+</html>

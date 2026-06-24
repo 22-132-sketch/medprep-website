@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedPREP — Where Pakistan's Best Doctors Begin</title>
+  <meta name="description" content="The most comprehensive MCQ + Notes platform built exclusively for Pakistani medical students. Study smarter, track your progress, and ace your professional exams." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E2C47A;
+      --gold-dim: rgba(201,168,76,0.15);
+      --gold-border: rgba(201,168,76,0.25);
+      --gold-border-strong: rgba(201,168,76,0.6);
+      --black: #000000;
+      --surface: #0a0a0a;
+      --surface-2: #0f0f0f;
+      --surface-3: #141414;
+      --white: #ffffff;
+      --text-primary: #ffffff;
+      --text-secondary: #999999;
+      --text-muted: #555555;
+      --text-faint: #333333;
+      --border: rgba(255,255,255,0.07);
+      --radius: 10px;
+      --radius-lg: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── UTILITIES ── */
+    .gold { color: var(--gold); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+    .section { padding: 88px 0; }
+    .section-alt { background: var(--surface); }
+    .section-alt2 { background: var(--surface-2); }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold-dim);
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
+      padding: 5px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      margin-bottom: 20px;
+    }
+
+    .tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: inline-block;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold-border) 30%, var(--gold-border) 70%, transparent 100%);
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.2px;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-primary-lg {
+      padding: 16px 40px;
+      font-size: 15px;
+      border-radius: var(--radius);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--gold);
+      border: 1.5px solid var(--gold-border-strong);
+      padding: 13px 28px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-secondary:hover { border-color: var(--gold); background: var(--gold-dim); transform: translateY(-1px); }
+
+    /* ── NAVBAR ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .nav-logo-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-logo-name span { color: var(--gold); }
+
+    .nav-logo-sub {
+      font-size: 10px;
+      color: var(--text-faint);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      transition: color 0.2s;
+      letter-spacing: 0.2px;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Mobile menu */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text-secondary);
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: rgba(0,0,0,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 40px;
+      z-index: 999;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 15px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 68px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 30%, transparent 100%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      color: var(--gold);
+      padding: 6px 18px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 28px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-sub {
+      color: var(--gold);
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .hero-desc {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.75;
+      max-width: 500px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .hero-note {
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-bottom: 56px;
+    }
+
+    .hero-note span { color: var(--gold); }
+
+    .hero-ecg {
+      width: 300px;
+      height: 30px;
+      margin: 0 auto 48px;
+      opacity: 0.4;
+    }
+
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .hero-stat {
+      padding: 0 40px;
+      text-align: center;
+    }
+
+    .hero-stat + .hero-stat {
+      border-left: 1px solid var(--border);
+    }
+
+    .hero-stat-num {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .hero-stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* ── PRICING ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 16px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      position: relative;
+    }
+
+    .pricing-card-featured {
+      border-color: var(--gold-border-strong);
+      background: var(--surface-3);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: #000;
+      padding: 4px 16px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      letter-spacing: 0.3px;
+    }
+
+    .pricing-tier {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .pricing-name {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .pricing-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .pricing-amount-sm {
+      font-size: 24px;
+    }
+
+    .pricing-amount sup {
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      vertical-align: super;
+    }
+
+    .pricing-unit {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .pricing-original {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: line-through;
+      margin-bottom: 4px;
+    }
+
+    .pricing-save {
+      display: inline-block;
+      background: rgba(201,168,76,0.15);
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .pricing-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+
+    .pricing-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .pricing-pill {
+      border: 1px solid var(--gold-border);
+      color: var(--gold);
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+    }
+
+    .pricing-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .pricing-footer-note {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .steps {
+      max-width: 560px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      left: 16px;
+      top: 34px;
+      bottom: 34px;
+      width: 1px;
+      background: linear-gradient(180deg, var(--gold-border) 0%, var(--gold-border) 100%);
+    }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      position: relative;
+      padding-bottom: 32px;
+    }
+
+    .step:last-child { padding-bottom: 0; }
+
+    .step-num {
+      width: 33px;
+      height: 33px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-content { padding-top: 4px; }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .step-desc {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--gold-border);
+      transform: translateY(-2px);
+    }
+
+    .feature-card-signature {
+      border-color: var(--gold-border-strong);
+      background: var(--surface-3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card-signature::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .feature-icon {
+      width: 46px;
+      height: 46px;
+      background: var(--gold-dim);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      font-size: 20px;
+      color: var(--gold);
+    }
+
+    .feature-badges {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .feature-desc {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .badge {
+      background: var(--gold);
+      color: #000;
+      padding: 2px 9px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── COMING SOON ── */
+    .coming-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .coming-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      opacity: 0.7;
+    }
+
+    .coming-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .coming-badge {
+      background: var(--gold-dim);
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
+      padding: 2px 9px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .coming-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .coming-desc {
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* ── FINAL CTA ── */
+    #cta {
+      padding: 100px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #cta::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .cta-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 46px;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-sub {
+      color: var(--text-secondary);
+      font-size: 14px;
+      max-width: 360px;
+      margin: 0 auto 14px;
+      line-height: 1.7;
+    }
+
+    .cta-note {
+      color: var(--gold);
+      font-size: 12px;
+      margin-bottom: 36px;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .cta-fine {
+      color: var(--text-faint);
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    /* ── FLOATING BUTTON ── */
+    #float-reg {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 900;
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 13px 22px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 32px rgba(201,168,76,0.35);
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+    }
+
+    #float-reg.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    #float-reg:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(201,168,76,0.45); }
+
+    /* ── WHATSAPP ── */
+    #whatsapp-btn {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      z-index: 900;
+      background: #25D366;
+      color: #fff;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    #whatsapp-btn:hover { transform: scale(1.08); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 48px 0 28px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand-name {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .footer-brand-name span { color: var(--gold); }
+
+    .footer-brand-sub {
+      font-size: 10px;
+      color: var(--text-faint);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .footer-brand-desc {
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .footer-col-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-bottom p {
+      color: var(--text-faint);
+      font-size: 12px;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .section-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      max-width: 420px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-headline { font-size: 44px; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .coming-grid { grid-template-columns: 1fr; max-width: 360px; }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      .hero-headline { font-size: 34px; }
+      .hero-stat { padding: 0 20px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .section { padding: 64px 0; }
+      .footer-top { grid-template-columns: 1fr; }
+      .cta-headline { font-size: 32px; }
+      .section-title { font-size: 28px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .hero-eyebrow-dot { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="MedPREP home">
+        <svg class="nav-logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="36" height="36" rx="8" fill="rgba(201,168,76,0.1)"/>
+          <polygon points="18,5 9,17 14,17 11,31 18,20 25,31 22,17 27,17" fill="#C9A84C" opacity="0.25"/>
+          <text x="18" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#C9A84C" font-family="serif">M</text>
+        </svg>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">Med<span>PREP</span></span>
+          <span class="nav-logo-sub">by Exonovo</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="register.html" class="btn-primary" style="padding: 10px 22px; font-size: 13px;">Register Now</a>
+      </div>
+
+      <button class="nav-hamburger" aria-label="Open menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#features" onclick="toggleMenu()">Features</a>
+    <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+    <a href="leaderboard.html" onclick="toggleMenu()">Leaderboard</a>
+    <a href="blog.html" onclick="toggleMenu()">Blog</a>
+    <a href="about.html" onclick="toggleMenu()">About</a>
+    <a href="contact.html" onclick="toggleMenu()">Contact</a>
+    <a href="register.html" class="btn-primary" style="margin-top: 8px; justify-content: center;">Register Now — PKR 1,500</a>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section id="hero" aria-label="Hero section">
+    <div class="hero-grid-bg" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero-content">
+
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+          Now open for KMU students &mdash; Launch pricing active
+        </div>
+
+        <h1 class="hero-headline">
+          Where Pakistan's Best<br/><span class="gold">Doctors Begin.</span>
+        </h1>
+
+        <p class="hero-sub">Built for the Exam. Designed for the Doctor.</p>
+
+        <p class="hero-desc">
+          The most comprehensive MCQ + Notes platform built exclusively for Pakistani medical students.
+          Study smarter, track every topic, and walk into your professional exam with confidence.
+        </p>
+
+        <div class="hero-actions">
+          <a href="register.html" class="btn-primary btn-primary-lg">
+            Register Now &mdash; PKR 1,500
+            <i class="ti ti-arrow-right" aria-hidden="true"></i>
+          </a>
+          <a href="#features" class="btn-secondary btn-primary-lg">
+            See Features
+          </a>
+        </div>
+
+        <p class="hero-note">
+          <span>Launch special</span> &nbsp;&bull;&nbsp; Full session access &nbsp;&bull;&nbsp; Credentials delivered within 24 hours
+        </p>
+
+        <svg class="hero-ecg" viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polyline
+            points="0,15 40,15 55,3 65,27 75,8 85,22 95,15 300,15"
+            stroke="#C9A84C" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <div class="hero-stats" role="list">
+          <div class="hero-stat" role="listitem">
+            <div class="hero-stat-num">5,000+</div>
+            <div class="hero-stat-label">MCQs Available</div>
+          </div>
+          <div class="hero-stat" role="listitem">
+            <div class="hero-stat-num">KMU</div>
+            <div class="hero-stat-label">Syllabus Aligned</div>
+          </div>
+          <div class="hero-stat" role="listitem">
+            <div class="hero-stat-num">360°</div>
+            <div class="hero-stat-label">Topic Coverage</div>
+          </div>
+          <div class="hero-stat" role="listitem">
+            <div class="hero-stat-num">3</div>
+            <div class="hero-stat-label">Study Modes</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── PRICING ── -->
+  <section id="pricing" class="section section-alt" aria-label="Pricing">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="tag">Pricing</div>
+        <h2 class="section-title">Simple. <span class="gold">Session-Based.</span> Fair.</h2>
+        <p class="section-desc">Designed around Pakistan's medical academic calendar. Pay once, study all session.</p>
+      </div>
+
+      <div class="pricing-grid reveal">
+
+        <!-- Featured -->
+        <div class="pricing-card pricing-card-featured">
+          <div class="pricing-badge">🎉 Launch Special — This Year Only</div>
+          <div style="margin-top: 12px;">
+            <div class="pricing-tier">This Year</div>
+            <div class="pricing-name">Full Session Subscription</div>
+            <div class="pricing-amount"><sup>PKR</sup> 1,500</div>
+            <div class="pricing-unit">Until your exam results</div>
+            <div class="pricing-original">Regular price: PKR 3,500</div>
+            <span class="pricing-save">Save 57%</span>
+            <div class="pricing-divider"></div>
+            <div class="pricing-features">
+              <span class="pricing-pill">All MCQs</span>
+              <span class="pricing-pill">Notes</span>
+              <span class="pricing-pill">360° View</span>
+              <span class="pricing-pill">Flashcards</span>
+              <span class="pricing-pill">Analytics</span>
+              <span class="pricing-pill">All 3 Modes</span>
+            </div>
+            <a href="register.html" class="btn-primary" style="width: 100%; justify-content: center;">
+              Register Now
+              <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Next session full -->
+        <div class="pricing-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="pricing-tier">Next Session</div>
+            <div class="pricing-name">Full Session</div>
+            <div class="pricing-amount pricing-amount-sm"><sup style="font-size:13px;">PKR</sup> 3,500</div>
+            <div class="pricing-unit">From session start</div>
+            <div class="pricing-divider"></div>
+            <div class="pricing-note">All features included. Available at the start of next academic session.</div>
+          </div>
+          <button class="btn-secondary" style="width: 100%; justify-content: center; margin-top: 12px;" disabled>
+            Available Next Session
+          </button>
+        </div>
+
+        <!-- Monthly -->
+        <div class="pricing-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="pricing-tier">Next Session</div>
+            <div class="pricing-name">Monthly</div>
+            <div class="pricing-amount pricing-amount-sm"><sup style="font-size:13px;">PKR</sup> 500</div>
+            <div class="pricing-unit">per month</div>
+            <div class="pricing-divider"></div>
+            <div class="pricing-note">Available from session start only. Locks out when 2 months remain before exams.</div>
+          </div>
+          <button class="btn-secondary" style="width: 100%; justify-content: center; margin-top: 12px;" disabled>
+            Available Next Session
+          </button>
+        </div>
+
+      </div>
+
+      <p class="pricing-footer-note reveal">
+        Late session offer: <strong style="color: var(--gold);">PKR 3,000</strong> for full remaining access when 2 months remain before exams. Monthly unavailable at that point.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section id="how-it-works" class="section" aria-label="How it works">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="tag">How It Works</div>
+        <h2 class="section-title">Start in <span class="gold">4 Simple Steps</span></h2>
+        <p class="section-desc">Registration takes less than 3 minutes. You will be studying the same day.</p>
+      </div>
+
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num" aria-hidden="true">1</div>
+          <div class="step-content">
+            <div class="step-title">Fill your registration form</div>
+            <div class="step-desc">Enter your full name, email, phone number, university, and year of study. Select the plan that suits you.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" aria-hidden="true">2</div>
+          <div class="step-content">
+            <div class="step-title">Transfer your payment</div>
+            <div class="step-desc">Transfer to our bank account shown on the registration page. Upload your payment screenshot right there — no WhatsApp needed.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" aria-hidden="true">3</div>
+          <div class="step-content">
+            <div class="step-title">We verify and send your access</div>
+            <div class="step-desc">Your payment screenshot is reviewed by our team. You receive your app download link and login credentials within 24 hours.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" aria-hidden="true">4</div>
+          <div class="step-content">
+            <div class="step-title">Open the app and start studying</div>
+            <div class="step-desc">Log in, pick your subject, and let MedPREP take you from the first page of your syllabus to your professional exam.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 44px;" class="reveal">
+        <a href="register.html" class="btn-primary btn-primary-lg">
+          Register Now &mdash; Takes 3 Minutes
+          <i class="ti ti-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── FEATURES ── -->
+  <section id="features" class="section section-alt" aria-label="Features">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="tag">Features</div>
+        <h2 class="section-title">Everything You Need to <span class="gold">Pass With Confidence</span></h2>
+        <p class="section-desc">Not just an MCQ bank. A complete exam preparation ecosystem built for Pakistani medical students.</p>
+      </div>
+
+      <div class="features-grid reveal">
+
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true"><i class="ti ti-brain"></i></div>
+          <div class="feature-badges">
+            <div class="feature-title" style="margin-bottom: 0;">Smart MCQ Engine</div>
+            <span class="badge">UWorld-style</span>
+          </div>
+          <p class="feature-desc">Wrong answer? Know exactly why. Every MCQ comes with a full explanation, trap identification, and a high-yield pearl — so you never make the same mistake twice.</p>
+        </div>
+
+        <div class="feature-card feature-card-signature">
+          <div class="feature-icon" aria-hidden="true"><i class="ti ti-rotate-360"></i></div>
+          <div class="feature-badges">
+            <div class="feature-title" style="margin-bottom: 0;">360° Topic View</div>
+            <span class="badge">Signature</span>
+          </div>
+          <p class="feature-desc">One topic. MCQs pulled simultaneously from Pathology, Pharmacology, Medicine, Forensic, and Community Medicine. No other platform offers this unified view.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true"><i class="ti ti-notes"></i></div>
+          <div class="feature-title">Syllabus-Based Notes</div>
+          <p class="feature-desc">Structured notes aligned directly to the KMU syllabus. Finish a topic and instantly bridge to its MCQs with one tap — the connection is built in.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true"><i class="ti ti-cards"></i></div>
+          <div class="feature-badges">
+            <div class="feature-title" style="margin-bottom: 0;">Smart Flashcards</div>
+            <span class="badge">Signature</span>
+          </div>
+          <p class="feature-desc">Flashcards auto-generated from your wrong MCQs. Every mistake becomes a targeted revision card — no manual creation needed.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true"><i class="ti ti-chart-bar"></i></div>
+          <div class="feature-title">Syllabus Tracker & Analytics</div>
+          <p class="feature-desc">See exactly how much you have covered and what remains. Weak subjects are identified automatically so you always know where to focus.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" aria-hidden="true"><i class="ti ti-clock"></i></div>
+          <div class="feature-title">3 Study Modes</div>
+          <p class="feature-desc">Timed Mode for exam simulation. Exam Mode for full mock tests. Tutor Mode for guided, explanatory learning. One app, three ways to prepare.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── COMING SOON ── -->
+  <section id="ecosystem" class="section" aria-label="Coming soon features">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="tag">Coming Soon</div>
+        <h2 class="section-title">More Than an App — <span class="gold">An Ecosystem</span></h2>
+        <p class="section-desc">We are building what Pakistan's medical students have always deserved. This is just the beginning.</p>
+      </div>
+
+      <div class="coming-grid reveal">
+        <div class="coming-card">
+          <div class="coming-card-header">
+            <i class="ti ti-trophy" style="font-size: 22px; color: var(--gold);" aria-hidden="true"></i>
+            <span class="coming-badge">Coming Soon</span>
+          </div>
+          <div class="coming-title">Leaderboard</div>
+          <div class="coming-desc">Rank among KMU's top performers. Public profiles and weekly rankings — see where you stand.</div>
+        </div>
+        <div class="coming-card">
+          <div class="coming-card-header">
+            <i class="ti ti-map-pin" style="font-size: 22px; color: var(--gold);" aria-hidden="true"></i>
+            <span class="coming-badge">Coming Soon</span>
+          </div>
+          <div class="coming-title">Pathway Counselling</div>
+          <div class="coming-desc">USMLE, AMC, Germany and beyond — guided by doctors who have already qualified and are now practicing abroad.</div>
+        </div>
+        <div class="coming-card">
+          <div class="coming-card-header">
+            <i class="ti ti-users" style="font-size: 22px; color: var(--gold);" aria-hidden="true"></i>
+            <span class="coming-badge">Coming Soon</span>
+          </div>
+          <div class="coming-title">Success Stories</div>
+          <div class="coming-desc">Pakistani doctors now practicing in Australia, UK, and USA — sharing their full journey from prof exams to the ward.</div>
+        </div>
+        <div class="coming-card">
+          <div class="coming-card-header">
+            <i class="ti ti-building" style="font-size: 22px; color: var(--gold);" aria-hidden="true"></i>
+            <span class="coming-badge">Coming Soon</span>
+          </div>
+          <div class="coming-title">University Partnerships</div>
+          <div class="coming-desc">Institutional access for KMU, UHS, and every medical university across Pakistan.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── FINAL CTA ── -->
+  <section id="cta" class="section-alt2" aria-label="Call to action">
+    <div class="container" style="position: relative; z-index: 1;">
+      <div class="reveal">
+        <div class="tag" style="margin-bottom: 24px;">Limited Time</div>
+        <h2 class="cta-headline">
+          Your Prof Exam<br/><span class="gold">Meets Its Match.</span>
+        </h2>
+        <p class="cta-sub">
+          PKR 1,500 for full session access. This launch price will not last beyond this year.
+        </p>
+        <p class="cta-note">Available for KMU students now &nbsp;&bull;&nbsp; Expanding to UHS soon</p>
+        <div class="cta-actions">
+          <a href="register.html" class="btn-primary btn-primary-lg">
+            Register Now &mdash; PKR 1,500
+            <i class="ti ti-arrow-right" aria-hidden="true"></i>
+          </a>
+          <a href="#features" class="btn-secondary" style="padding: 15px 28px; font-size: 15px;">
+            View Features
+          </a>
+        </div>
+        <p class="cta-fine">
+          Full session access &nbsp;&bull;&nbsp; Payment verified within 24 hours &nbsp;&bull;&nbsp; App delivered to your email
+        </p>
+
+        <svg viewBox="0 0 280 22" xmlns="http://www.w3.org/2000/svg" style="width: 240px; height: 20px; margin: 40px auto 0; display: block; opacity: 0.25;" aria-hidden="true">
+          <polyline points="0,11 22,11 32,2 42,20 52,5 62,17 72,11 280,11"
+            stroke="#C9A84C" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">Med<span>PREP</span></div>
+          <div class="footer-brand-sub">by Exonovo</div>
+          <p class="footer-brand-desc">
+            The most comprehensive exam preparation platform for Pakistani medical students.
+            Built for KMU. Expanding across Pakistan.
+          </p>
+        </div>
+        <div>
+          <div class="footer-col-title">Platform</div>
+          <ul class="footer-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="pathways.html">Pathways</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Legal</div>
+          <ul class="footer-links">
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+          </ul>
+          <div style="margin-top: 20px;">
+            <div class="footer-col-title">Support</div>
+            <a href="https://wa.me/923009012548" target="_blank" rel="noopener" style="color: var(--text-muted); font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+              <i class="ti ti-brand-whatsapp" style="color: #25D366; font-size: 16px;" aria-hidden="true"></i>
+              WhatsApp Support
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 MedPREP by Exonovo. All rights reserved.</p>
+        <p>Built for KMU. Expanding across Pakistan.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── FLOATING REGISTER BUTTON ── -->
+  <button id="float-reg" onclick="window.location.href='register.html'" aria-label="Register now">
+    <i class="ti ti-user-plus" aria-hidden="true"></i>
+    Register — PKR 1,500
+  </button>
+
+  <!-- ── WHATSAPP BUTTON ── -->
+  <a id="whatsapp-btn" href="https://wa.me/923009012548" target="_blank" rel="noopener" aria-label="Contact us on WhatsApp">
+    <i class="ti ti-brand-whatsapp"></i>
+  </a>
+
+  <script>
+    // Mobile menu toggle
+    function toggleMenu() {
+      const m = document.getElementById('mobile-menu');
+      m.classList.toggle('open');
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('mobile-menu');
+      const hamburger = document.querySelector('.nav-hamburger');
+      if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+        menu.classList.remove('open');
+      }
+    });
+
+    // Floating register button — appears after scrolling past hero
+    const floatBtn = document.getElementById('float-reg');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > window.innerHeight * 0.6) {
+        floatBtn.classList.add('visible');
+      } else {
+        floatBtn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(function(el) { observer.observe(el); });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

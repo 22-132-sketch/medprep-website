@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register — MedPREP</title>
+  <meta name="description" content="Register for MedPREP and get full session access to Pakistan's most comprehensive medical exam preparation platform." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E2C47A;
+      --gold-dim: rgba(201,168,76,0.12);
+      --gold-dim-hover: rgba(201,168,76,0.2);
+      --gold-border: rgba(201,168,76,0.25);
+      --gold-border-strong: rgba(201,168,76,0.6);
+      --black: #000000;
+      --surface: #0a0a0a;
+      --surface-2: #0f0f0f;
+      --surface-3: #141414;
+      --surface-4: #181818;
+      --white: #ffffff;
+      --text-primary: #ffffff;
+      --text-secondary: #999999;
+      --text-muted: #666666;
+      --text-faint: #333333;
+      --border: rgba(255,255,255,0.07);
+      --border-focus: rgba(201,168,76,0.5);
+      --radius: 10px;
+      --radius-lg: 14px;
+      --error: #e05252;
+      --error-dim: rgba(224,82,82,0.12);
+      --success: #4caf82;
+      --success-dim: rgba(76,175,130,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── NAVBAR ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .nav-logo-name span { color: var(--gold); }
+
+    .nav-logo-sub {
+      font-size: 10px;
+      color: var(--text-faint);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: block;
+      margin-top: 1px;
+    }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--gold); }
+
+    /* ── PAGE LAYOUT ── */
+    .page-wrap {
+      min-height: 100vh;
+      padding-top: 68px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 0;
+      flex: 1;
+    }
+
+    /* ── LEFT PANEL ── */
+    .left-panel {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 52px 48px;
+      position: sticky;
+      top: 68px;
+      height: calc(100vh - 68px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .left-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold-dim);
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
+      padding: 4px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      margin-bottom: 24px;
+    }
+
+    .left-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: inline-block;
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.75); }
+    }
+
+    .left-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .left-sub {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    /* Plan selector */
+    .plan-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .plan-option {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+
+    .plan-option:hover { border-color: var(--gold-border); }
+
+    .plan-option.selected {
+      border-color: var(--gold);
+      background: var(--gold-dim);
+    }
+
+    .plan-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .plan-option-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .plan-option-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .plan-radio {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.2s;
+    }
+
+    .plan-option.selected .plan-radio {
+      border-color: var(--gold);
+    }
+
+    .plan-radio-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .plan-option.selected .plan-radio-dot { opacity: 1; }
+
+    .plan-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .plan-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .plan-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .plan-badge {
+      position: absolute;
+      top: -10px;
+      right: 14px;
+      background: var(--gold);
+      color: #000;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.3px;
+    }
+
+    /* Bank details */
+    .bank-box {
+      background: var(--surface-2);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      margin-bottom: 24px;
+    }
+
+    .bank-box-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .bank-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bank-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .bank-row:first-of-type { padding-top: 0; }
+
+    .bank-label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .bank-value {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .copy-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 14px;
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: color 0.2s, background 0.2s;
+      display: flex;
+      align-items: center;
+    }
+    .copy-btn:hover { color: var(--gold); background: var(--gold-dim); }
+
+    .bank-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 12px;
+      line-height: 1.6;
+      display: flex;
+      gap: 6px;
+    }
+
+    /* Trust signals */
+    .trust-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .trust-item i { color: var(--gold); font-size: 14px; }
+
+    /* ── RIGHT PANEL — FORM ── */
+    .right-panel {
+      padding: 52px 48px;
+      background: var(--black);
+    }
+
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .form-sub {
+      color: var(--text-secondary);
+      font-size: 13px;
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+
+    /* Progress steps */
+    .progress-steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 40px;
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .progress-step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+
+    .progress-step.active .progress-step-num {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: #000;
+    }
+
+    .progress-step.done .progress-step-num {
+      border-color: var(--gold);
+      background: var(--gold-dim);
+      color: var(--gold);
+    }
+
+    .progress-step-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .progress-step.active .progress-step-label { color: var(--text-primary); }
+    .progress-step.done .progress-step-label { color: var(--gold); }
+
+    .progress-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      margin: 0 12px;
+      max-width: 40px;
+    }
+
+    .progress-line.done { background: var(--gold-border); }
+
+    /* Form fields */
+    .form-section {
+      display: none;
+    }
+    .form-section.active { display: block; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.3px;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    .form-label span {
+      color: var(--gold);
+    }
+
+    .form-input {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-input::placeholder { color: var(--text-faint); }
+
+    .form-input:focus {
+      border-color: var(--border-focus);
+      background: var(--surface-3);
+    }
+
+    .form-input.error {
+      border-color: var(--error);
+      background: var(--error-dim);
+    }
+
+    .form-select {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+    }
+
+    .form-select:focus {
+      border-color: var(--border-focus);
+      background-color: var(--surface-3);
+    }
+
+    .form-select option { background: #1a1a1a; color: var(--text-primary); }
+
+    .field-error {
+      font-size: 11px;
+      color: var(--error);
+      margin-top: 5px;
+      display: none;
+      align-items: center;
+      gap: 4px;
+    }
+    .field-error.show { display: flex; }
+
+    .form-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    /* Upload area */
+    .upload-area {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+
+    .upload-area:hover, .upload-area.dragover {
+      border-color: var(--gold-border-strong);
+      background: var(--gold-dim);
+    }
+
+    .upload-area.has-file {
+      border-color: var(--gold);
+      border-style: solid;
+      background: var(--gold-dim);
+    }
+
+    .upload-area input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .upload-icon {
+      font-size: 32px;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .upload-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .upload-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .upload-preview {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .upload-preview.show { display: flex; }
+
+    .upload-preview-img {
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--gold-border);
+    }
+
+    .upload-preview-info { text-align: left; }
+
+    .upload-preview-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gold);
+      margin-bottom: 2px;
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .upload-preview-size {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .upload-change {
+      font-size: 11px;
+      color: var(--gold);
+      cursor: pointer;
+      text-decoration: underline;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* Plan summary box in step 2 */
+    .selected-plan-box {
+      background: var(--surface-2);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .selected-plan-name {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .selected-plan-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .selected-plan-change {
+      font-size: 11px;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .selected-plan-change:hover { color: var(--gold); }
+
+    /* Navigation buttons */
+    .form-nav {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.2px;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      padding: 13px 20px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 400;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-back:hover { border-color: var(--gold-border); color: var(--gold); }
+
+    /* Submit loading */
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(0,0,0,0.3);
+      border-top-color: #000;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── SUCCESS STATE ── */
+    #success-state {
+      display: none;
+      text-align: center;
+      padding: 60px 40px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    #success-state.show { display: block; }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--gold-dim);
+      border: 1.5px solid var(--gold-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      font-size: 32px;
+      color: var(--gold);
+    }
+
+    .success-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .success-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .success-steps {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      text-align: left;
+      margin-bottom: 28px;
+    }
+
+    .success-step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .success-step:last-child { border-bottom: none; }
+
+    .success-step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .success-ref {
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    .success-ref span {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .success-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #25D366;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      transition: opacity 0.2s;
+    }
+    .success-whatsapp:hover { opacity: 0.9; }
+
+    /* ── FORM CONTAINER ── */
+    #form-container { display: block; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .page-grid {
+        grid-template-columns: 1fr;
+      }
+      .left-panel {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 32px 20px;
+      }
+      .right-panel { padding: 32px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .trust-row { display: none; }
+      .plan-selector { margin-bottom: 20px; }
+      .bank-box { margin-bottom: 16px; }
+    }
+
+    @media (min-width: 861px) {
+      .left-panel {
+        position: sticky;
+        top: 68px;
+        height: calc(100vh - 68px);
+        overflow-y: auto;
+      }
+      .page-grid {
+        grid-template-columns: 1fr 1.1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .nav-inner { padding: 0 20px; }
+      .progress-step-label { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="30" height="30" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect width="36" height="36" rx="8" fill="rgba(201,168,76,0.1)"/>
+          <polygon points="18,5 9,17 14,17 11,31 18,20 25,31 22,17 27,17" fill="#C9A84C" opacity="0.25"/>
+          <text x="18" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#C9A84C" font-family="serif">M</text>
+        </svg>
+        <div>
+          <div class="nav-logo-name">Med<span>PREP</span></div>
+          <span class="nav-logo-sub">by Exonovo</span>
+        </div>
+      </a>
+      <a href="index.html" class="nav-back">
+        <i class="ti ti-arrow-left" aria-hidden="true"></i>
+        Back to Home
+      </a>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+    <div class="page-grid">
+
+      <!-- ── LEFT PANEL ── -->
+      <aside class="left-panel" aria-label="Registration information">
+
+        <div class="left-tag">Launch Special Active</div>
+
+        <h1 class="left-headline">
+          Get Full<br/><span style="color: var(--gold);">Session Access</span>
+        </h1>
+
+        <p class="left-sub">
+          Choose your plan, complete the form, and upload your payment screenshot.
+          We will verify and send your app access within 24 hours.
+        </p>
+
+        <!-- Plan Selector -->
+        <div class="plan-selector" role="radiogroup" aria-label="Select a plan">
+
+          <label class="plan-option selected" id="plan-launch-label" onclick="selectPlan('launch', this)">
+            <input type="radio" name="plan" value="launch" id="plan-launch" checked />
+            <div class="plan-badge">Best Value</div>
+            <div class="plan-option-inner">
+              <div class="plan-option-left">
+                <div class="plan-radio">
+                  <div class="plan-radio-dot"></div>
+                </div>
+                <div>
+                  <div class="plan-name">Launch Special — Full Session</div>
+                  <div class="plan-desc">Until exam results &bull; This year only</div>
+                </div>
+              </div>
+              <div class="plan-price">PKR 1,500</div>
+            </div>
+          </label>
+
+        </div>
+
+        <p style="font-size: 11px; color: var(--text-faint); margin-top: -16px; margin-bottom: 28px;">
+          Next session plans (PKR 3,500 full / PKR 500/month) will be available when the new session begins.
+        </p>
+
+        <!-- Bank Details -->
+        <div class="bank-box">
+          <div class="bank-box-title">
+            <i class="ti ti-building-bank" aria-hidden="true"></i>
+            Bank Transfer Details
+          </div>
+
+          <div class="bank-row">
+            <span class="bank-label">Bank</span>
+            <span class="bank-value">MCB Bank Ltd</span>
+          </div>
+
+          <div class="bank-row">
+            <span class="bank-label">Account Title</span>
+            <span class="bank-value">Muhammad Abbas</span>
+          </div>
+
+          <div class="bank-row">
+            <span class="bank-label">Account Number</span>
+            <span class="bank-value">
+              <span id="acc-num">1513864151010428</span>
+              <button class="copy-btn" onclick="copyText('1513864151010428', this)" aria-label="Copy account number">
+                <i class="ti ti-copy"></i>
+              </button>
+            </span>
+          </div>
+
+          <div class="bank-note">
+            <i class="ti ti-info-circle" style="color: var(--gold); font-size: 14px; flex-shrink: 0; margin-top: 1px;" aria-hidden="true"></i>
+            <span>Transfer the exact amount, then upload your payment screenshot in the form. Include your full name as the transfer reference if possible.</span>
+          </div>
+        </div>
+
+        <!-- Trust signals -->
+        <div class="trust-row" aria-label="Trust and security information">
+          <div class="trust-item">
+            <i class="ti ti-shield-check" aria-hidden="true"></i>
+            Payment verified manually by our team
+          </div>
+          <div class="trust-item">
+            <i class="ti ti-clock" aria-hidden="true"></i>
+            App access delivered within 24 hours
+          </div>
+          <div class="trust-item">
+            <i class="ti ti-message-circle" aria-hidden="true"></i>
+            Support available on WhatsApp
+          </div>
+          <div class="trust-item">
+            <i class="ti ti-lock" aria-hidden="true"></i>
+            Your data is kept private and secure
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- ── RIGHT PANEL ── -->
+      <main class="right-panel" aria-label="Registration form">
+
+        <div id="form-container">
+
+          <h2 class="form-title">Create Your Account</h2>
+          <p class="form-sub">Fill in your details carefully. These will be used to create your MedPREP login.</p>
+
+          <!-- Progress -->
+          <div class="progress-steps" role="list" aria-label="Form progress">
+            <div class="progress-step active" id="step-ind-1" role="listitem">
+              <div class="progress-step-num" id="step-num-1">1</div>
+              <div class="progress-step-label">Your Details</div>
+            </div>
+            <div class="progress-line" id="line-1"></div>
+            <div class="progress-step" id="step-ind-2" role="listitem">
+              <div class="progress-step-num" id="step-num-2">2</div>
+              <div class="progress-step-label">Payment Proof</div>
+            </div>
+            <div class="progress-line" id="line-2"></div>
+            <div class="progress-step" id="step-ind-3" role="listitem">
+              <div class="progress-step-num" id="step-num-3">3</div>
+              <div class="progress-step-label">Review & Submit</div>
+            </div>
+          </div>
+
+          <form id="reg-form" novalidate>
+
+            <!-- ── STEP 1: Personal Details ── -->
+            <div class="form-section active" id="section-1">
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="full-name">Full Name <span>*</span></label>
+                  <input class="form-input" type="text" id="full-name" name="full_name"
+                    placeholder="e.g. Muhammad Ali Khan" autocomplete="name" />
+                  <div class="field-error" id="err-name">
+                    <i class="ti ti-alert-circle" style="font-size:12px;"></i> Please enter your full name
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="email">Email Address <span>*</span></label>
+                  <input class="form-input" type="email" id="email" name="email"
+                    placeholder="you@example.com" autocomplete="email" />
+                  <div class="field-error" id="err-email">
+                    <i class="ti ti-alert-circle" style="font-size:12px;"></i> Please enter a valid email address
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone Number <span>*</span></label>
+                <input class="form-input" type="tel" id="phone" name="phone"
+                  placeholder="03XX XXXXXXX" autocomplete="tel" />
+                <div class="form-hint">We may contact you on this number regarding your registration.</div>
+                <div class="field-error" id="err-phone">
+                  <i class="ti ti-alert-circle" style="font-size:12px;"></i> Please enter a valid phone number
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="university">University <span>*</span></label>
+                  <select class="form-select" id="university" name="university">
+                    <option value="" disabled selected>Select your university</option>
+                    <option value="KMU">Khyber Medical University (KMU)</option>
+                    <option value="Other">Other (Expanding soon)</option>
+                  </select>
+                  <div class="field-error" id="err-university">
+                    <i class="ti ti-alert-circle" style="font-size:12px;"></i> Please select your university
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="year">Year of Study <span>*</span></label>
+                  <select class="form-select" id="year" name="year">
+                    <option value="" disabled selected>Select your year</option>
+                    <option value="1st Year MBBS">1st Year MBBS</option>
+                    <option value="2nd Year MBBS">2nd Year MBBS</option>
+                    <option value="3rd Year MBBS">3rd Year MBBS</option>
+                    <option value="4th Year MBBS">4th Year MBBS</option>
+                    <option value="Final Year MBBS">Final Year MBBS</option>
+                    <option value="1st Year BDS">1st Year BDS</option>
+                    <option value="2nd Year BDS">2nd Year BDS</option>
+                    <option value="3rd Year BDS">3rd Year BDS</option>
+                    <option value="Final Year BDS">Final Year BDS</option>
+                  </select>
+                  <div class="field-error" id="err-year">
+                    <i class="ti ti-alert-circle" style="font-size:12px;"></i> Please select your year of study
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-nav">
+                <button type="button" class="btn-primary" onclick="goToStep(2)" style="flex: 1;">
+                  Continue to Payment
+                  <i class="ti ti-arrow-right" aria-hidden="true"></i>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- ── STEP 2: Payment Screenshot ── -->
+            <div class="form-section" id="section-2">
+
+              <div class="selected-plan-box">
+                <div>
+                  <div class="selected-plan-name">Launch Special — Full Session</div>
+                  <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Until exam results &bull; This year only</div>
+                </div>
+                <div style="text-align: right;">
+                  <div class="selected-plan-price">PKR 1,500</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">
+                  Payment Screenshot <span style="color: var(--gold);">*</span>
+                </label>
+                <div class="upload-area" id="upload-area" role="button" aria-label="Upload payment screenshot">
+                  <input type="file" id="screenshot" name="screenshot" accept="image/*"
+                    onchange="handleFileSelect(this)" aria-label="Select payment screenshot" />
+
+                  <div id="upload-default">
+                    <i class="ti ti-cloud-upload upload-icon" aria-hidden="true"></i>
+                    <div class="upload-title">Upload Payment Screenshot</div>
+                    <div class="upload-desc">
+                      Take a screenshot of your bank transfer confirmation<br/>
+                      and upload it here. JPG, PNG up to 10MB.
+                    </div>
+                  </div>
+
+                  <div class="upload-preview" id="upload-preview">
+                    <img src="" alt="Payment screenshot preview" class="upload-preview-img" id="preview-img" />
+                    <div class="upload-preview-info">
+                      <div class="upload-preview-name" id="preview-name"></div>
+                      <div class="upload-preview-size" id="preview-size"></div>
+                      <span class="upload-change">Click to change</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="field-error" id="err-screenshot">
+                  <i class="ti ti-alert-circle" style="font-size:12px;"></i> Please upload your payment screenshot
+                </div>
+                <div class="form-hint" style="margin-top: 8px;">
+                  Make sure the screenshot clearly shows the transaction amount, date, and your name.
+                </div>
+              </div>
+
+              <div class="form-nav">
+                <button type="button" class="btn-back" onclick="goToStep(1)">
+                  <i class="ti ti-arrow-left" aria-hidden="true"></i>
+                  Back
+                </button>
+                <button type="button" class="btn-primary" onclick="goToStep(3)" style="flex: 1;">
+                  Review Registration
+                  <i class="ti ti-arrow-right" aria-hidden="true"></i>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- ── STEP 3: Review & Submit ── -->
+            <div class="form-section" id="section-3">
+
+              <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">
+                Please review your details before submitting. Once submitted, we will verify your payment and send your app access.
+              </p>
+
+              <!-- Review card -->
+              <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 20px;">
+
+                <div style="font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;">
+                  Your Details
+                  <button type="button" onclick="goToStep(1)" style="background: none; border: none; color: var(--gold); font-size: 11px; cursor: pointer; font-family: 'Inter', sans-serif;">Edit</button>
+                </div>
+
+                <div class="bank-row">
+                  <span class="bank-label">Full Name</span>
+                  <span class="bank-value" id="review-name">—</span>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-label">Email</span>
+                  <span class="bank-value" id="review-email">—</span>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-label">Phone</span>
+                  <span class="bank-value" id="review-phone">—</span>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-label">University</span>
+                  <span class="bank-value" id="review-university">—</span>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-label">Year</span>
+                  <span class="bank-value" id="review-year">—</span>
+                </div>
+              </div>
+
+              <!-- Payment review -->
+              <div style="background: var(--surface-2); border: 1px solid var(--gold-border); border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 24px;">
+
+                <div style="font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;">
+                  Plan & Payment
+                  <button type="button" onclick="goToStep(2)" style="background: none; border: none; color: var(--gold); font-size: 11px; cursor: pointer; font-family: 'Inter', sans-serif;">Edit</button>
+                </div>
+
+                <div class="bank-row">
+                  <span class="bank-label">Plan</span>
+                  <span class="bank-value">Launch Special — Full Session</span>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-label">Amount</span>
+                  <span class="bank-value" style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 16px;">PKR 1,500</span>
+                </div>
+                <div class="bank-row">
+                  <span class="bank-label">Screenshot</span>
+                  <span class="bank-value" id="review-screenshot" style="font-size: 12px;">—</span>
+                </div>
+              </div>
+
+              <!-- Agreement -->
+              <label style="display: flex; gap: 10px; align-items: flex-start; cursor: pointer; margin-bottom: 24px;">
+                <input type="checkbox" id="agree-check" style="margin-top: 3px; accent-color: var(--gold); width: 15px; height: 15px; flex-shrink: 0;" />
+                <span style="font-size: 12px; color: var(--text-secondary); line-height: 1.6;">
+                  I confirm that all details above are correct and I have transferred PKR 1,500 to the MCB Bank account provided. I understand that access will be sent to my email within 24 hours after verification.
+                </span>
+              </label>
+              <div class="field-error" id="err-agree">
+                <i class="ti ti-alert-circle" style="font-size:12px;"></i> Please confirm the above before submitting
+              </div>
+
+              <div class="form-nav">
+                <button type="button" class="btn-back" onclick="goToStep(2)">
+                  <i class="ti ti-arrow-left" aria-hidden="true"></i>
+                  Back
+                </button>
+                <button type="submit" class="btn-primary" id="submit-btn" style="flex: 1;">
+                  <span id="submit-text">Submit Registration</span>
+                  <div class="spinner" id="submit-spinner"></div>
+                  <i class="ti ti-send" id="submit-icon" aria-hidden="true"></i>
+                </button>
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+
+        <!-- ── SUCCESS STATE ── -->
+        <div id="success-state" role="status" aria-live="polite">
+          <div class="success-icon" aria-hidden="true">
+            <i class="ti ti-circle-check"></i>
+          </div>
+
+          <h2 class="success-title">Registration Submitted!</h2>
+
+          <p class="success-desc">
+            Thank you. Your registration and payment screenshot have been received.
+            Our team will verify your payment and send your MedPREP app access to your email within <strong style="color: var(--white);">24 hours</strong>.
+          </p>
+
+          <div class="success-ref" id="success-ref">
+            Reference: <span id="success-ref-num">—</span>
+          </div>
+
+          <div class="success-steps">
+            <div class="success-step">
+              <div class="success-step-num">1</div>
+              <span>We review your payment screenshot — usually within a few hours.</span>
+            </div>
+            <div class="success-step">
+              <div class="success-step-num">2</div>
+              <span>Your MedPREP login credentials and app download link are sent to your email.</span>
+            </div>
+            <div class="success-step">
+              <div class="success-step-num">3</div>
+              <span>Open the app, log in, and start your prep.</span>
+            </div>
+          </div>
+
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">
+            Questions? Reach us on WhatsApp — we respond quickly.
+          </p>
+
+          <a href="https://wa.me/923009012548" target="_blank" rel="noopener" class="success-whatsapp">
+            <i class="ti ti-brand-whatsapp"></i>
+            Contact Support on WhatsApp
+          </a>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- WhatsApp floating -->
+  <a id="whatsapp-btn" href="https://wa.me/923009012548" target="_blank" rel="noopener"
+    aria-label="Contact us on WhatsApp"
+    style="position:fixed;bottom:28px;right:28px;z-index:900;background:#25D366;color:#fff;
+    width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:22px;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:transform 0.2s;">
+    <i class="ti ti-brand-whatsapp"></i>
+  </a>
+
+  <script>
+    // ── PLAN SELECTION ──
+    function selectPlan(planId, label) {
+      document.querySelectorAll('.plan-option').forEach(function(el) {
+        el.classList.remove('selected');
+      });
+      label.classList.add('selected');
+      document.getElementById('plan-' + planId).checked = true;
+    }
+
+    // ── COPY TO CLIPBOARD ──
+    function copyText(text, btn) {
+      navigator.clipboard.writeText(text).then(function() {
+        const icon = btn.querySelector('i');
+        icon.className = 'ti ti-check';
+        btn.style.color = 'var(--gold)';
+        setTimeout(function() {
+          icon.className = 'ti ti-copy';
+          btn.style.color = '';
+        }, 2000);
+      }).catch(function() {
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      });
+    }
+
+    // ── FILE UPLOAD ──
+    function handleFileSelect(input) {
+      const file = input.files[0];
+      if (!file) return;
+
+      const uploadDefault = document.getElementById('upload-default');
+      const uploadPreview = document.getElementById('upload-preview');
+      const previewImg = document.getElementById('preview-img');
+      const previewName = document.getElementById('preview-name');
+      const previewSize = document.getElementById('preview-size');
+      const uploadArea = document.getElementById('upload-area');
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        previewImg.src = e.target.result;
+        previewName.textContent = file.name;
+        previewSize.textContent = formatFileSize(file.size);
+        uploadDefault.style.display = 'none';
+        uploadPreview.classList.add('show');
+        uploadArea.classList.add('has-file');
+        document.getElementById('err-screenshot').classList.remove('show');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function formatFileSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(1) + ' MB';
+    }
+
+    // Drag and drop
+    const uploadArea = document.getElementById('upload-area');
+    uploadArea.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      this.classList.add('dragover');
+    });
+    uploadArea.addEventListener('dragleave', function() {
+      this.classList.remove('dragover');
+    });
+    uploadArea.addEventListener('drop', function(e) {
+      e.preventDefault();
+      this.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const input = document.getElementById('screenshot');
+        const dt = new DataTransfer();
+        dt.items.add(file);
+        input.files = dt.files;
+        handleFileSelect(input);
+      }
+    });
+
+    // ── VALIDATION ──
+    function validateStep1() {
+      let valid = true;
+
+      const name = document.getElementById('full-name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const university = document.getElementById('university').value;
+      const year = document.getElementById('year').value;
+
+      if (!name || name.length < 3) {
+        showError('full-name', 'err-name'); valid = false;
+      } else { clearError('full-name', 'err-name'); }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        showError('email', 'err-email'); valid = false;
+      } else { clearError('email', 'err-email'); }
+
+      const phoneClean = phone.replace(/[\s\-]/g, '');
+      if (!phoneClean || phoneClean.length < 10) {
+        showError('phone', 'err-phone'); valid = false;
+      } else { clearError('phone', 'err-phone'); }
+
+      if (!university) {
+        showError('university', 'err-university'); valid = false;
+      } else { clearError('university', 'err-university'); }
+
+      if (!year) {
+        showError('year', 'err-year'); valid = false;
+      } else { clearError('year', 'err-year'); }
+
+      return valid;
+    }
+
+    function validateStep2() {
+      const file = document.getElementById('screenshot').files[0];
+      if (!file) {
+        document.getElementById('err-screenshot').classList.add('show');
+        return false;
+      }
+      document.getElementById('err-screenshot').classList.remove('show');
+      return true;
+    }
+
+    function validateStep3() {
+      const agreed = document.getElementById('agree-check').checked;
+      if (!agreed) {
+        document.getElementById('err-agree').classList.add('show');
+        return false;
+      }
+      document.getElementById('err-agree').classList.remove('show');
+      return true;
+    }
+
+    function showError(fieldId, errId) {
+      const field = document.getElementById(fieldId);
+      if (field) field.classList.add('error');
+      document.getElementById(errId).classList.add('show');
+    }
+
+    function clearError(fieldId, errId) {
+      const field = document.getElementById(fieldId);
+      if (field) field.classList.remove('error');
+      document.getElementById(errId).classList.remove('show');
+    }
+
+    // Clear errors on input
+    ['full-name', 'email', 'phone'].forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', function() {
+          this.classList.remove('error');
+        });
+      }
+    });
+
+    // ── STEP NAVIGATION ──
+    let currentStep = 1;
+
+    function goToStep(step) {
+      if (step === 2 && !validateStep1()) return;
+      if (step === 3 && !validateStep2()) return;
+
+      if (step === 3) {
+        populateReview();
+      }
+
+      // Hide current, show target
+      document.getElementById('section-' + currentStep).classList.remove('active');
+      document.getElementById('section-' + step).classList.add('active');
+
+      // Update progress indicators
+      updateProgress(step);
+      currentStep = step;
+
+      // Scroll form area to top
+      document.querySelector('.right-panel').scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateProgress(step) {
+      for (let i = 1; i <= 3; i++) {
+        const ind = document.getElementById('step-ind-' + i);
+        const num = document.getElementById('step-num-' + i);
+        ind.classList.remove('active', 'done');
+
+        if (i < step) {
+          ind.classList.add('done');
+          num.innerHTML = '<i class="ti ti-check" style="font-size:12px;"></i>';
+        } else if (i === step) {
+          ind.classList.add('active');
+          num.textContent = i;
+        } else {
+          num.textContent = i;
+        }
+      }
+
+      for (let i = 1; i <= 2; i++) {
+        const line = document.getElementById('line-' + i);
+        line.classList.toggle('done', i < step);
+      }
+    }
+
+    function populateReview() {
+      document.getElementById('review-name').textContent = document.getElementById('full-name').value.trim();
+      document.getElementById('review-email').textContent = document.getElementById('email').value.trim();
+      document.getElementById('review-phone').textContent = document.getElementById('phone').value.trim();
+      document.getElementById('review-university').textContent = document.getElementById('university').value;
+      document.getElementById('review-year').textContent = document.getElementById('year').value;
+
+      const file = document.getElementById('screenshot').files[0];
+      if (file) {
+        document.getElementById('review-screenshot').textContent = file.name + ' (' + formatFileSize(file.size) + ')';
+      }
+    }
+
+    // ── FORM SUBMIT ──
+    document.getElementById('reg-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!validateStep3()) return;
+
+      const submitBtn     = document.getElementById('submit-btn');
+      const submitText    = document.getElementById('submit-text');
+      const submitSpinner = document.getElementById('submit-spinner');
+      const submitIcon    = document.getElementById('submit-icon');
+
+      function setLoading(msg) {
+        submitBtn.disabled = true;
+        submitText.textContent = msg;
+        submitIcon.style.display = 'none';
+        submitSpinner.style.display = 'block';
+      }
+
+      function resetBtn() {
+        submitBtn.disabled = false;
+        submitText.textContent = 'Submit Registration';
+        submitSpinner.style.display = 'none';
+        submitIcon.style.display = 'inline-flex';
+      }
+
+      function showSubmitError(msg) {
+        resetBtn();
+        let errBox = document.getElementById('submit-error');
+        if (!errBox) {
+          errBox = document.createElement('p');
+          errBox.id = 'submit-error';
+          errBox.style.cssText = 'color:#e05252;font-size:12px;margin-top:12px;display:flex;align-items:center;gap:6px;';
+          document.getElementById('submit-btn').parentNode.appendChild(errBox);
+        }
+        errBox.innerHTML = '<i class="ti ti-alert-circle"></i> ' + msg;
+        errBox.style.display = 'flex';
+      }
+
+      const file = document.getElementById('screenshot').files[0];
+
+      // Step 1: Convert screenshot to base64 then upload to ImgBB
+      setLoading('Uploading screenshot...');
+
+      const reader = new FileReader();
+
+      reader.onload = function(evt) {
+        const base64 = evt.target.result.split(',')[1];
+        const IMGBB_KEY = 'f8dea8c50b6c8f4a27916c76b6c8e916';
+
+        const imgForm = new FormData();
+        imgForm.append('key', IMGBB_KEY);
+        imgForm.append('image', base64);
+        imgForm.append('name', 'MedPREP_Payment_' + Date.now());
+
+        // Upload screenshot to ImgBB, then submit to Formspree
+        // On CORS failure (local file testing), submit without image URL gracefully
+        fetch('https://api.imgbb.com/1/upload?key=' + IMGBB_KEY, {
+          method: 'POST',
+          body: imgForm
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(imgResult) {
+          const screenshotUrl = (imgResult && imgResult.data && imgResult.data.url)
+            ? imgResult.data.url
+            : 'Upload pending — see student name';
+          return submitToFormspree(screenshotUrl);
+        })
+        .catch(function() {
+          // CORS or network error — submit without image URL, note it in the email
+          return submitToFormspree('Screenshot could not be auto-uploaded. Contact student: ' + document.getElementById('phone').value.trim());
+        });
+      };
+
+      function submitToFormspree(screenshotUrl) {
+        setLoading('Submitting registration...');
+
+        const payload = {
+          '01_Full_Name':          document.getElementById('full-name').value.trim(),
+          '02_Email':              document.getElementById('email').value.trim(),
+          '03_Phone':              document.getElementById('phone').value.trim(),
+          '04_University':         document.getElementById('university').value,
+          '05_Year_of_Study':      document.getElementById('year').value,
+          '06_Plan':               'Launch Special — Full Session (PKR 1,500)',
+          '07_Payment_Screenshot': screenshotUrl,
+          '08_Submitted_At':       new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' }),
+          '09_Reference_Number':   window._medprepRef || 'N/A'
+        };
+
+        return fetch('https://formspree.io/f/mwvdpkqd', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+        .then(function(res) {
+          if (res.ok) {
+            showSuccess();
+          } else {
+            return res.json().then(function(d) {
+              throw new Error(d.errors ? d.errors[0].message : 'Submission failed');
+            });
+          }
+        })
+        .catch(function(err) {
+          console.error('Submission error:', err);
+          showSubmitError('Something went wrong. Please try again or contact us on WhatsApp.');
+        })
+        .finally(resetBtn);
+      }
+
+      reader.onerror = function() {
+        showSubmitError('Could not read your screenshot. Please try a different image file.');
+        resetBtn();
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    function showSuccess() {
+      // Generate reference number
+      const ref = 'MP-' + Date.now().toString(36).toUpperCase().slice(-6);
+      window._medprepRef = ref;
+      document.getElementById('success-ref-num').textContent = ref;
+
+      document.getElementById('form-container').style.display = 'none';
+      const successEl = document.getElementById('success-state');
+      successEl.classList.add('show');
+      successEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+</body>
+</html>

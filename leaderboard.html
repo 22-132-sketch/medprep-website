@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leaderboard — MedPREP</title>
+  <meta name="description" content="MedPREP Leaderboard — see Pakistan's top medical students ranked by performance. Coming soon for KMU students." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E2C47A;
+      --gold-dim: rgba(201,168,76,0.12);
+      --gold-border: rgba(201,168,76,0.25);
+      --gold-border-strong: rgba(201,168,76,0.6);
+      --black: #000000;
+      --surface: #0a0a0a;
+      --surface-2: #0f0f0f;
+      --surface-3: #141414;
+      --white: #ffffff;
+      --text-primary: #ffffff;
+      --text-secondary: #999999;
+      --text-muted: #555555;
+      --text-faint: #2e2e2e;
+      --border: rgba(255,255,255,0.07);
+      --radius: 10px;
+      --radius-lg: 14px;
+      --rank-1: #C9A84C;
+      --rank-2: #A8A8A8;
+      --rank-3: #cd7f32;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .gold { color: var(--gold); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold-border) 30%, var(--gold-border) 70%, transparent 100%);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold-dim);
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
+      padding: 5px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      margin-bottom: 20px;
+    }
+    .tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+    .coming-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold-dim);
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
+      padding: 4px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--gold);
+      border: 1.5px solid var(--gold-border-strong);
+      padding: 13px 28px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-secondary:hover { border-color: var(--gold); background: var(--gold-dim); transform: translateY(-1px); }
+
+    /* ── NAVBAR ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-name { font-size: 18px; font-weight: 600; color: var(--white); }
+    .nav-logo-name span { color: var(--gold); }
+    .nav-logo-sub { font-size: 10px; color: var(--text-faint); letter-spacing: 1px; text-transform: uppercase; display: block; margin-top: 1px; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--gold); }
+
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-secondary); }
+
+    .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: rgba(0,0,0,0.97); border-bottom: 1px solid var(--border); padding: 24px 20px; z-index: 999; flex-direction: column; gap: 16px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--text-secondary); text-decoration: none; font-size: 15px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+
+    /* ── HERO ── */
+    .page-hero {
+      padding-top: 140px;
+      padding-bottom: 64px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-desc {
+      color: var(--text-secondary);
+      font-size: 15px;
+      max-width: 500px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── FILTERS BAR ── */
+    .filters-bar {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      position: sticky;
+      top: 68px;
+      z-index: 100;
+    }
+
+    .filters-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 4px;
+    }
+
+    .filter-tab {
+      padding: 7px 16px;
+      border-radius: var(--radius);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .filter-tab:hover { color: var(--text-secondary); border-color: var(--border); }
+    .filter-tab.active { background: var(--gold-dim); color: var(--gold); border-color: var(--gold-border); }
+
+    .filter-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-select {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 7px 14px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    /* ── PODIUM ── */
+    .podium-section {
+      padding: 64px 0 48px;
+    }
+
+    .podium {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .podium-slot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .podium-slot-2 { order: 1; }
+    .podium-slot-1 { order: 2; }
+    .podium-slot-3 { order: 3; }
+
+    .podium-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--surface-3);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--text-muted);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .podium-slot-1 .podium-avatar {
+      width: 80px;
+      height: 80px;
+      border-color: var(--rank-1);
+      background: rgba(201,168,76,0.08);
+    }
+
+    .podium-avatar-shimmer {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.04) 50%, transparent 60%);
+      animation: shimmer 2.5s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .podium-crown {
+      position: absolute;
+      top: -2px;
+      font-size: 18px;
+    }
+
+    .podium-rank-badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+    }
+
+    .rank-1-badge { background: var(--rank-1); color: #000; }
+    .rank-2-badge { background: var(--rank-2); color: #000; }
+    .rank-3-badge { background: var(--rank-3); color: #000; }
+
+    .podium-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .podium-score {
+      font-size: 11px;
+      color: var(--text-faint);
+      text-align: center;
+    }
+
+    .podium-block {
+      border-radius: var(--radius) var(--radius) 0 0;
+      width: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .podium-block-1 {
+      height: 120px;
+      background: linear-gradient(180deg, rgba(201,168,76,0.15) 0%, rgba(201,168,76,0.05) 100%);
+      border: 1px solid var(--gold-border);
+      color: var(--gold);
+      width: 120px;
+    }
+
+    .podium-block-2 {
+      height: 90px;
+      background: linear-gradient(180deg, rgba(168,168,168,0.1) 0%, rgba(168,168,168,0.03) 100%);
+      border: 1px solid rgba(168,168,168,0.2);
+      color: var(--rank-2);
+    }
+
+    .podium-block-3 {
+      height: 70px;
+      background: linear-gradient(180deg, rgba(205,127,50,0.1) 0%, rgba(205,127,50,0.03) 100%);
+      border: 1px solid rgba(205,127,50,0.2);
+      color: var(--rank-3);
+    }
+
+    /* Coming soon overlay on podium */
+    .podium-overlay {
+      position: relative;
+    }
+
+    .podium-lock {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .podium-lock-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: 1.5px solid var(--gold-border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--gold);
+    }
+
+    .podium-lock-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .podium-lock-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 240px;
+      line-height: 1.6;
+    }
+
+    /* ── TABLE ── */
+    .leaderboard-table-wrap {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .table-header {
+      display: grid;
+      grid-template-columns: 60px 1fr 140px 120px 100px;
+      padding: 12px 20px;
+      background: var(--surface-3);
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 140px 120px 100px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+      transition: background 0.2s;
+      filter: blur(4px);
+      user-select: none;
+    }
+
+    .table-row:last-child { border-bottom: none; }
+    .table-row:hover { background: var(--surface-3); }
+
+    .rank-cell {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .rank-1-color { color: var(--rank-1); }
+    .rank-2-color { color: var(--rank-2); }
+    .rank-3-color { color: var(--rank-3); }
+    .rank-other { color: var(--text-muted); font-size: 14px; font-family: 'Inter', sans-serif; font-weight: 500; }
+
+    .student-cell { display: flex; align-items: center; gap: 12px; }
+
+    .student-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .student-name { font-size: 14px; font-weight: 500; }
+    .student-year { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+
+    .score-cell { font-size: 14px; font-weight: 500; color: var(--gold); }
+    .accuracy-cell { font-size: 13px; color: var(--text-secondary); }
+
+    .badge-cell { display: flex; gap: 4px; flex-wrap: wrap; }
+    .mini-badge {
+      background: var(--gold-dim);
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 10px;
+    }
+
+    /* Table blur overlay */
+    .table-blur-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.95) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 40px;
+      z-index: 5;
+      border-radius: var(--radius-lg);
+    }
+
+    .unlock-card {
+      background: var(--surface-2);
+      border: 1px solid var(--gold-border-strong);
+      border-radius: var(--radius-lg);
+      padding: 28px 36px;
+      text-align: center;
+      max-width: 420px;
+      position: relative;
+    }
+
+    .unlock-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .unlock-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: 1.5px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--gold);
+      margin: 0 auto 16px;
+    }
+
+    .unlock-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .unlock-desc {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    /* ── WHAT TO EXPECT ── */
+    .expect-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 64px 0;
+    }
+
+    .expect-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+
+    .expect-card:hover { border-color: var(--gold-border); transform: translateY(-2px); }
+
+    .expect-icon {
+      width: 46px;
+      height: 46px;
+      background: var(--gold-dim);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    .expect-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .expect-desc { color: var(--text-secondary); font-size: 13px; line-height: 1.7; }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 88px 0;
+      text-align: center;
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      max-width: 400px;
+      margin: 0 auto 32px;
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── FOOTER ── */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 48px 0 28px; }
+    .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand-name { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+    .footer-brand-name span { color: var(--gold); }
+    .footer-brand-sub { font-size: 10px; color: var(--text-faint); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .footer-brand-desc { color: var(--text-muted); font-size: 12px; line-height: 1.7; }
+    .footer-col-title { font-size: 11px; font-weight: 600; color: var(--text-secondary); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-bottom p { color: var(--text-faint); font-size: 12px; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .table-header { grid-template-columns: 50px 1fr 100px 80px; }
+      .table-row { grid-template-columns: 50px 1fr 100px 80px; }
+      .badge-cell { display: none; }
+      .expect-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .nav-links, .nav-links + a { display: none; }
+      .nav-hamburger { display: flex; }
+      .podium-block { width: 80px; }
+      .podium-block-1 { width: 100px; }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      .hero-title { font-size: 32px; }
+      .table-header { grid-template-columns: 44px 1fr 90px; }
+      .table-row { grid-template-columns: 44px 1fr 90px; }
+      .accuracy-cell { display: none; }
+      .expect-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .cta-title { font-size: 28px; }
+      .podium { gap: 8px; }
+      .podium-block { width: 70px; }
+      .podium-block-1 { width: 86px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="MedPREP home">
+        <svg width="30" height="30" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect width="36" height="36" rx="8" fill="rgba(201,168,76,0.1)"/>
+          <polygon points="18,5 9,17 14,17 11,31 18,20 25,31 22,17 27,17" fill="#C9A84C" opacity="0.25"/>
+          <text x="18" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#C9A84C" font-family="serif">M</text>
+        </svg>
+        <div>
+          <div class="nav-logo-name">Med<span>PREP</span></div>
+          <span class="nav-logo-sub">by Exonovo</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="features.html">Features</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="leaderboard.html" class="active">Leaderboard</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <a href="register.html" class="btn-primary" style="padding: 10px 22px; font-size: 13px;">Register Now</a>
+
+      <button class="nav-hamburger" aria-label="Open menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="features.html">Features</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="register.html" class="btn-primary" style="justify-content: center; margin-top: 8px;">Register Now</a>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section class="page-hero" aria-label="Leaderboard">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container" style="position: relative; z-index: 1;">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 20px;">
+        <div class="tag" style="margin-bottom: 0;">Leaderboard</div>
+        <div class="coming-badge">
+          <i class="ti ti-clock" style="font-size: 11px;" aria-hidden="true"></i>
+          Launching with the app
+        </div>
+      </div>
+      <h1 class="hero-title">
+        Pakistan's Top<br/><span class="gold">Medical Students.</span>
+      </h1>
+      <p class="hero-desc">
+        The MedPREP Leaderboard ranks KMU's best — by performance, accuracy, and consistency. Study hard, study smart, and earn your place at the top.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FILTERS BAR ── -->
+  <div class="filters-bar" aria-label="Leaderboard filters">
+    <div class="container">
+      <div class="filters-inner">
+        <div class="filter-tabs" role="tablist">
+          <button class="filter-tab active" role="tab">Weekly</button>
+          <button class="filter-tab" role="tab">Monthly</button>
+          <button class="filter-tab" role="tab">All Time</button>
+        </div>
+        <div class="filter-right">
+          <select class="filter-select" disabled aria-label="Filter by year">
+            <option>All Years</option>
+          </select>
+          <select class="filter-select" disabled aria-label="Filter by subject">
+            <option>All Subjects</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PODIUM ── -->
+  <section class="podium-section" aria-label="Top 3 students">
+    <div class="container">
+
+      <div style="position: relative; padding: 40px 0;">
+
+        <!-- Podium visual -->
+        <div class="podium" aria-hidden="true">
+
+          <!-- 2nd Place -->
+          <div class="podium-slot podium-slot-2">
+            <div class="podium-avatar" style="border-color: var(--rank-2); background: rgba(168,168,168,0.06);">
+              <i class="ti ti-user" style="font-size: 24px;"></i>
+              <div class="podium-avatar-shimmer"></div>
+              <div class="podium-rank-badge rank-2-badge">2</div>
+            </div>
+            <div class="podium-name">—</div>
+            <div class="podium-score">—</div>
+            <div class="podium-block podium-block-2">2</div>
+          </div>
+
+          <!-- 1st Place -->
+          <div class="podium-slot podium-slot-1">
+            <div class="podium-avatar" style="width:80px;height:80px;">
+              <i class="ti ti-user" style="font-size: 30px;"></i>
+              <div class="podium-avatar-shimmer"></div>
+              <div class="podium-crown">👑</div>
+              <div class="podium-rank-badge rank-1-badge">1</div>
+            </div>
+            <div class="podium-name" style="color: var(--gold);">—</div>
+            <div class="podium-score">—</div>
+            <div class="podium-block podium-block-1">1</div>
+          </div>
+
+          <!-- 3rd Place -->
+          <div class="podium-slot podium-slot-3">
+            <div class="podium-avatar" style="border-color: var(--rank-3); background: rgba(205,127,50,0.06);">
+              <i class="ti ti-user" style="font-size: 24px;"></i>
+              <div class="podium-avatar-shimmer"></div>
+              <div class="podium-rank-badge rank-3-badge">3</div>
+            </div>
+            <div class="podium-name">—</div>
+            <div class="podium-score">—</div>
+            <div class="podium-block podium-block-3">3</div>
+          </div>
+
+        </div>
+
+        <!-- Coming soon lock over podium -->
+        <div class="podium-lock" role="status">
+          <div class="podium-lock-icon">
+            <i class="ti ti-trophy" aria-hidden="true"></i>
+          </div>
+          <div class="podium-lock-text">Rankings unlock when the app launches</div>
+          <div class="podium-lock-sub">Register now to be among the first students on the leaderboard.</div>
+          <a href="register.html" class="btn-primary" style="margin-top: 16px; padding: 12px 28px; font-size: 13px;">
+            Register Now
+            <i class="ti ti-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- ── RANKINGS TABLE ── -->
+      <div class="leaderboard-table-wrap reveal" style="min-height: 420px;">
+
+        <!-- Table header -->
+        <div class="table-header" role="row">
+          <div role="columnheader">Rank</div>
+          <div role="columnheader">Student</div>
+          <div role="columnheader">Score</div>
+          <div role="columnheader">Accuracy</div>
+          <div role="columnheader">Badges</div>
+        </div>
+
+        <!-- Ghost rows — blurred placeholder data -->
+        <div class="table-row" role="row" aria-hidden="true">
+          <div class="rank-cell rank-1-color">1</div>
+          <div class="student-cell">
+            <div class="student-avatar" style="border-color: var(--rank-1); color: var(--rank-1);">A</div>
+            <div>
+              <div class="student-name">Ahmad K.</div>
+              <div class="student-year">Final Year MBBS · KMU</div>
+            </div>
+          </div>
+          <div class="score-cell">9,840 pts</div>
+          <div class="accuracy-cell">94%</div>
+          <div class="badge-cell"><span class="mini-badge">🔥 Streak</span><span class="mini-badge">⚡ Speed</span></div>
+        </div>
+
+        <div class="table-row" role="row" aria-hidden="true">
+          <div class="rank-cell rank-2-color">2</div>
+          <div class="student-cell">
+            <div class="student-avatar" style="border-color: var(--rank-2); color: var(--rank-2);">F</div>
+            <div>
+              <div class="student-name">Fatima R.</div>
+              <div class="student-year">4th Year MBBS · KMU</div>
+            </div>
+          </div>
+          <div class="score-cell">9,210 pts</div>
+          <div class="accuracy-cell">91%</div>
+          <div class="badge-cell"><span class="mini-badge">📚 Scholar</span></div>
+        </div>
+
+        <div class="table-row" role="row" aria-hidden="true">
+          <div class="rank-cell rank-3-color">3</div>
+          <div class="student-cell">
+            <div class="student-avatar" style="border-color: var(--rank-3); color: var(--rank-3);">U</div>
+            <div>
+              <div class="student-name">Usman T.</div>
+              <div class="student-year">3rd Year MBBS · KMU</div>
+            </div>
+          </div>
+          <div class="score-cell">8,775 pts</div>
+          <div class="accuracy-cell">88%</div>
+          <div class="badge-cell"><span class="mini-badge">🎯 Accurate</span></div>
+        </div>
+
+        <div class="table-row" role="row" aria-hidden="true">
+          <div class="rank-cell rank-other">4</div>
+          <div class="student-cell">
+            <div class="student-avatar">Z</div>
+            <div><div class="student-name">Zainab M.</div><div class="student-year">2nd Year MBBS · KMU</div></div>
+          </div>
+          <div class="score-cell">8,340 pts</div>
+          <div class="accuracy-cell">86%</div>
+          <div class="badge-cell"></div>
+        </div>
+
+        <div class="table-row" role="row" aria-hidden="true">
+          <div class="rank-cell rank-other">5</div>
+          <div class="student-cell">
+            <div class="student-avatar">H</div>
+            <div><div class="student-name">Hassan A.</div><div class="student-year">Final Year MBBS · KMU</div></div>
+          </div>
+          <div class="score-cell">7,920 pts</div>
+          <div class="accuracy-cell">84%</div>
+          <div class="badge-cell"></div>
+        </div>
+
+        <div class="table-row" role="row" aria-hidden="true">
+          <div class="rank-cell rank-other">6</div>
+          <div class="student-cell">
+            <div class="student-avatar">S</div>
+            <div><div class="student-name">Sara N.</div><div class="student-year">3rd Year MBBS · KMU</div></div>
+          </div>
+          <div class="score-cell">7,640 pts</div>
+          <div class="accuracy-cell">82%</div>
+          <div class="badge-cell"></div>
+        </div>
+
+        <div class="table-row" role="row" aria-hidden="true">
+          <div class="rank-cell rank-other">7</div>
+          <div class="student-cell">
+            <div class="student-avatar">B</div>
+            <div><div class="student-name">Bilal Q.</div><div class="student-year">4th Year MBBS · KMU</div></div>
+          </div>
+          <div class="score-cell">7,210 pts</div>
+          <div class="accuracy-cell">80%</div>
+          <div class="badge-cell"></div>
+        </div>
+
+        <div class="table-row" role="row" aria-hidden="true">
+          <div class="rank-cell rank-other">8</div>
+          <div class="student-cell">
+            <div class="student-avatar">M</div>
+            <div><div class="student-name">Maryam I.</div><div class="student-year">1st Year MBBS · KMU</div></div>
+          </div>
+          <div class="score-cell">6,890 pts</div>
+          <div class="accuracy-cell">79%</div>
+          <div class="badge-cell"></div>
+        </div>
+
+        <!-- Blur + Unlock overlay -->
+        <div class="table-blur-overlay" aria-hidden="true">
+          <div class="unlock-card">
+            <div class="unlock-icon">
+              <i class="ti ti-lock-open" aria-hidden="true"></i>
+            </div>
+            <div class="unlock-title">Rankings Coming Soon</div>
+            <p class="unlock-desc">
+              Live rankings will appear here once the app launches. Register now to secure your spot and start climbing from day one.
+            </p>
+            <a href="register.html" class="btn-primary" style="padding: 12px 28px; font-size: 13px; justify-content: center; width: 100%;">
+              Register — Be First on the Board
+              <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── WHAT TO EXPECT ── -->
+  <section style="padding: 88px 0; background: var(--surface);" aria-label="What to expect from the leaderboard">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 52px;" class="reveal">
+        <div class="tag">What's Coming</div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 12px;">
+          The Leaderboard<br/><span class="gold">Worth Competing For.</span>
+        </h2>
+        <p style="color: var(--text-secondary); font-size: 14px; max-width: 440px; margin: 0 auto; line-height: 1.75;">
+          Here is exactly what the MedPREP Leaderboard will track, rank, and celebrate.
+        </p>
+      </div>
+
+      <div class="expect-grid reveal">
+
+        <div class="expect-card">
+          <div class="expect-icon" aria-hidden="true"><i class="ti ti-trophy"></i></div>
+          <div class="expect-title">Weekly & All-Time Rankings</div>
+          <p class="expect-desc">Rankings reset weekly so every student has a fresh chance to climb. All-time rankings track your consistency across the entire session.</p>
+        </div>
+
+        <div class="expect-card">
+          <div class="expect-icon" aria-hidden="true"><i class="ti ti-user-circle"></i></div>
+          <div class="expect-title">Public Student Profiles</div>
+          <p class="expect-desc">Every ranked student gets a public profile — year of study, subject strengths, MCQs attempted, accuracy rate, and earned badges.</p>
+        </div>
+
+        <div class="expect-card">
+          <div class="expect-icon" aria-hidden="true"><i class="ti ti-chart-bar"></i></div>
+          <div class="expect-title">Subject-wise Rankings</div>
+          <p class="expect-desc">Not just overall — rank by individual subject. Be the top Pharmacology student in KMU, or dominate Pathology in your year.</p>
+        </div>
+
+        <div class="expect-card">
+          <div class="expect-icon" aria-hidden="true"><i class="ti ti-medal"></i></div>
+          <div class="expect-title">Achievement Badges</div>
+          <p class="expect-desc">Earn badges for streaks, speed, accuracy milestones, and subject mastery. Displayed publicly on your profile for the whole university to see.</p>
+        </div>
+
+        <div class="expect-card">
+          <div class="expect-icon" aria-hidden="true"><i class="ti ti-flame"></i></div>
+          <div class="expect-title">Streak Tracking</div>
+          <p class="expect-desc">Consistent daily study is tracked and rewarded. Students with the longest active streaks get featured prominently on the leaderboard.</p>
+        </div>
+
+        <div class="expect-card">
+          <div class="expect-icon" aria-hidden="true"><i class="ti ti-building"></i></div>
+          <div class="expect-title">University Expansion</div>
+          <p class="expect-desc">Starting with KMU. As MedPREP expands to UHS and beyond, the leaderboard will grow into a national ranking of Pakistan's top medical students.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── CTA ── -->
+  <section class="cta-section" aria-label="Call to action">
+    <div class="container">
+      <div class="reveal">
+        <div class="tag">Claim Your Spot</div>
+        <h2 class="cta-title">
+          Your Name Could Be<br/><span class="gold">At the Top.</span>
+        </h2>
+        <p class="cta-desc">
+          Register now. Study from day one. When the leaderboard goes live — you'll already have a head start.
+        </p>
+        <div class="cta-actions">
+          <a href="register.html" class="btn-primary" style="padding: 16px 40px; font-size: 15px;">
+            Register Now — PKR 1,500
+            <i class="ti ti-arrow-right" aria-hidden="true"></i>
+          </a>
+          <a href="features.html" class="btn-secondary" style="padding: 15px 28px; font-size: 15px;">
+            Explore Features
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">Med<span>PREP</span></div>
+          <div class="footer-brand-sub">by Exonovo</div>
+          <p class="footer-brand-desc">Pakistan's most comprehensive exam preparation platform. Built for KMU. Expanding across Pakistan.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Platform</div>
+          <ul class="footer-links">
+            <li><a href="features.html">Features</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="pathways.html">Pathways</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Legal</div>
+          <ul class="footer-links">
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+          </ul>
+          <div style="margin-top: 20px;">
+            <div class="footer-col-title">Support</div>
+            <a href="https://wa.me/923009012548" target="_blank" rel="noopener"
+              style="color: var(--text-muted); font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+              <i class="ti ti-brand-whatsapp" style="color: #25D366;" aria-hidden="true"></i>
+              WhatsApp Support
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 MedPREP by Exonovo. All rights reserved.</p>
+        <p>Built for KMU. Expanding across Pakistan.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/923009012548" target="_blank" rel="noopener" aria-label="WhatsApp Support"
+    style="position:fixed;bottom:28px;right:28px;z-index:900;background:#25D366;color:#fff;
+    width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:22px;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:transform 0.2s;">
+    <i class="ti ti-brand-whatsapp"></i>
+  </a>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    }
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('mobile-menu');
+      const hamburger = document.querySelector('.nav-hamburger');
+      if (!menu.contains(e.target) && !hamburger.contains(e.target)) menu.classList.remove('open');
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(function(el) { observer.observe(el); });
+  </script>
+</body>
+</html>

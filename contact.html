@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — MedPREP</title>
+  <meta name="description" content="Get in touch with MedPREP. Registration help, technical support, partnership enquiries and more — we respond within 24 hours." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E2C47A;
+      --gold-dim: rgba(201,168,76,0.12);
+      --gold-border: rgba(201,168,76,0.25);
+      --gold-border-strong: rgba(201,168,76,0.6);
+      --black: #000000;
+      --surface: #0a0a0a;
+      --surface-2: #0f0f0f;
+      --surface-3: #141414;
+      --white: #ffffff;
+      --text-primary: #ffffff;
+      --text-secondary: #999999;
+      --text-muted: #555555;
+      --text-faint: #2e2e2e;
+      --border: rgba(255,255,255,0.07);
+      --border-focus: rgba(201,168,76,0.5);
+      --radius: 10px;
+      --radius-lg: 14px;
+      --error: #e05252;
+      --error-dim: rgba(224,82,82,0.1);
+      --success: #4caf82;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .gold { color: var(--gold); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold-border) 30%, var(--gold-border) 70%, transparent 100%);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold-dim);
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
+      padding: 5px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+      margin-bottom: 20px;
+    }
+    .tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* ── NAVBAR ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-name { font-size: 18px; font-weight: 600; color: var(--white); }
+    .nav-logo-name span { color: var(--gold); }
+    .nav-logo-sub { font-size: 10px; color: var(--text-faint); letter-spacing: 1px; text-transform: uppercase; display: block; margin-top: 1px; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--gold); }
+
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-secondary); }
+
+    .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: rgba(0,0,0,0.97); border-bottom: 1px solid var(--border); padding: 24px 20px; z-index: 999; flex-direction: column; gap: 16px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--text-secondary); text-decoration: none; font-size: 15px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+
+    /* ── PAGE LAYOUT ── */
+    .page-wrap {
+      padding-top: 68px;
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .page-hero {
+      padding: 72px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, black 20%, transparent 100%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 500px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    /* ── MAIN GRID ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 32px;
+      padding: 0 0 88px;
+      align-items: start;
+    }
+
+    /* ── LEFT — INFO PANEL ── */
+    .info-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: sticky;
+      top: 96px;
+    }
+
+    /* Quick contact card */
+    .quick-card {
+      background: var(--surface-2);
+      border: 1px solid var(--gold-border-strong);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quick-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .quick-card-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .quick-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .quick-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .quick-item:first-of-type { padding-top: 0; }
+    .quick-item:hover { opacity: 0.8; }
+
+    .quick-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .quick-icon-gold { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold-border); }
+    .quick-icon-wa   { background: rgba(37,211,102,0.12); color: #25D366; border: 1px solid rgba(37,211,102,0.25); }
+    .quick-icon-yt   { background: rgba(255,0,0,0.1); color: #ff4444; border: 1px solid rgba(255,0,0,0.2); }
+
+    .quick-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .quick-value {
+      font-size: 13px;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* Response time card */
+    .response-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .response-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .response-label { font-size: 11px; color: var(--text-muted); margin-bottom: 3px; }
+    .response-value { font-size: 14px; font-weight: 500; }
+
+    /* Location card */
+    .location-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .location-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* Enquiry type cards */
+    .enquiry-types {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+
+    .enquiry-types-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .enquiry-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    .enquiry-item:last-child { border-bottom: none; }
+    .enquiry-item i { color: var(--gold); font-size: 15px; flex-shrink: 0; }
+
+    /* ── RIGHT — FORM PANEL ── */
+    .form-panel {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+    }
+
+    .form-panel-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .form-panel-sub {
+      color: var(--text-secondary);
+      font-size: 13px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    /* Enquiry type selector */
+    .enquiry-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .enquiry-btn {
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      font-size: 12px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .enquiry-btn:hover { border-color: var(--gold-border); color: var(--text-secondary); }
+    .enquiry-btn.selected { border-color: var(--gold); background: var(--gold-dim); color: var(--white); }
+    .enquiry-btn i { font-size: 14px; color: var(--gold); flex-shrink: 0; }
+
+    /* Form fields */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 20px; }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.3px;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+    .form-label span { color: var(--gold); }
+
+    .form-input {
+      width: 100%;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
+    }
+    .form-input::placeholder { color: var(--text-faint); }
+    .form-input:focus { border-color: var(--border-focus); background: var(--surface-4, #181818); }
+    .form-input.error { border-color: var(--error); background: var(--error-dim); }
+
+    .form-textarea {
+      width: 100%;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
+      resize: vertical;
+      min-height: 140px;
+      line-height: 1.6;
+    }
+    .form-textarea::placeholder { color: var(--text-faint); }
+    .form-textarea:focus { border-color: var(--border-focus); background: var(--surface-4, #181818); }
+    .form-textarea.error { border-color: var(--error); background: var(--error-dim); }
+
+    .field-error {
+      font-size: 11px;
+      color: var(--error);
+      margin-top: 5px;
+      display: none;
+      align-items: center;
+      gap: 4px;
+    }
+    .field-error.show { display: flex; }
+
+    .char-count {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    /* Submit */
+    .form-submit-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(0,0,0,0.3);
+      border-top-color: #000;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .form-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── SUCCESS ── */
+    #contact-success {
+      display: none;
+      text-align: center;
+      padding: 48px 24px;
+    }
+
+    #contact-success.show { display: block; }
+
+    .success-icon {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: 1.5px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 28px;
+      color: var(--gold);
+    }
+
+    .success-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .success-desc {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.75;
+      max-width: 380px;
+      margin: 0 auto 28px;
+    }
+
+    /* ── FOOTER ── */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 48px 0 28px; }
+    .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand-name { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+    .footer-brand-name span { color: var(--gold); }
+    .footer-brand-sub { font-size: 10px; color: var(--text-faint); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .footer-brand-desc { color: var(--text-muted); font-size: 12px; line-height: 1.7; }
+    .footer-col-title { font-size: 11px; font-weight: 600; color: var(--text-secondary); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-bottom p { color: var(--text-faint); font-size: 12px; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .info-panel { position: static; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .nav-links, .nav-links + a { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      .form-panel { padding: 24px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .enquiry-selector { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="MedPREP home">
+        <svg width="30" height="30" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect width="36" height="36" rx="8" fill="rgba(201,168,76,0.1)"/>
+          <polygon points="18,5 9,17 14,17 11,31 18,20 25,31 22,17 27,17" fill="#C9A84C" opacity="0.25"/>
+          <text x="18" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#C9A84C" font-family="serif">M</text>
+        </svg>
+        <div>
+          <div class="nav-logo-name">Med<span>PREP</span></div>
+          <span class="nav-logo-sub">by Exonovo</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="features.html">Features</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+
+      <a href="register.html" class="btn-primary" style="padding: 10px 22px; font-size: 13px;">Register Now</a>
+
+      <button class="nav-hamburger" aria-label="Open menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="features.html">Features</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="register.html" class="btn-primary" style="justify-content: center; margin-top: 8px;">Register Now</a>
+  </div>
+
+  <div class="page-wrap">
+
+    <!-- ── HERO ── -->
+    <section class="page-hero" aria-label="Contact us">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container" style="position: relative; z-index: 1;">
+        <div class="tag">Get in Touch</div>
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; line-height: 1.15; margin-bottom: 14px;">
+          We Are Here.<br/><span class="gold">Talk to Us.</span>
+        </h1>
+        <p style="color: var(--text-secondary); font-size: 15px; max-width: 480px; line-height: 1.8;">
+          Registration question, technical issue, partnership enquiry, or something else entirely — send us a message and we will respond within 24 hours.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── CONTACT GRID ── -->
+    <div class="container">
+      <div class="contact-grid reveal">
+
+        <!-- ── LEFT INFO PANEL ── -->
+        <aside class="info-panel" aria-label="Contact information">
+
+          <!-- Quick Contact -->
+          <div class="quick-card">
+            <div class="quick-card-title">Direct Contact</div>
+
+            <a href="mailto:muhammadabbas46233@gmail.com" class="quick-item">
+              <div class="quick-icon quick-icon-gold">
+                <i class="ti ti-mail" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="quick-label">Email</div>
+                <div class="quick-value">muhammadabbas46233@gmail.com</div>
+              </div>
+            </a>
+
+            <a href="https://wa.me/923009012548" target="_blank" rel="noopener" class="quick-item">
+              <div class="quick-icon quick-icon-wa">
+                <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="quick-label">WhatsApp</div>
+                <div class="quick-value">+92 300 9012548</div>
+              </div>
+            </a>
+
+            <a href="https://www.youtube.com/@MedPREP" target="_blank" rel="noopener" class="quick-item">
+              <div class="quick-icon quick-icon-yt">
+                <i class="ti ti-brand-youtube" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="quick-label">YouTube</div>
+                <div class="quick-value">MedPREP by Exonovo</div>
+              </div>
+            </a>
+
+          </div>
+
+          <!-- Response Time -->
+          <div class="response-card">
+            <div class="response-icon">
+              <i class="ti ti-clock" aria-hidden="true"></i>
+            </div>
+            <div>
+              <div class="response-label">Average Response Time</div>
+              <div class="response-value">Within 24 hours</div>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="location-card">
+            <div class="location-icon">
+              <i class="ti ti-map-pin" aria-hidden="true"></i>
+            </div>
+            <div>
+              <div class="response-label">Based in</div>
+              <div class="response-value">Abbottabad, Pakistan</div>
+            </div>
+          </div>
+
+          <!-- What we handle -->
+          <div class="enquiry-types">
+            <div class="enquiry-types-title">We Handle</div>
+            <div class="enquiry-item">
+              <i class="ti ti-user-check" aria-hidden="true"></i>
+              Registration & payment questions
+            </div>
+            <div class="enquiry-item">
+              <i class="ti ti-device-mobile" aria-hidden="true"></i>
+              App & technical support
+            </div>
+            <div class="enquiry-item">
+              <i class="ti ti-building" aria-hidden="true"></i>
+              University & institutional partnerships
+            </div>
+            <div class="enquiry-item">
+              <i class="ti ti-speakerphone" aria-hidden="true"></i>
+              Media & press enquiries
+            </div>
+            <div class="enquiry-item">
+              <i class="ti ti-message-circle" aria-hidden="true"></i>
+              General questions
+            </div>
+          </div>
+
+        </aside>
+
+        <!-- ── RIGHT FORM PANEL ── -->
+        <main class="form-panel" aria-label="Contact form">
+
+          <div id="form-container">
+            <h2 class="form-panel-title">Send Us a Message</h2>
+            <p class="form-panel-sub">Select the type of enquiry below, fill in your details, and we will get back to you as soon as possible.</p>
+
+            <!-- Enquiry type selector -->
+            <div style="margin-bottom: 6px;">
+              <div class="form-label" style="margin-bottom: 10px;">What is your enquiry about? <span>*</span></div>
+              <div class="enquiry-selector" id="enquiry-selector" role="group" aria-label="Enquiry type">
+                <button type="button" class="enquiry-btn selected" data-value="Registration / Payment" onclick="selectEnquiry(this)">
+                  <i class="ti ti-user-check" aria-hidden="true"></i> Registration / Payment
+                </button>
+                <button type="button" class="enquiry-btn" data-value="App / Technical Support" onclick="selectEnquiry(this)">
+                  <i class="ti ti-device-mobile" aria-hidden="true"></i> App / Technical Support
+                </button>
+                <button type="button" class="enquiry-btn" data-value="University / Partnership" onclick="selectEnquiry(this)">
+                  <i class="ti ti-building" aria-hidden="true"></i> University / Partnership
+                </button>
+                <button type="button" class="enquiry-btn" data-value="Media / Press" onclick="selectEnquiry(this)">
+                  <i class="ti ti-speakerphone" aria-hidden="true"></i> Media / Press
+                </button>
+                <button type="button" class="enquiry-btn" data-value="General Enquiry" onclick="selectEnquiry(this)" style="grid-column: 1 / -1;">
+                  <i class="ti ti-message-circle" aria-hidden="true"></i> General Enquiry
+                </button>
+              </div>
+              <input type="hidden" id="enquiry-type" value="Registration / Payment" />
+              <div class="field-error" id="err-enquiry">
+                <i class="ti ti-alert-circle" style="font-size:12px;"></i> Please select an enquiry type
+              </div>
+            </div>
+
+            <form id="contact-form" novalidate>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="c-name">Full Name <span>*</span></label>
+                  <input class="form-input" type="text" id="c-name" name="name"
+                    placeholder="Your full name" autocomplete="name" />
+                  <div class="field-error" id="err-c-name">
+                    <i class="ti ti-alert-circle" style="font-size:12px;"></i> Please enter your name
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="c-email">Email Address <span>*</span></label>
+                  <input class="form-input" type="email" id="c-email" name="email"
+                    placeholder="you@example.com" autocomplete="email" />
+                  <div class="field-error" id="err-c-email">
+                    <i class="ti ti-alert-circle" style="font-size:12px;"></i> Please enter a valid email
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="c-phone">Phone Number <span style="color: var(--text-muted); font-weight: 400;">(optional)</span></label>
+                <input class="form-input" type="tel" id="c-phone" name="phone"
+                  placeholder="03XX XXXXXXX" autocomplete="tel" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="c-subject">Subject <span>*</span></label>
+                <input class="form-input" type="text" id="c-subject" name="subject"
+                  placeholder="Brief subject of your message" />
+                <div class="field-error" id="err-c-subject">
+                  <i class="ti ti-alert-circle" style="font-size:12px;"></i> Please enter a subject
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="c-message">Message <span>*</span></label>
+                <textarea class="form-textarea" id="c-message" name="message"
+                  placeholder="Write your message here. The more detail you provide, the better we can help you."
+                  maxlength="1000" oninput="updateCharCount(this)"></textarea>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                  <div class="field-error" id="err-c-message" style="margin-top: 0;">
+                    <i class="ti ti-alert-circle" style="font-size:12px;"></i> Please enter your message
+                  </div>
+                  <div class="char-count" id="char-count">0 / 1000</div>
+                </div>
+              </div>
+
+              <div class="form-submit-row">
+                <button type="submit" class="btn-primary" id="contact-submit-btn" style="padding: 14px 32px;">
+                  <span id="contact-submit-text">Send Message</span>
+                  <div class="spinner" id="contact-spinner"></div>
+                  <i class="ti ti-send" id="contact-submit-icon" aria-hidden="true"></i>
+                </button>
+                <p class="form-note">We respond within 24 hours.<br/>For urgent help, WhatsApp us directly.</p>
+              </div>
+
+              <div id="contact-submit-error" style="display:none; color: var(--error); font-size: 12px; margin-top: 12px; align-items: center; gap: 6px;">
+                <i class="ti ti-alert-circle"></i>
+                <span id="contact-error-text">Something went wrong. Please try again.</span>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- ── SUCCESS ── -->
+          <div id="contact-success" role="status" aria-live="polite">
+            <div class="success-icon" aria-hidden="true">
+              <i class="ti ti-circle-check"></i>
+            </div>
+            <h2 class="success-title">Message Sent!</h2>
+            <p class="success-desc">
+              Thank you for reaching out. We have received your message and will get back to you within <strong style="color: var(--white);">24 hours</strong>.
+            </p>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">
+              Need faster help? Reach us directly on WhatsApp.
+            </p>
+            <a href="https://wa.me/923009012548" target="_blank" rel="noopener"
+              style="display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: #fff; padding: 12px 24px; border-radius: var(--radius); font-size: 13px; font-weight: 500; text-decoration: none;">
+              <i class="ti ti-brand-whatsapp"></i>
+              WhatsApp Support
+            </a>
+          </div>
+
+        </main>
+
+      </div>
+    </div>
+
+  </div><!-- end page-wrap -->
+
+  <!-- ── FOOTER ── -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">Med<span>PREP</span></div>
+          <div class="footer-brand-sub">by Exonovo</div>
+          <p class="footer-brand-desc">Pakistan's most comprehensive exam preparation platform. Built for KMU. Expanding across Pakistan.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Platform</div>
+          <ul class="footer-links">
+            <li><a href="features.html">Features</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="pathways.html">Pathways</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Legal</div>
+          <ul class="footer-links">
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+          </ul>
+          <div style="margin-top: 20px;">
+            <div class="footer-col-title">Support</div>
+            <a href="https://wa.me/923009012548" target="_blank" rel="noopener"
+              style="color: var(--text-muted); font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+              <i class="ti ti-brand-whatsapp" style="color: #25D366;" aria-hidden="true"></i>
+              WhatsApp Support
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 MedPREP by Exonovo. All rights reserved.</p>
+        <p>Built for KMU. Expanding across Pakistan.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/923009012548" target="_blank" rel="noopener" aria-label="WhatsApp Support"
+    style="position:fixed;bottom:28px;right:28px;z-index:900;background:#25D366;color:#fff;
+    width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:22px;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:transform 0.2s;">
+    <i class="ti ti-brand-whatsapp"></i>
+  </a>
+
+  <script>
+    // ── MOBILE MENU ──
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    }
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('mobile-menu');
+      const hamburger = document.querySelector('.nav-hamburger');
+      if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+        menu.classList.remove('open');
+      }
+    });
+
+    // ── REVEAL ──
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(function(el) { observer.observe(el); });
+
+    // ── ENQUIRY TYPE SELECTOR ──
+    function selectEnquiry(btn) {
+      document.querySelectorAll('.enquiry-btn').forEach(function(b) {
+        b.classList.remove('selected');
+      });
+      btn.classList.add('selected');
+      document.getElementById('enquiry-type').value = btn.getAttribute('data-value');
+      document.getElementById('err-enquiry').classList.remove('show');
+    }
+
+    // ── CHAR COUNT ──
+    function updateCharCount(el) {
+      document.getElementById('char-count').textContent = el.value.length + ' / 1000';
+    }
+
+    // ── CLEAR ERRORS ON INPUT ──
+    ['c-name', 'c-email', 'c-subject', 'c-message'].forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', function() {
+          this.classList.remove('error');
+          const errEl = document.getElementById('err-' + id);
+          if (errEl) errEl.classList.remove('show');
+        });
+      }
+    });
+
+    // ── VALIDATION ──
+    function validateContactForm() {
+      let valid = true;
+
+      const name = document.getElementById('c-name').value.trim();
+      const email = document.getElementById('c-email').value.trim();
+      const subject = document.getElementById('c-subject').value.trim();
+      const message = document.getElementById('c-message').value.trim();
+
+      if (!name || name.length < 2) {
+        document.getElementById('c-name').classList.add('error');
+        document.getElementById('err-c-name').classList.add('show');
+        valid = false;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        document.getElementById('c-email').classList.add('error');
+        document.getElementById('err-c-email').classList.add('show');
+        valid = false;
+      }
+
+      if (!subject || subject.length < 3) {
+        document.getElementById('c-subject').classList.add('error');
+        document.getElementById('err-c-subject').classList.add('show');
+        valid = false;
+      }
+
+      if (!message || message.length < 10) {
+        document.getElementById('c-message').classList.add('error');
+        document.getElementById('err-c-message').classList.add('show');
+        valid = false;
+      }
+
+      return valid;
+    }
+
+    // ── FORM SUBMIT ──
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!validateContactForm()) return;
+
+      const btn     = document.getElementById('contact-submit-btn');
+      const text    = document.getElementById('contact-submit-text');
+      const spinner = document.getElementById('contact-spinner');
+      const icon    = document.getElementById('contact-submit-icon');
+      const errBox  = document.getElementById('contact-submit-error');
+
+      btn.disabled = true;
+      text.textContent = 'Sending...';
+      icon.style.display = 'none';
+      spinner.style.display = 'block';
+      errBox.style.display = 'none';
+
+      const payload = {
+        '01_Enquiry_Type': document.getElementById('enquiry-type').value,
+        '02_Name':         document.getElementById('c-name').value.trim(),
+        '03_Email':        document.getElementById('c-email').value.trim(),
+        '04_Phone':        document.getElementById('c-phone').value.trim() || 'Not provided',
+        '05_Subject':      document.getElementById('c-subject').value.trim(),
+        '06_Message':      document.getElementById('c-message').value.trim(),
+        '07_Sent_At':      new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })
+      };
+
+      fetch('https://formspree.io/f/mwvdpkqd', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(function(res) {
+        if (res.ok) {
+          document.getElementById('form-container').style.display = 'none';
+          document.getElementById('contact-success').classList.add('show');
+        } else {
+          throw new Error('Failed');
+        }
+      })
+      .catch(function() {
+        errBox.style.display = 'flex';
+        document.getElementById('contact-error-text').textContent =
+          'Something went wrong. Please try again or contact us directly on WhatsApp.';
+      })
+      .finally(function() {
+        btn.disabled = false;
+        text.textContent = 'Send Message';
+        spinner.style.display = 'none';
+        icon.style.display = 'inline-flex';
+      });
+    });
+  </script>
+</body>
+</html>

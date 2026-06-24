@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — MedPREP</title>
+  <meta name="description" content="MedPREP Privacy Policy — how we collect, use and protect your personal data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --gold: #C9A84C; --gold-light: #E2C47A; --gold-dim: rgba(201,168,76,0.12);
+      --gold-border: rgba(201,168,76,0.25); --gold-border-strong: rgba(201,168,76,0.6);
+      --black: #000; --surface: #0a0a0a; --surface-2: #0f0f0f; --surface-3: #141414;
+      --white: #fff; --text-primary: #fff; --text-secondary: #999; --text-muted: #555;
+      --text-faint: #2e2e2e; --border: rgba(255,255,255,0.07); --radius: 10px; --radius-lg: 14px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    .gold { color: var(--gold); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent 0%, var(--gold-border) 30%, var(--gold-border) 70%, transparent 100%); }
+    .tag { display: inline-flex; align-items: center; gap: 6px; background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold-border); padding: 5px 16px; border-radius: 100px; font-size: 12px; font-weight: 500; letter-spacing: 0.4px; margin-bottom: 20px; }
+    .tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: #000; border: none; padding: 12px 28px; border-radius: var(--radius); font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.15s; font-family: 'Inter', sans-serif; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* NAVBAR */
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-name { font-size: 18px; font-weight: 600; color: var(--white); }
+    .nav-logo-name span { color: var(--gold); }
+    .nav-logo-sub { font-size: 10px; color: var(--text-faint); letter-spacing: 1px; text-transform: uppercase; display: block; margin-top: 1px; }
+    .nav-back { display: inline-flex; align-items: center; gap: 6px; color: var(--text-secondary); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--gold); }
+
+    /* PAGE LAYOUT */
+    .page-wrap { padding-top: 68px; }
+
+    /* HERO */
+    .page-hero { padding: 64px 0 52px; position: relative; overflow: hidden; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, black 10%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, black 10%, transparent 100%); }
+
+    .hero-inner { position: relative; z-index: 1; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 700; line-height: 1.15; margin-bottom: 12px; }
+    .page-meta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 16px; }
+    .page-meta-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); }
+    .page-meta-item i { color: var(--gold); font-size: 13px; }
+
+    /* MAIN LAYOUT */
+    .legal-layout { display: grid; grid-template-columns: 240px 1fr; gap: 48px; padding: 52px 0 88px; align-items: start; }
+
+    /* TOC SIDEBAR */
+    .toc { position: sticky; top: 96px; }
+    .toc-title { font-size: 11px; font-weight: 600; color: var(--text-secondary); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .toc-item a { display: block; padding: 7px 12px; border-radius: var(--radius); font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.2s, background 0.2s; border-left: 2px solid transparent; }
+    .toc-item a:hover { color: var(--text-secondary); background: var(--surface-2); }
+    .toc-item a.active { color: var(--gold); border-left-color: var(--gold); background: var(--gold-dim); }
+
+    /* CONTENT */
+    .legal-content { min-width: 0; }
+
+    .legal-section { margin-bottom: 52px; padding-bottom: 52px; border-bottom: 1px solid var(--border); }
+    .legal-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .section-num { font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+
+    .section-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; margin-bottom: 18px; line-height: 1.2; }
+
+    .legal-text { color: var(--text-secondary); font-size: 14px; line-height: 1.85; }
+    .legal-text p + p { margin-top: 14px; }
+    .legal-text strong { color: var(--text-primary); font-weight: 500; }
+    .legal-text a { color: var(--gold); text-decoration: none; }
+    .legal-text a:hover { text-decoration: underline; }
+
+    .legal-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+    .legal-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+    .legal-list-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 7px; }
+
+    .info-box { background: var(--surface-2); border: 1px solid var(--gold-border); border-radius: var(--radius-lg); padding: 20px 24px; margin: 20px 0; }
+    .info-box-title { font-size: 12px; font-weight: 600; color: var(--gold); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .info-box-text { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+
+    .highlight-box { background: var(--gold-dim); border-left: 3px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; padding: 16px 20px; margin: 20px 0; }
+    .highlight-box p { font-size: 14px; color: var(--text-primary); line-height: 1.7; }
+
+    .data-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    .data-table th { background: var(--surface-3); padding: 10px 14px; font-size: 11px; font-weight: 600; color: var(--text-secondary); letter-spacing: 0.5px; text-transform: uppercase; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table td { padding: 12px 14px; font-size: 13px; color: var(--text-secondary); border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table td:first-child { color: var(--text-primary); font-weight: 500; }
+
+    /* CONTACT CTA */
+    .contact-cta { background: var(--surface-2); border: 1px solid var(--gold-border); border-radius: var(--radius-lg); padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 48px; }
+    .contact-cta-text h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .contact-cta-text p { font-size: 13px; color: var(--text-secondary); }
+
+    /* FOOTER */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 32px 0; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .footer-bottom p { color: var(--text-faint); font-size: 12px; }
+    .footer-links-row { display: flex; gap: 20px; }
+    .footer-links-row a { color: var(--text-muted); text-decoration: none; font-size: 12px; transition: color 0.2s; }
+    .footer-links-row a:hover { color: var(--gold); }
+
+    @media (max-width: 820px) {
+      .legal-layout { grid-template-columns: 1fr; }
+      .toc { display: none; }
+      .page-title { font-size: 32px; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      .page-title { font-size: 26px; }
+      .contact-cta { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="30" height="30" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect width="36" height="36" rx="8" fill="rgba(201,168,76,0.1)"/>
+          <polygon points="18,5 9,17 14,17 11,31 18,20 25,31 22,17 27,17" fill="#C9A84C" opacity="0.25"/>
+          <text x="18" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="#C9A84C" font-family="serif">M</text>
+        </svg>
+        <div>
+          <div class="nav-logo-name">Med<span>PREP</span></div>
+          <span class="nav-logo-sub">by Exonovo</span>
+        </div>
+      </a>
+      <a href="index.html" class="nav-back">
+        <i class="ti ti-arrow-left" aria-hidden="true"></i>
+        Back to Home
+      </a>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- HERO -->
+    <div class="page-hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="container">
+        <div class="hero-inner">
+          <div class="tag">Legal</div>
+          <h1 class="page-title">Privacy <span class="gold">Policy</span></h1>
+          <p style="color: var(--text-secondary); font-size: 14px; max-width: 520px; line-height: 1.75; margin-top: 10px;">
+            We believe you have a right to know exactly what data we collect, how we use it, and how we protect it. This policy explains everything clearly and honestly.
+          </p>
+          <div class="page-meta">
+            <div class="page-meta-item"><i class="ti ti-calendar" aria-hidden="true"></i> Effective: June 24, 2025</div>
+            <div class="page-meta-item"><i class="ti ti-building" aria-hidden="true"></i> Exonovo / MedPREP</div>
+            <div class="page-meta-item"><i class="ti ti-map-pin" aria-hidden="true"></i> Abbottabad, Pakistan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEGAL LAYOUT -->
+    <div class="container">
+      <div class="legal-layout">
+
+        <!-- TOC -->
+        <aside class="toc" aria-label="Table of contents">
+          <div class="toc-title">Contents</div>
+          <ul class="toc-list">
+            <li class="toc-item"><a href="#overview">1. Overview</a></li>
+            <li class="toc-item"><a href="#data-collected">2. Data We Collect</a></li>
+            <li class="toc-item"><a href="#how-we-use">3. How We Use Your Data</a></li>
+            <li class="toc-item"><a href="#third-parties">4. Third-Party Services</a></li>
+            <li class="toc-item"><a href="#cookies">5. Cookies</a></li>
+            <li class="toc-item"><a href="#data-storage">6. Data Storage & Security</a></li>
+            <li class="toc-item"><a href="#your-rights">7. Your Rights</a></li>
+            <li class="toc-item"><a href="#changes">8. Changes to This Policy</a></li>
+            <li class="toc-item"><a href="#contact">9. Contact Us</a></li>
+          </ul>
+        </aside>
+
+        <!-- CONTENT -->
+        <main class="legal-content" aria-label="Privacy policy content">
+
+          <!-- 1. OVERVIEW -->
+          <section class="legal-section" id="overview">
+            <div class="section-num">01</div>
+            <h2 class="section-title">Overview</h2>
+            <div class="legal-text">
+              <p>MedPREP is operated by <strong>Exonovo</strong>, based in Abbottabad, Pakistan. We are committed to protecting your personal information and being transparent about how we handle it.</p>
+              <p>This Privacy Policy applies to the MedPREP website (<strong>medprep.pk</strong> and associated pages) and the MedPREP mobile application. By using our services, you agree to the collection and use of information as described in this policy.</p>
+              <p>We do not sell your data. We do not share your data with advertisers. We collect only what we need to provide you with our service.</p>
+            </div>
+            <div class="highlight-box" style="margin-top: 20px;">
+              <p>If you have any questions about this policy or how your data is handled, contact us at <a href="mailto:muhammadabbas46233@gmail.com" style="color: var(--gold);">muhammadabbas46233@gmail.com</a> or on WhatsApp at <a href="https://wa.me/923009012548" style="color: var(--gold);">+92 300 9012548</a>.</p>
+            </div>
+          </section>
+
+          <!-- 2. DATA COLLECTED -->
+          <section class="legal-section" id="data-collected">
+            <div class="section-num">02</div>
+            <h2 class="section-title">Data We Collect</h2>
+            <div class="legal-text">
+              <p>We collect the following categories of personal information:</p>
+            </div>
+
+            <table class="data-table" aria-label="Data collection table">
+              <thead>
+                <tr>
+                  <th>Data Type</th>
+                  <th>What We Collect</th>
+                  <th>Why</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Registration Data</td>
+                  <td>Full name, email address, phone number, university, year of study</td>
+                  <td>To create your account and deliver app access</td>
+                </tr>
+                <tr>
+                  <td>Payment Verification</td>
+                  <td>Bank transfer screenshot uploaded by the student</td>
+                  <td>To verify payment and activate your subscription</td>
+                </tr>
+                <tr>
+                  <td>App Usage Data</td>
+                  <td>MCQs attempted, topics studied, scores, study session data, syllabus progress</td>
+                  <td>To power analytics, weak area detection, leaderboard, and performance tracking</td>
+                </tr>
+                <tr>
+                  <td>Contact Messages</td>
+                  <td>Name, email, phone, message content submitted via contact form</td>
+                  <td>To respond to your enquiry</td>
+                </tr>
+                <tr>
+                  <td>Newsletter</td>
+                  <td>Name and email address submitted voluntarily</td>
+                  <td>To send blog updates and announcements you opted into</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="info-box">
+              <div class="info-box-title"><i class="ti ti-shield-check" aria-hidden="true"></i> What We Do Not Collect</div>
+              <div class="info-box-text">We do not collect your CNIC, bank account details, passwords in plain text, or any sensitive financial information beyond the payment screenshot you upload for verification purposes.</div>
+            </div>
+          </section>
+
+          <!-- 3. HOW WE USE -->
+          <section class="legal-section" id="how-we-use">
+            <div class="section-num">03</div>
+            <h2 class="section-title">How We Use Your Data</h2>
+            <div class="legal-text">
+              <p>We use your personal data only for the following purposes:</p>
+            </div>
+            <ul class="legal-list">
+              <li><div class="legal-list-dot"></div><span><strong>Account creation and access delivery</strong> — Your registration details are used to create your MedPREP account and send you your app download link and login credentials.</span></li>
+              <li><div class="legal-list-dot"></div><span><strong>Payment verification</strong> — Your payment screenshot is reviewed manually by our team to confirm your subscription before access is granted.</span></li>
+              <li><div class="legal-list-dot"></div><span><strong>App personalisation</strong> — Your usage data powers your personal dashboard, syllabus tracker, weak area detection, flashcard generation, and performance analytics.</span></li>
+              <li><div class="legal-list-dot"></div><span><strong>Leaderboard</strong> — With your consent, your display name and performance rank may appear on the public MedPREP leaderboard.</span></li>
+              <li><div class="legal-list-dot"></div><span><strong>Support and communication</strong> — We use your contact details to respond to enquiries and send important service notifications.</span></li>
+              <li><div class="legal-list-dot"></div><span><strong>Newsletter</strong> — If you subscribed, we use your email to send blog updates and announcements. You may unsubscribe at any time.</span></li>
+            </ul>
+            <div class="legal-text" style="margin-top: 14px;">
+              <p>We will <strong>never</strong> use your data for advertising, sell it to third parties, or use it for any purpose not listed above.</p>
+            </div>
+          </section>
+
+          <!-- 4. THIRD PARTIES -->
+          <section class="legal-section" id="third-parties">
+            <div class="section-num">04</div>
+            <h2 class="section-title">Third-Party Services</h2>
+            <div class="legal-text">
+              <p>We use a small number of trusted third-party services to operate MedPREP. These are the only external parties that may receive your data:</p>
+            </div>
+
+            <table class="data-table" aria-label="Third party services table">
+              <thead>
+                <tr>
+                  <th>Service</th>
+                  <th>Purpose</th>
+                  <th>Data Shared</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Formspree</td>
+                  <td>Processes form submissions from website</td>
+                  <td>Registration details, contact messages, newsletter signups</td>
+                </tr>
+                <tr>
+                  <td>ImgBB</td>
+                  <td>Temporary hosting of payment screenshots</td>
+                  <td>The payment screenshot image you upload</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="legal-text">
+              <p>Each of these services has its own privacy policy. We encourage you to review them. We do not share your data with any other third party, advertising network, or data broker.</p>
+            </div>
+          </section>
+
+          <!-- 5. COOKIES -->
+          <section class="legal-section" id="cookies">
+            <div class="section-num">05</div>
+            <h2 class="section-title">Cookies</h2>
+            <div class="legal-text">
+              <p>The MedPREP website uses <strong>minimal, functional cookies only</strong>. We do not use advertising cookies, tracking pixels, or third-party analytics cookies.</p>
+              <p>The cookies we use are strictly necessary for the website to function — for example, to remember your session or form progress. No personal data is shared with advertisers through cookies.</p>
+            </div>
+            <div class="info-box" style="margin-top: 18px;">
+              <div class="info-box-title"><i class="ti ti-cookie" aria-hidden="true"></i> Our Cookie Approach</div>
+              <div class="info-box-text">We use only what is necessary. No tracking. No advertising. No data sold to cookie networks. You can disable cookies in your browser settings — the website will still function normally.</div>
+            </div>
+          </section>
+
+          <!-- 6. DATA STORAGE -->
+          <section class="legal-section" id="data-storage">
+            <div class="section-num">06</div>
+            <h2 class="section-title">Data Storage & Security</h2>
+            <div class="legal-text">
+              <p>Your registration data is stored securely and accessed only by the MedPREP team for the purposes described in this policy. We take reasonable precautions to protect your information from unauthorised access, loss, or disclosure.</p>
+              <p>Payment screenshots are uploaded to ImgBB for verification and are not stored permanently on our servers beyond what is needed for account confirmation. Once your subscription is verified and activated, the screenshot is retained only for record-keeping purposes.</p>
+              <p>We retain your account data for as long as your subscription is active and for a reasonable period thereafter for administrative purposes. You may request deletion of your data at any time — see Your Rights below.</p>
+            </div>
+            <div class="highlight-box">
+              <p>MedPREP is a pre-launch platform. As our infrastructure grows, we are committed to maintaining and improving our data security practices in line with industry standards.</p>
+            </div>
+          </section>
+
+          <!-- 7. YOUR RIGHTS -->
+          <section class="legal-section" id="your-rights">
+            <div class="section-num">07</div>
+            <h2 class="section-title">Your Rights</h2>
+            <div class="legal-text">
+              <p>You have the following rights regarding your personal data:</p>
+            </div>
+            <ul class="legal-list">
+              <li><div class="legal-list-dot"></div><span><strong>Access</strong> — You may request a copy of the personal data we hold about you.</span></li>
+              <li><div class="legal-list-dot"></div><span><strong>Correction</strong> — You may request that we correct any inaccurate information we hold about you.</span></li>
+              <li><div class="legal-list-dot"></div><span><strong>Deletion</strong> — You may request that we delete your personal data. Note that deletion will result in the termination of your MedPREP subscription.</span></li>
+              <li><div class="legal-list-dot"></div><span><strong>Unsubscribe</strong> — You may opt out of newsletter emails at any time by contacting us directly.</span></li>
+              <li><div class="legal-list-dot"></div><span><strong>Leaderboard opt-out</strong> — You may request that your profile be removed from the public leaderboard at any time.</span></li>
+            </ul>
+            <div class="legal-text" style="margin-top: 14px;">
+              <p>To exercise any of these rights, contact us at <a href="mailto:muhammadabbas46233@gmail.com">muhammadabbas46233@gmail.com</a> or via WhatsApp at +92 300 9012548. We will respond within 7 business days.</p>
+            </div>
+          </section>
+
+          <!-- 8. CHANGES -->
+          <section class="legal-section" id="changes">
+            <div class="section-num">08</div>
+            <h2 class="section-title">Changes to This Policy</h2>
+            <div class="legal-text">
+              <p>We may update this Privacy Policy from time to time as our services evolve. When we make significant changes, we will update the effective date at the top of this page and, where appropriate, notify registered users by email.</p>
+              <p>We encourage you to review this policy periodically. Continued use of MedPREP after any changes constitutes your acceptance of the updated policy.</p>
+            </div>
+          </section>
+
+          <!-- 9. CONTACT -->
+          <section class="legal-section" id="contact">
+            <div class="section-num">09</div>
+            <h2 class="section-title">Contact Us</h2>
+            <div class="legal-text">
+              <p>If you have any questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact us:</p>
+            </div>
+            <div class="info-box" style="margin-top: 18px;">
+              <div class="info-box-title"><i class="ti ti-building" aria-hidden="true"></i> MedPREP by Exonovo</div>
+              <div class="info-box-text" style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px;">
+                <span><strong style="color: var(--text-primary);">Email:</strong> <a href="mailto:muhammadabbas46233@gmail.com" style="color: var(--gold);">muhammadabbas46233@gmail.com</a></span>
+                <span><strong style="color: var(--text-primary);">WhatsApp:</strong> <a href="https://wa.me/923009012548" style="color: var(--gold);">+92 300 9012548</a></span>
+                <span><strong style="color: var(--text-primary);">Location:</strong> Abbottabad, Pakistan</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- CONTACT CTA -->
+          <div class="contact-cta">
+            <div class="contact-cta-text">
+              <h3>Have a privacy question?</h3>
+              <p>We respond to all privacy enquiries within 7 business days.</p>
+            </div>
+            <a href="contact.html" class="btn-primary">
+              Contact Us
+              <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 MedPREP by Exonovo. All rights reserved.</p>
+        <div class="footer-links-row">
+          <a href="index.html">Home</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Use</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/923009012548" target="_blank" rel="noopener" aria-label="WhatsApp Support"
+    style="position:fixed;bottom:28px;right:28px;z-index:900;background:#25D366;color:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.4);">
+    <i class="ti ti-brand-whatsapp"></i>
+  </a>
+
+  <script>
+    // TOC active highlight on scroll
+    const sections = document.querySelectorAll('.legal-section');
+    const tocLinks = document.querySelectorAll('.toc-item a');
+    window.addEventListener('scroll', function() {
+      let current = '';
+      sections.forEach(function(s) { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+      tocLinks.forEach(function(a) {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+      });
+    }, { passive: true });
+  </script>
+</body>
+</html>
