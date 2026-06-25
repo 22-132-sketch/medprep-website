@@ -1601,6 +1601,9 @@
         setLoading('Submitting registration...');
 
         const payload = {
+          'access_key':            'fdab60ba-09f8-4f7f-8c84-e757494d490a',
+          'subject':               'New MedPREP Registration — ' + document.getElementById('full-name').value.trim(),
+          'from_name':             'MedPREP Registration System',
           '01_Full_Name':          document.getElementById('full-name').value.trim(),
           '02_Email':              document.getElementById('email').value.trim(),
           '03_Phone':              document.getElementById('phone').value.trim(),
@@ -1612,7 +1615,7 @@
           '09_Reference_Number':   window._medprepRef || 'N/A'
         };
 
-        return fetch('https://formspree.io/f/mwvdpkqd', {
+        return fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify(payload)

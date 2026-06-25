@@ -990,6 +990,9 @@
       errBox.style.display = 'none';
 
       const payload = {
+        'access_key':      'fdab60ba-09f8-4f7f-8c84-e757494d490a',
+        'subject':         'MedPREP Contact: ' + document.getElementById('c-subject').value.trim(),
+        'from_name':       'MedPREP Contact Form',
         '01_Enquiry_Type': document.getElementById('enquiry-type').value,
         '02_Name':         document.getElementById('c-name').value.trim(),
         '03_Email':        document.getElementById('c-email').value.trim(),
@@ -999,7 +1002,7 @@
         '07_Sent_At':      new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })
       };
 
-      fetch('https://formspree.io/f/mwvdpkqd', {
+      fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(payload)

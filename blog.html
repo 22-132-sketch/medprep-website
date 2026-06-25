@@ -1189,13 +1189,16 @@
       spinner.style.display = 'block';
 
       const payload = {
+        'access_key': 'fdab60ba-09f8-4f7f-8c84-e757494d490a',
+        'subject':    'MedPREP Newsletter Signup — ' + name,
+        'from_name':  'MedPREP Newsletter',
         '01_Type':  'Newsletter Subscription',
         '02_Name':  name,
         '03_Email': email,
         '04_Time':  new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })
       };
 
-      fetch('https://formspree.io/f/mwvdpkqd', {
+      fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(payload)
