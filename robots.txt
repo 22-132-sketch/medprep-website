@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://medprep.pk/sitemap.xml
+Sitemap: https://register.medprepapp.me/sitemap.xml

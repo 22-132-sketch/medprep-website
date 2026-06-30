@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://medprep.pk/</loc>
+    <loc>https://register.medprepapp.me/</loc>
     <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://medprep.pk/features.html</loc>
+    <loc>https://register.medprepapp.me/features.html</loc>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://medprep.pk/register.html</loc>
+    <loc>https://register.medprepapp.me/register.html</loc>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://medprep.pk/about.html</loc>
+    <loc>https://register.medprepapp.me/about.html</loc>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://medprep.pk/leaderboard.html</loc>
+    <loc>https://register.medprepapp.me/leaderboard.html</loc>
     <lastmod>2025-06-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://medprep.pk/blog.html</loc>
+    <loc>https://register.medprepapp.me/blog.html</loc>
     <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://medprep.pk/pathways.html</loc>
+    <loc>https://register.medprepapp.me/pathways.html</loc>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://medprep.pk/success-stories.html</loc>
+    <loc>https://register.medprepapp.me/success-stories.html</loc>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://medprep.pk/contact.html</loc>
+    <loc>https://register.medprepapp.me/contact.html</loc>
     <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://medprep.pk/privacy.html</loc>
+    <loc>https://register.medprepapp.me/privacy.html</loc>
     <lastmod>2025-06-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://medprep.pk/terms.html</loc>
+    <loc>https://register.medprepapp.me/terms.html</loc>
     <lastmod>2025-06-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
