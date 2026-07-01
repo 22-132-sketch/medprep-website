@@ -1563,15 +1563,54 @@
       });
     }
 
+    // ── Shared email building blocks ──────────────────────────
+    // Mirrors the helpers in the admin panel's registrations.js so
+    // every MedPREP email (registration received, approved, rejected,
+    // welcome, manual) shares one consistent branded shell.
+
+    var MEDPREP_LOGO_URL = 'https://medprepapp.me/icons/icon-monogram-transparent.png';
+
+    function buildEmailPreheader(text) {
+      return '<div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;">'
+        + escapeHtml(text)
+        + '&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;'
+        + '</div>';
+    }
+
+    function buildEmailHeader() {
+      return ''
+        + '<tr><td style="padding:0;background:linear-gradient(135deg,#0a0a0a 0%,#1a1608 60%,#3a2e0c 100%);border-bottom:1px solid rgba(201,168,76,0.25);">'
+        +   '<table role="presentation" width="100%"><tr>'
+        +     '<td style="padding:24px 32px;">'
+        +       '<table role="presentation"><tr>'
+        +         '<td style="padding-right:10px;vertical-align:middle;">'
+        +           '<img src="' + MEDPREP_LOGO_URL + '" width="32" height="32" alt="MedPREP" style="display:block;border:0;" />'
+        +         '</td>'
+        +         '<td style="vertical-align:middle;">'
+        +           '<p style="margin:0;font-size:19px;font-weight:bold;color:#ffffff;letter-spacing:0.01em;">Med<span style="color:#C9A84C;">PREP</span></p>'
+        +         '</td>'
+        +       '</tr></table>'
+        +     '</td>'
+        +   '</tr></table>'
+        + '</td></tr>';
+    }
+
+    function buildEmailFooter(email) {
+      return ''
+        + '<p style="max-width:480px;margin:16px auto 0 auto;text-align:center;font-size:11px;color:#555555;line-height:1.6;">'
+        +   'This email was sent to ' + escapeHtml(email || '') + ' regarding your MedPREP registration.'
+        + '</p>'
+        + '<p style="max-width:480px;margin:6px auto 0 auto;text-align:center;font-size:11px;color:#333333;">&copy; 2025 MedPREP by Exonovo</p>';
+    }
+
     function buildRegistrationReceivedEmail(reg) {
       return ''
+        + buildEmailPreheader('We\'ve received your MedPREP registration.')
         + '<div style="background:#000000;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;">'
         +   '<table role="presentation" width="100%" style="max-width:480px;margin:0 auto;background:#0a0a0a;border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;">'
-        +     '<tr><td style="padding:28px 32px 0 32px;">'
-        +       '<p style="margin:0;font-size:18px;font-weight:bold;color:#ffffff;">Med<span style="color:#C9A84C;">PREP</span></p>'
-        +     '</td></tr>'
+        +     buildEmailHeader()
         +     '<tr><td style="padding:24px 32px 0 32px;">'
-        +       '<h1 style="margin:0 0 12px 0;font-size:20px;color:#ffffff;">Registration Received</h1>'
+        +       '<h1 style="margin:0 0 12px 0;font-size:20px;color:#ffffff;">Registration received</h1>'
         +       '<p style="margin:0 0 20px 0;font-size:14px;line-height:1.6;color:#999999;">'
         +         'Hi ' + escapeHtml(reg.fullName) + ', thanks for registering with MedPREP. We\'ve received your '
         +         'details and payment screenshot, and our team is verifying it now.'
@@ -1595,7 +1634,7 @@
         +       '<a href="https://wa.me/923073005231" style="display:inline-block;background:rgba(37,211,102,0.12);color:#25D366;text-decoration:none;font-size:13px;padding:10px 18px;border-radius:8px;border:1px solid rgba(37,211,102,0.3);">Contact Support on WhatsApp</a>'
         +     '</td></tr>'
         +   '</table>'
-        +   '<p style="max-width:480px;margin:16px auto 0 auto;text-align:center;font-size:11px;color:#333333;">&copy; 2025 MedPREP by Exonovo</p>'
+        +   buildEmailFooter(reg.email)
         + '</div>';
     }
 
