@@ -1306,6 +1306,36 @@
     <i class="ti ti-brand-whatsapp"></i>
   </a>
 
+  <!-- Firebase (v9 modular) — writes registrations to Firestore -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCQflJTJ9WWnoVwL_EwTzh0hSsznzYRbtA",
+      authDomain: "medprep-4f53e.firebaseapp.com",
+      projectId: "medprep-4f53e",
+      storageBucket: "medprep-4f53e.firebasestorage.app",
+      messagingSenderId: "284986365323",
+      appId: "1:284986365323:web:fbbd0951533e8721318b8e"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Expose a small promise-based API for the classic script below to use.
+    // (The form-handling script stays a regular script so it can keep using
+    // plain function declarations / event listeners without a build step.)
+    window.medprepDB = {
+      addRegistration: function (data) {
+        return addDoc(collection(db, "registrations"), {
+          ...data,
+          createdAt: serverTimestamp()
+        });
+      }
+    };
+  </script>
+
   <script>
     // ── PLAN SELECTION ──
     function selectPlan(planId, label) {
@@ -1526,6 +1556,49 @@
       }
     }
 
+    // ── EMAIL TEMPLATE ──
+    function escapeHtml(str) {
+      return String(str || '').replace(/[&<>"']/g, function(c) {
+        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+      });
+    }
+
+    function buildRegistrationReceivedEmail(reg) {
+      return ''
+        + '<div style="background:#000000;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;">'
+        +   '<table role="presentation" width="100%" style="max-width:480px;margin:0 auto;background:#0a0a0a;border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;">'
+        +     '<tr><td style="padding:28px 32px 0 32px;">'
+        +       '<p style="margin:0;font-size:18px;font-weight:bold;color:#ffffff;">Med<span style="color:#C9A84C;">PREP</span></p>'
+        +     '</td></tr>'
+        +     '<tr><td style="padding:24px 32px 0 32px;">'
+        +       '<h1 style="margin:0 0 12px 0;font-size:20px;color:#ffffff;">Registration Received</h1>'
+        +       '<p style="margin:0 0 20px 0;font-size:14px;line-height:1.6;color:#999999;">'
+        +         'Hi ' + escapeHtml(reg.fullName) + ', thanks for registering with MedPREP. We\'ve received your '
+        +         'details and payment screenshot, and our team is verifying it now.'
+        +       '</p>'
+        +     '</td></tr>'
+        +     '<tr><td style="padding:0 32px;">'
+        +       '<table role="presentation" width="100%" style="background:#141414;border:1px solid rgba(201,168,76,0.25);border-radius:10px;">'
+        +         '<tr><td style="padding:14px 16px 6px 16px;font-size:12px;color:#666666;">Reference</td>'
+        +             '<td style="padding:14px 16px 6px 16px;font-size:13px;color:#ffffff;text-align:right;">' + escapeHtml(reg.referenceNumber) + '</td></tr>'
+        +         '<tr><td style="padding:6px 16px;font-size:12px;color:#666666;">Plan</td>'
+        +             '<td style="padding:6px 16px;font-size:13px;color:#ffffff;text-align:right;">' + escapeHtml(reg.planLabel) + '</td></tr>'
+        +         '<tr><td style="padding:6px 16px 14px 16px;font-size:12px;color:#666666;">Amount</td>'
+        +             '<td style="padding:6px 16px 14px 16px;font-size:13px;color:#C9A84C;text-align:right;">' + escapeHtml(reg.currency) + ' ' + escapeHtml(reg.amount) + '</td></tr>'
+        +       '</table>'
+        +     '</td></tr>'
+        +     '<tr><td style="padding:24px 32px 32px 32px;">'
+        +       '<p style="margin:0 0 16px 0;font-size:13px;line-height:1.6;color:#999999;">'
+        +         'We will verify your payment and send your MedPREP app login details to this email '
+        +         'within <strong style="color:#ffffff;">24 hours</strong>. Questions? Message us on WhatsApp.'
+        +       '</p>'
+        +       '<a href="https://wa.me/923073005231" style="display:inline-block;background:rgba(37,211,102,0.12);color:#25D366;text-decoration:none;font-size:13px;padding:10px 18px;border-radius:8px;border:1px solid rgba(37,211,102,0.3);">Contact Support on WhatsApp</a>'
+        +     '</td></tr>'
+        +   '</table>'
+        +   '<p style="max-width:480px;margin:16px auto 0 auto;text-align:center;font-size:11px;color:#333333;">&copy; 2025 MedPREP by Exonovo</p>'
+        + '</div>';
+    }
+
     // ── FORM SUBMIT ──
     document.getElementById('reg-form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -1565,6 +1638,11 @@
 
       const file = document.getElementById('screenshot').files[0];
 
+      // Reference number is generated up front so it can be stored on the
+      // Firestore record itself and included in the confirmation email.
+      const ref = 'MP-' + Date.now().toString(36).toUpperCase().slice(-6);
+      window._medprepRef = ref;
+
       // Step 1: Convert screenshot to base64 then upload to ImgBB
       setLoading('Uploading screenshot...');
 
@@ -1579,8 +1657,9 @@
         imgForm.append('image', base64);
         imgForm.append('name', 'MedPREP_Payment_' + Date.now());
 
-        // Upload screenshot to ImgBB, then submit to Formspree
-        // On CORS failure (local file testing), submit without image URL gracefully
+        // Upload screenshot to ImgBB, then save the registration to Firestore.
+        // On CORS/network failure, save without an image URL gracefully —
+        // the admin team can still follow up using the phone number.
         fetch('https://api.imgbb.com/1/upload?key=' + IMGBB_KEY, {
           method: 'POST',
           body: imgForm
@@ -1589,52 +1668,65 @@
         .then(function(imgResult) {
           const screenshotUrl = (imgResult && imgResult.data && imgResult.data.url)
             ? imgResult.data.url
-            : 'Upload pending, see student name';
-          return submitToFormspree(screenshotUrl);
+            : '';
+          return submitRegistration(screenshotUrl);
         })
         .catch(function() {
-          // CORS or network error, submit without image URL, note it in the email
-          return submitToFormspree('Screenshot could not be auto-uploaded. Contact student: ' + document.getElementById('phone').value.trim());
+          return submitRegistration('');
         });
       };
 
-      function submitToFormspree(screenshotUrl) {
+      function submitRegistration(screenshotUrl) {
         setLoading('Submitting registration...');
 
-        const payload = {
-          'access_key':            'fdab60ba-09f8-4f7f-8c84-e757494d490a',
-          'subject':               'New MedPREP Registration, ' + document.getElementById('full-name').value.trim(),
-          'from_name':             'MedPREP Registration System',
-          '01_Full_Name':          document.getElementById('full-name').value.trim(),
-          '02_Email':              document.getElementById('email').value.trim(),
-          '03_Phone':              document.getElementById('phone').value.trim(),
-          '04_University':         document.getElementById('university').value,
-          '05_Year_of_Study':      document.getElementById('year').value,
-          '06_Plan':               'Launch Special, Full Session (PKR 1,500)',
-          '07_Payment_Screenshot': screenshotUrl,
-          '08_Submitted_At':       new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' }),
-          '09_Reference_Number':   window._medprepRef || 'N/A'
+        const registration = {
+          fullName:        document.getElementById('full-name').value.trim(),
+          email:           document.getElementById('email').value.trim(),
+          phone:           document.getElementById('phone').value.trim(),
+          university:      document.getElementById('university').value,
+          year:            document.getElementById('year').value,
+          plan:            'launch',
+          planLabel:       'Launch Special, Full Session',
+          amount:          1500,
+          currency:        'PKR',
+          screenshotUrl:   screenshotUrl,
+          referenceNumber: ref,
+          status:          'pending',
+          submittedAt:     new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })
         };
 
-        return fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(payload)
-        })
-        .then(function(res) {
-          if (res.ok) {
-            showSuccess();
-          } else {
-            return res.json().then(function(d) {
-              throw new Error(d.errors ? d.errors[0].message : 'Submission failed');
+        if (!window.medprepDB || typeof window.medprepDB.addRegistration !== 'function') {
+          showSubmitError('Could not connect to our servers. Please refresh and try again.');
+          resetBtn();
+          return;
+        }
+
+        window.medprepDB.addRegistration(registration)
+          .then(function() {
+            showSuccess(ref);
+            // Confirmation email is best-effort and never blocks the success
+            // state — the registration is already safely saved in Firestore.
+            sendRegistrationEmail(registration).catch(function(err) {
+              console.error('Registration email error:', err);
             });
-          }
-        })
-        .catch(function(err) {
-          console.error('Submission error:', err);
-          showSubmitError('Something went wrong. Please try again or contact us on WhatsApp.');
-        })
-        .finally(resetBtn);
+          })
+          .catch(function(err) {
+            console.error('Firestore submission error:', err);
+            showSubmitError('Something went wrong saving your registration. Please try again or contact us on WhatsApp.');
+          })
+          .finally(resetBtn);
+      }
+
+      function sendRegistrationEmail(registration) {
+        return fetch('https://medprep-email-api.vercel.app/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            to: registration.email,
+            subject: 'Registration Received — MedPREP',
+            html: buildRegistrationReceivedEmail(registration)
+          })
+        });
       }
 
       reader.onerror = function() {
@@ -1645,11 +1737,8 @@
       reader.readAsDataURL(file);
     });
 
-    function showSuccess() {
-      // Generate reference number
-      const ref = 'MP-' + Date.now().toString(36).toUpperCase().slice(-6);
-      window._medprepRef = ref;
-      document.getElementById('success-ref-num').textContent = ref;
+    function showSuccess(ref) {
+      document.getElementById('success-ref-num').textContent = ref || window._medprepRef || '';
 
       document.getElementById('form-container').style.display = 'none';
       const successEl = document.getElementById('success-state');
