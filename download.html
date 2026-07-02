@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MedPREP, Where Pakistan's Best Doctors Begin</title>
-  <meta name="description" content="The most comprehensive MCQ + Notes platform built exclusively for Pakistani medical students. Study smarter, track your progress, and ace your professional exams." />
-<link rel="canonical" href="https://register.medprepapp.me/" />
+  <title>Download MedPREP, App for Windows, Android & iOS</title>
+  <meta name="description" content="Install MedPREP on Windows, Android, or iOS in seconds. No app store, no heavy download &mdash; works instantly on any device, even low-end phones." />
+<link rel="canonical" href="https://register.medprepapp.me/download.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
@@ -893,6 +893,109 @@
       .download-grid { grid-template-columns: 1fr; max-width: 340px; }
     }
 
+    /* ── DOWNLOAD PAGE: HERO ── */
+    #download-hero {
+      padding: 150px 0 88px;
+      position: relative;
+      overflow: hidden;
+    }
+    .dl-hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, black 40%, transparent 100%);
+      pointer-events: none;
+    }
+    .dl-hero-content {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 52px;
+      position: relative;
+      z-index: 1;
+    }
+    .dl-hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 46px;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+    .dl-hero-desc {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    @media (max-width: 700px) {
+      #download-hero { padding: 110px 0 56px; }
+      .dl-hero-headline { font-size: 30px; }
+      .dl-hero-desc { font-size: 13px; }
+    }
+
+    /* ── WHY PWA GRID ── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .why-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 26px 20px;
+      text-align: center;
+    }
+    .why-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      font-size: 20px;
+      color: var(--gold);
+    }
+    .why-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .why-desc { color: var(--text-muted); font-size: 12px; line-height: 1.6; }
+    @media (max-width: 700px) {
+      .why-grid { grid-template-columns: 1fr; max-width: 360px; }
+    }
+
+    /* ── DOWNLOAD FAQ ── */
+    .faq-list {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .faq-q i { color: var(--gold); font-size: 16px; }
+    .faq-a {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.7;
+      padding-left: 24px;
+    }
+    .faq-a a { color: var(--gold); text-decoration: none; }
+    .faq-a a:hover { text-decoration: underline; }
+
     /* ── FINAL CTA ── */
     #cta {
       padding: 100px 0;
@@ -1217,7 +1320,7 @@
   <!-- ── NAVBAR ── -->
   <nav id="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="#" class="nav-logo" aria-label="MedPREP home">
+      <a href="index.html" class="nav-logo" aria-label="MedPREP home">
         <svg class="nav-logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect width="36" height="36" rx="8" fill="rgba(201,168,76,0.1)"/>
           <polygon points="18,5 9,17 14,17 11,31 18,20 25,31 22,17 27,17" fill="#C9A84C" opacity="0.25"/>
@@ -1230,9 +1333,9 @@
       </a>
 
       <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="download.html">Download</a></li>
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="download.html" style="color: var(--gold);">Download</a></li>
         <li><a href="leaderboard.html">Leaderboard</a></li>
         <li><a href="blog.html">Blog</a></li>
             <li><a href="success-stories.html">Success Stories</a></li>
@@ -1251,9 +1354,9 @@
   </nav>
 
   <div class="mobile-menu" id="mobile-menu">
-    <a href="#features" onclick="toggleMenu()">Features</a>
-    <a href="#pricing" onclick="toggleMenu()">Pricing</a>
-    <a href="download.html" onclick="toggleMenu()">Download</a>
+    <a href="index.html#features" onclick="toggleMenu()">Features</a>
+    <a href="index.html#pricing" onclick="toggleMenu()">Pricing</a>
+    <a href="download.html" onclick="toggleMenu()" style="color: var(--gold);">Download</a>
     <a href="leaderboard.html" onclick="toggleMenu()">Leaderboard</a>
     <a href="blog.html" onclick="toggleMenu()">Blog</a>
     <a href="about.html" onclick="toggleMenu()">About</a>
@@ -1261,318 +1364,18 @@
     <a href="register.html" class="btn-primary" style="margin-top: 8px; justify-content: center;">Register Now, PKR 1,500</a>
   </div>
 
-  <!-- ── HERO ── -->
-  <section id="hero" aria-label="Hero section">
-    <div class="hero-grid-bg" aria-hidden="true"></div>
-    <div class="hero-glow" aria-hidden="true"></div>
+  <!-- ── DOWNLOAD PAGE HEADER ── -->
+  <section id="download-hero" aria-label="Download MedPREP">
+    <div class="dl-hero-grid-bg" aria-hidden="true"></div>
     <div class="container">
-      <div class="hero-content">
-
-        <div class="hero-eyebrow">
-          <span class="hero-eyebrow-dot" aria-hidden="true"></span>
-          Now open for KMU students, Launch pricing active
-        </div>
-
-        <h1 class="hero-headline">
-          Study Smart.<br/><span class="gold">Pass Your Profs.</span>
-        </h1>
-
-        <p class="hero-sub">Built for KMU students who want to study right, not just study hard.</p>
-
-        <p class="hero-desc">
-          MedPREP gives you syllabus-based notes, targeted MCQs, and tools that show exactly where you stand, so you go into your prof exam knowing you are ready.
-        </p>
-
-        <div class="hero-actions">
-          <a href="register.html" class="btn-primary btn-primary-lg">
-            Register Now, PKR 1,500
-            <i class="ti ti-arrow-right" aria-hidden="true"></i>
-          </a>
-          <a href="#features" class="btn-secondary btn-primary-lg">
-            See Features
-          </a>
-        </div>
-
-        <p class="hero-note">
-          <span>Launch price</span> &nbsp;&bull;&nbsp; Full session access &nbsp;&bull;&nbsp; App details sent within 24 hours
-        </p>
-
-        <svg class="hero-ecg" viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <polyline
-            points="0,15 40,15 55,3 65,27 75,8 85,22 95,15 300,15"
-            stroke="#C9A84C" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-
-        <div class="hero-stats" role="list">
-          <div class="hero-stat" role="listitem">
-            <div class="hero-stat-num">5,000+</div>
-            <div class="hero-stat-label">MCQs</div>
-          </div>
-          <div class="hero-stat" role="listitem">
-            <div class="hero-stat-num">KMU</div>
-            <div class="hero-stat-label">Syllabus Aligned</div>
-          </div>
-          <div class="hero-stat" role="listitem">
-            <div class="hero-stat-num">360°</div>
-            <div class="hero-stat-label">Topic Coverage</div>
-          </div>
-          <div class="hero-stat" role="listitem">
-            <div class="hero-stat-num">3</div>
-            <div class="hero-stat-label">Study Modes</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ── PRICING ── -->
-  <section id="pricing" class="section section-alt" aria-label="Pricing">
-    <div class="container">
-      <div class="section-header reveal">
-        <div class="tag">Pricing</div>
-        <h2 class="section-title">Simple <span class="gold">Pricing.</span></h2>
-        <p class="section-desc">Pay once and study for the full session. No monthly renewals, no hidden charges.</p>
-      </div>
-
-      <div class="pricing-grid reveal">
-
-        <!-- Featured -->
-        <div class="pricing-card pricing-card-featured">
-          <div class="pricing-badge">Launch Price, This Year Only</div>
-          <div style="margin-top: 12px;">
-            <div class="pricing-tier">This Year</div>
-            <div class="pricing-name">Full Session Subscription</div>
-            <div class="pricing-amount"><sup>PKR</sup> 1,500</div>
-            <div class="pricing-unit">Access until your exam results</div>
-            <div class="pricing-original">Next session price: PKR 3,500</div>
-            <span class="pricing-save">57% off next session price</span>
-            <div class="pricing-divider"></div>
-            <div class="pricing-features">
-              <span class="pricing-pill">All MCQs</span>
-              <span class="pricing-pill">Notes</span>
-              <span class="pricing-pill">360° View</span>
-              <span class="pricing-pill">Flashcards</span>
-              <span class="pricing-pill">Analytics</span>
-              <span class="pricing-pill">All 3 Modes</span>
-            </div>
-            <a href="register.html" class="btn-primary" style="width: 100%; justify-content: center;">
-              Register Now
-              <i class="ti ti-arrow-right" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Next session full -->
-        <div class="pricing-card" style="display: flex; flex-direction: column; justify-content: space-between;">
-          <div>
-            <div class="pricing-tier">Next Session</div>
-            <div class="pricing-name">Full Session</div>
-            <div class="pricing-amount pricing-amount-sm"><sup style="font-size:13px;">PKR</sup> 3,500</div>
-            <div class="pricing-unit">From session start</div>
-            <div class="pricing-divider"></div>
-            <div class="pricing-note">All features included. Available at the start of next academic session.</div>
-          </div>
-          <button class="btn-secondary" style="width: 100%; justify-content: center; margin-top: 12px;" disabled>
-            Available Next Session
-          </button>
-        </div>
-
-        <!-- Monthly -->
-        <div class="pricing-card" style="display: flex; flex-direction: column; justify-content: space-between;">
-          <div>
-            <div class="pricing-tier">Next Session</div>
-            <div class="pricing-name">Monthly</div>
-            <div class="pricing-amount pricing-amount-sm"><sup style="font-size:13px;">PKR</sup> 500</div>
-            <div class="pricing-unit">per month</div>
-            <div class="pricing-divider"></div>
-            <div class="pricing-note">Available from session start only. Locks out when 2 months remain before exams.</div>
-          </div>
-          <button class="btn-secondary" style="width: 100%; justify-content: center; margin-top: 12px;" disabled>
-            Available Next Session
-          </button>
-        </div>
-
-      </div>
-
-      <p class="pricing-footer-note reveal">
-        Late session offer: <strong style="color: var(--gold);">PKR 3,000</strong> for full remaining access when 2 months remain before exams. Monthly unavailable at that point.
-      </p>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ── HOW IT WORKS ── -->
-  <section id="how-it-works" class="section" aria-label="How it works">
-    <div class="container">
-      <div class="section-header reveal">
-        <div class="tag">How It Works</div>
-        <h2 class="section-title">How It <span class="gold">Works</span></h2>
-        <p class="section-desc">The whole process takes about 3 minutes.</p>
-      </div>
-
-      <div class="steps reveal">
-        <div class="step">
-          <div class="step-num" aria-hidden="true">1</div>
-          <div class="step-content">
-            <div class="step-title">Fill in your details</div>
-            <div class="step-desc">Enter your name, email, phone, university and year. Choose your plan.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num" aria-hidden="true">2</div>
-          <div class="step-content">
-            <div class="step-title">Make the bank transfer</div>
-            <div class="step-desc">Transfer to the bank account shown on the page, then upload your payment screenshot.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num" aria-hidden="true">3</div>
-          <div class="step-content">
-            <div class="step-title">We check and send you access</div>
-            <div class="step-desc">We review your screenshot and send you the app download link and login details within 24 hours.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num" aria-hidden="true">4</div>
-          <div class="step-content">
-            <div class="step-title">Start studying</div>
-            <div class="step-desc">Log in, pick your subject and get started.</div>
-          </div>
-        </div>
-      </div>
-
-      <div style="text-align: center; margin-top: 44px;" class="reveal">
-        <a href="register.html" class="btn-primary btn-primary-lg">
-          Register Now
-          <i class="ti ti-arrow-right" aria-hidden="true"></i>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ── FEATURES ── -->
-  <section id="features" class="section section-alt" aria-label="Features">
-    <div class="container">
-      <div class="section-header reveal">
-        <div class="tag">Features</div>
-        <h2 class="section-title">What You Get with <span class="gold">MedPREP</span></h2>
-        <p class="section-desc">Notes, MCQs, flashcards and progress tracking, all built around your KMU syllabus.</p>
-      </div>
-
-      <div class="features-grid reveal">
-
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><i class="ti ti-brain"></i></div>
-          <div class="feature-badges">
-            <div class="feature-title" style="margin-bottom: 0;">Smart MCQ Engine</div>
-            <span class="badge">UWorld-style</span>
-          </div>
-          <p class="feature-desc">Every wrong answer shows you why you got it wrong, what the trap was, and the key point to remember. You learn from every mistake.</p>
-        </div>
-
-        <div class="feature-card feature-card-signature">
-          <div class="feature-icon" aria-hidden="true"><i class="ti ti-rotate-360"></i></div>
-          <div class="feature-badges">
-            <div class="feature-title" style="margin-bottom: 0;">360° Topic View</div>
-            <span class="badge">Signature</span>
-          </div>
-          <p class="feature-desc">Pick any topic and get MCQs from every subject that covers it, Pathology, Pharmacology, Medicine, Forensic, Community Medicine, all together.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><i class="ti ti-notes"></i></div>
-          <div class="feature-title">Syllabus-Based Notes</div>
-          <p class="feature-desc">Notes written around your KMU syllabus. Finish a topic and tap once to go straight to its MCQs.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><i class="ti ti-cards"></i></div>
-          <div class="feature-badges">
-            <div class="feature-title" style="margin-bottom: 0;">Smart Flashcards</div>
-            <span class="badge">Signature</span>
-          </div>
-          <p class="feature-desc">Get it wrong and MedPREP automatically makes a flashcard from it. Your revision deck builds itself.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><i class="ti ti-chart-bar"></i></div>
-          <div class="feature-title">Syllabus Tracker & Analytics</div>
-          <p class="feature-desc">See how much of your syllabus you have covered and what is left. Weak areas are flagged automatically.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><i class="ti ti-clock"></i></div>
-          <div class="feature-title">3 Study Modes</div>
-          <p class="feature-desc">Study how you want. Tutor Mode explains as you go. Timed Mode adds exam pressure. Exam Mode simulates the real thing.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ── COMING SOON ── -->
-  <section id="ecosystem" class="section" aria-label="Coming soon features">
-    <div class="container">
-      <div class="section-header reveal">
-        <div class="tag">Coming Soon</div>
-        <h2 class="section-title">More Features <span class="gold">Coming Soon</span></h2>
-        <p class="section-desc">We are working on more features that will roll out after launch.</p>
-      </div>
-
-      <div class="coming-grid reveal">
-        <div class="coming-card">
-          <div class="coming-card-header">
-            <i class="ti ti-trophy" style="font-size: 22px; color: var(--gold);" aria-hidden="true"></i>
-            <span class="coming-badge">Coming Soon</span>
-          </div>
-          <div class="coming-title">Leaderboard</div>
-          <div class="coming-desc">See how you rank against other KMU students. Weekly rankings updated from your app performance.</div>
-        </div>
-        <div class="coming-card">
-          <div class="coming-card-header">
-            <i class="ti ti-map-pin" style="font-size: 22px; color: var(--gold);" aria-hidden="true"></i>
-            <span class="coming-badge">Coming Soon</span>
-          </div>
-          <div class="coming-title">Pathway Counselling</div>
-          <div class="coming-desc">Guidance for USMLE, AMC and Germany from Pakistani doctors who have already done it.</div>
-        </div>
-        <div class="coming-card">
-          <div class="coming-card-header">
-            <i class="ti ti-users" style="font-size: 22px; color: var(--gold);" aria-hidden="true"></i>
-            <span class="coming-badge">Coming Soon</span>
-          </div>
-          <div class="coming-title">Success Stories</div>
-          <div class="coming-desc">Real stories from Pakistani doctors now working in Australia, UK and USA.</div>
-        </div>
-        <div class="coming-card">
-          <div class="coming-card-header">
-            <i class="ti ti-building" style="font-size: 22px; color: var(--gold);" aria-hidden="true"></i>
-            <span class="coming-badge">Coming Soon</span>
-          </div>
-          <div class="coming-title">University Partnerships</div>
-          <div class="coming-desc">Institutional access for KMU, UHS, and every medical university across Pakistan.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ── DOWNLOAD / GET THE APP ── -->
-  <section id="download" class="section" aria-label="Download MedPREP">
-    <div class="container">
-      <div class="section-header reveal">
+      <div class="dl-hero-content reveal">
         <div class="tag">Available Everywhere</div>
-        <h2 class="section-title">Get MedPREP on <span class="gold">Any Device</span></h2>
-        <p class="section-desc">No app store, no heavy install. Works instantly on Windows, Android, and iOS &mdash; even on low-end phones.</p>
+        <h1 class="dl-hero-headline">
+          Get MedPREP on <span class="gold">Any Device</span>
+        </h1>
+        <p class="dl-hero-desc">
+          No app store, no heavy install, no waiting for approval. MedPREP installs directly from your browser and works on low-end phones &mdash; built for how KMU students actually study.
+        </p>
       </div>
 
       <div class="download-grid reveal">
@@ -1605,10 +1408,79 @@
       </div>
 
       <p class="download-note">
-        Already registered? <a href="download.html">Open the full download page &rarr;</a>
+        Not registered yet? <a href="register.html">Register first, PKR 1,500 &rarr;</a>
       </p>
     </div>
   </section>
+
+  <div class="divider"></div>
+
+  <!-- ── WHY NO APP STORE ── -->
+  <section id="why-pwa" class="section section-alt" aria-label="Why no app store">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="tag">Why It's Built This Way</div>
+        <h2 class="section-title">No App Store. <span class="gold">On Purpose.</span></h2>
+        <p class="section-desc">MedPREP is a Progressive Web App &mdash; the same technology used by products like Twitter and Starbucks. Here's why that's better for you.</p>
+      </div>
+
+      <div class="why-grid reveal">
+        <div class="why-card">
+          <div class="why-icon"><i class="ti ti-bolt" aria-hidden="true"></i></div>
+          <div class="why-title">Instant updates</div>
+          <div class="why-desc">New MCQs and fixes reach you the moment we ship &mdash; no waiting on app store review.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
+          <div class="why-title">Works on any phone</div>
+          <div class="why-desc">Runs smoothly even on low-end Android devices, without eating your storage.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="ti ti-wifi-off" aria-hidden="true"></i></div>
+          <div class="why-title">Offline access</div>
+          <div class="why-desc">Once installed, previously loaded content stays accessible even with patchy signal.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
+          <div class="why-title">Safe by design</div>
+          <div class="why-desc">Runs inside your browser's security sandbox &mdash; the same protection your bank's website uses.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── DOWNLOAD FAQ ── -->
+  <section id="download-faq" class="section" aria-label="Download FAQ">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="tag">Questions</div>
+        <h2 class="section-title">Before You <span class="gold">Install</span></h2>
+      </div>
+
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <div class="faq-q"><i class="ti ti-help-circle" aria-hidden="true"></i> Is this safe? It's not on the Play Store or App Store.</div>
+          <div class="faq-a">Yes. MedPREP runs entirely inside your browser's sandbox &mdash; the same security model as any website, including your bank's. Installing it just creates a shortcut; it doesn't get deeper system access the way a native app would.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><i class="ti ti-help-circle" aria-hidden="true"></i> Do I need to register before installing?</div>
+          <div class="faq-a">You can install the app first, but full question banks unlock after registration (PKR 1,500/session). <a href="register.html">Register here</a>.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><i class="ti ti-help-circle" aria-hidden="true"></i> Will it take up storage on my phone?</div>
+          <div class="faq-a">Barely any &mdash; a fraction of what a native app install would use, since content loads from the web and caches only what you actually study.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><i class="ti ti-help-circle" aria-hidden="true"></i> What if the install button doesn't show up?</div>
+          <div class="faq-a">Some browsers hide the install prompt. Use Chrome (Android/Windows) or Safari (iOS) for the smoothest experience, or message us on <a href="https://wa.me/923073005231" target="_blank" rel="noopener">WhatsApp</a> and we'll walk you through it.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
 
   <!-- iOS install instructions modal -->
   <div class="ios-modal-overlay" id="iosModal" role="dialog" aria-modal="true" aria-label="Install on iOS instructions">
@@ -1684,8 +1556,8 @@
         <div>
           <div class="footer-col-title">Platform</div>
           <ul class="footer-links">
-            <li><a href="#features">Features</a></li>
-            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
             <li><a href="register.html">Register</a></li>
             <li><a href="leaderboard.html">Leaderboard</a></li>
           </ul>
