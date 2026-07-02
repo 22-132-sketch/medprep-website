@@ -721,6 +721,178 @@
       line-height: 1.6;
     }
 
+    /* ── DOWNLOAD / GET THE APP ── */
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .download-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.15s;
+      position: relative;
+    }
+
+    .download-card.recommended {
+      border-color: var(--gold-border-strong);
+      background: linear-gradient(180deg, var(--gold-dim) 0%, var(--surface-2) 60%);
+    }
+
+    .download-card:hover { transform: translateY(-3px); border-color: var(--gold-border); }
+
+    .download-badge {
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: #000;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      padding: 3px 12px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .download-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      font-size: 24px;
+      color: var(--gold);
+    }
+
+    .download-platform {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .download-desc {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+      min-height: 42px;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      width: 100%;
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 12px 20px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .download-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    .download-note {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 28px;
+    }
+    .download-note a { color: var(--gold); text-decoration: none; }
+    .download-note a:hover { text-decoration: underline; }
+
+    /* iOS instructions modal */
+    .ios-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .ios-modal-overlay.active { display: flex; }
+
+    .ios-modal {
+      background: var(--surface-2);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      max-width: 360px;
+      width: 100%;
+      padding: 28px 24px;
+      position: relative;
+    }
+    .ios-modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .ios-modal-close:hover { color: var(--text-primary); }
+    .ios-modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .ios-modal-sub {
+      color: var(--text-secondary);
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .ios-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .ios-step-num {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ios-step-text { font-size: 13px; color: var(--text-primary); line-height: 1.5; padding-top: 2px; }
+    .ios-step-text i { color: var(--gold); margin: 0 2px; }
+
+    @media (max-width: 700px) {
+      .download-grid { grid-template-columns: 1fr; max-width: 340px; }
+    }
+
     /* ── FINAL CTA ── */
     #cta {
       padding: 100px 0;
@@ -1060,6 +1232,7 @@
       <ul class="nav-links">
         <li><a href="#features">Features</a></li>
         <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#download">Download</a></li>
         <li><a href="leaderboard.html">Leaderboard</a></li>
         <li><a href="blog.html">Blog</a></li>
             <li><a href="success-stories.html">Success Stories</a></li>
@@ -1080,6 +1253,7 @@
   <div class="mobile-menu" id="mobile-menu">
     <a href="#features" onclick="toggleMenu()">Features</a>
     <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+    <a href="#download" onclick="toggleMenu()">Download</a>
     <a href="leaderboard.html" onclick="toggleMenu()">Leaderboard</a>
     <a href="blog.html" onclick="toggleMenu()">Blog</a>
     <a href="about.html" onclick="toggleMenu()">About</a>
@@ -1392,6 +1566,76 @@
 
   <div class="divider"></div>
 
+  <!-- ── DOWNLOAD / GET THE APP ── -->
+  <section id="download" class="section" aria-label="Download MedPREP">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="tag">Available Everywhere</div>
+        <h2 class="section-title">Get MedPREP on <span class="gold">Any Device</span></h2>
+        <p class="section-desc">No app store, no heavy install. Works instantly on Windows, Android, and iOS &mdash; even on low-end phones.</p>
+      </div>
+
+      <div class="download-grid reveal">
+        <div class="download-card" id="card-windows">
+          <div class="download-icon"><i class="ti ti-brand-windows" aria-hidden="true"></i></div>
+          <div class="download-platform">Windows</div>
+          <div class="download-desc">Install as a desktop app straight from your browser.</div>
+          <button class="download-btn" onclick="medprepDownload('windows')">
+            Get for Windows <i class="ti ti-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="download-card" id="card-android">
+          <div class="download-icon"><i class="ti ti-brand-android" aria-hidden="true"></i></div>
+          <div class="download-platform">Android</div>
+          <div class="download-desc">One tap to install. No storage-heavy APK, no Play Store wait.</div>
+          <button class="download-btn" onclick="medprepDownload('android')">
+            Get for Android <i class="ti ti-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="download-card" id="card-ios">
+          <div class="download-icon"><i class="ti ti-brand-apple" aria-hidden="true"></i></div>
+          <div class="download-platform">iOS</div>
+          <div class="download-desc">Add to Home Screen from Safari for a full app experience.</div>
+          <button class="download-btn" onclick="medprepDownload('ios')">
+            Get for iOS <i class="ti ti-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <p class="download-note">
+        Already registered? <a href="https://medprepapp.me/?utm_source=website&utm_medium=download_section&utm_campaign=direct" target="_blank" rel="noopener">Open MedPREP directly &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- iOS install instructions modal -->
+  <div class="ios-modal-overlay" id="iosModal" role="dialog" aria-modal="true" aria-label="Install on iOS instructions">
+    <div class="ios-modal">
+      <button class="ios-modal-close" onclick="closeIosModal()" aria-label="Close">&times;</button>
+      <div class="ios-modal-title">Install on iOS</div>
+      <div class="ios-modal-sub">Safari doesn't allow one-tap install &mdash; takes 10 seconds manually:</div>
+      <div class="ios-step">
+        <div class="ios-step-num">1</div>
+        <div class="ios-step-text">Open MedPREP in <strong>Safari</strong>, then tap the <i class="ti ti-square-arrow-up" aria-hidden="true"></i> Share icon at the bottom.</div>
+      </div>
+      <div class="ios-step">
+        <div class="ios-step-num">2</div>
+        <div class="ios-step-text">Scroll down and tap <strong>&ldquo;Add to Home Screen.&rdquo;</strong></div>
+      </div>
+      <div class="ios-step">
+        <div class="ios-step-num">3</div>
+        <div class="ios-step-text">Tap <strong>Add</strong>. The MedPREP icon now opens like a normal app.</div>
+      </div>
+      <a href="https://medprepapp.me/?utm_source=website&utm_medium=download_section&utm_campaign=ios" target="_blank" rel="noopener" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 8px;">
+        Continue to MedPREP <i class="ti ti-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
   <!-- ── FINAL CTA ── -->
   <section id="cta" class="section-alt2" aria-label="Call to action">
     <div class="container" style="position: relative; z-index: 1;">
@@ -1552,6 +1796,50 @@
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
+    });
+
+    // ── DOWNLOAD SECTION: platform detect + routing ──
+    const APP_URL = 'https://medprepapp.me/';
+
+    function detectPlatform() {
+      const ua = navigator.userAgent || '';
+      const platform = navigator.platform || '';
+      if (/iPhone|iPad|iPod/.test(ua) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1)) return 'ios';
+      if (/Android/.test(ua)) return 'android';
+      if (/Win/.test(platform)) return 'windows';
+      return null;
+    }
+
+    (function highlightRecommended() {
+      const detected = detectPlatform();
+      if (!detected) return;
+      const card = document.getElementById('card-' + detected);
+      if (!card) return;
+      card.classList.add('recommended');
+      const badge = document.createElement('div');
+      badge.className = 'download-badge';
+      badge.textContent = 'Recommended for your device';
+      card.prepend(badge);
+    })();
+
+    function medprepDownload(platform) {
+      const url = APP_URL + '?utm_source=website&utm_medium=download_section&utm_campaign=' + platform;
+      if (platform === 'ios') {
+        document.getElementById('iosModal').classList.add('active');
+        return;
+      }
+      // Windows / Android: open the app in a new tab.
+      // The real "Install" prompt (beforeinstallprompt) fires on medprepapp.me's
+      // own origin once it loads, since that's where the PWA manifest lives.
+      window.open(url, '_blank', 'noopener');
+    }
+
+    function closeIosModal() {
+      document.getElementById('iosModal').classList.remove('active');
+    }
+
+    document.getElementById('iosModal').addEventListener('click', function(e) {
+      if (e.target === this) closeIosModal();
     });
   </script>
 </body>
