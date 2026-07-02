@@ -1823,14 +1823,15 @@
     })();
 
     function medprepDownload(platform) {
-      const url = APP_URL + '?utm_source=website&utm_medium=download_section&utm_campaign=' + platform;
+      const url = APP_URL + '?autoinstall=1&utm_source=website&utm_medium=download_section&utm_campaign=' + platform;
       if (platform === 'ios') {
         document.getElementById('iosModal').classList.add('active');
         return;
       }
-      // Windows / Android: open the app in a new tab.
-      // The real "Install" prompt (beforeinstallprompt) fires on medprepapp.me's
-      // own origin once it loads, since that's where the PWA manifest lives.
+      // Windows / Android: open the app with ?autoinstall=1. pwa-install.js
+      // on medprepapp.me watches for that flag and fires the native
+      // "Install" dialog automatically as soon as beforeinstallprompt is
+      // available, instead of requiring a second click on that page.
       window.open(url, '_blank', 'noopener');
     }
 
