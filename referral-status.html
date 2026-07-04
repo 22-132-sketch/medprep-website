@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Referral Status — MedPREP</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#171a21;
+    --border:#262b35;
+    --text:#e8eaed;
+    --muted:#8b93a1;
+    --accent:#C9A84C;
+    --good:#22c55e;
+    --pending:#f59e0b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    display:flex; align-items:center; justify-content:center; padding:24px;
+  }
+  .card{
+    width:100%; max-width:420px; background:var(--card);
+    border:1px solid var(--border); border-radius:14px; padding:28px;
+  }
+  h1{font-size:20px; margin:0 0 4px;}
+  p.sub{color:var(--muted); font-size:13px; margin:0 0 24px;}
+  label{display:block; font-size:12px; color:var(--muted); margin-bottom:6px; margin-top:14px;}
+  input{
+    width:100%; padding:11px 12px; background:#0f1115; border:1px solid var(--border);
+    border-radius:8px; color:var(--text); font-size:15px; letter-spacing:1px;
+  }
+  input:focus{outline:none; border-color:var(--accent);}
+  button{
+    width:100%; margin-top:20px; padding:12px; background:var(--accent); color:#000;
+    border:none; border-radius:8px; font-size:15px; font-weight:600; cursor:pointer;
+  }
+  button:disabled{opacity:0.6; cursor:default;}
+  .error{color:#f87171; font-size:13px; margin-top:10px; display:none;}
+  .results{display:none; margin-top:24px; border-top:1px solid var(--border); padding-top:20px;}
+  .row{display:flex; justify-content:space-between; padding:9px 0; font-size:14px; border-bottom:1px solid var(--border);}
+  .row:last-child{border-bottom:none;}
+  .row .label{color:var(--muted);}
+  .row .val{font-weight:600;}
+  .val.good{color:var(--good);}
+  .val.pending{color:var(--pending);}
+  .name{font-size:16px; font-weight:600; margin-bottom:2px;}
+  .code-tag{display:inline-block; background:#0f1115; border:1px solid var(--border); padding:2px 8px; border-radius:6px; font-size:12px; color:var(--accent); margin-bottom:16px;}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Referral Status</h1>
+  <p class="sub">Enter your referral code and PIN to check your stats.</p>
+
+  <form id="lookupForm">
+    <label for="code">Referral Code</label>
+    <input id="code" type="text" placeholder="e.g. AHM001" maxlength="10" autocomplete="off" required>
+
+    <label for="pin">PIN</label>
+    <input id="pin" type="text" placeholder="4-digit PIN" maxlength="4" inputmode="numeric" autocomplete="off" required>
+
+    <button type="submit" id="submitBtn">Check Status</button>
+    <div class="error" id="errorMsg"></div>
+  </form>
+
+  <div class="results" id="results">
+    <div class="name" id="friendName"></div>
+    <div class="code-tag" id="codeTag"></div>
+    <div class="row"><span class="label">Total referred</span><span class="val" id="totalReferred">-</span></div>
+    <div class="row"><span class="label">Paid (confirmed)</span><span class="val good" id="paidCount">-</span></div>
+    <div class="row"><span class="label">Pending payment</span><span class="val pending" id="pendingCount">-</span></div>
+    <div class="row"><span class="label">Rejected</span><span class="val" id="rejectedCount">-</span></div>
+    <div class="row"><span class="label">Commission rate</span><span class="val" id="commRate">-</span></div>
+    <div class="row"><span class="label">Commission earned</span><span class="val good" id="commEarned">-</span></div>
+    <div class="row"><span class="label">Already paid out</span><span class="val" id="totalPaidOut">-</span></div>
+    <div class="row"><span class="label">Owed to you</span><span class="val pending" id="commOwed">-</span></div>
+  </div>
+</div>
+
+<!-- Firebase (compat) SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+  // ---- REPLACE with your actual MedPREP Firebase config ----
+  const firebaseConfig = {
+    apiKey: "AIzaSyCQflJTJ9WWnoVwL_EwTzh0hSsznzYRbtA",
+    authDomain: "medprep-4f53e.firebaseapp.com",
+    projectId: "medprep-4f53e",
+    storageBucket: "medprep-4f53e.firebasestorage.app",
+    messagingSenderId: "284986365323",
+    appId: "1:284986365323:web:fbbd0951533e8721318b8e"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  const form = document.getElementById('lookupForm');
+  const errorMsg = document.getElementById('errorMsg');
+  const results = document.getElementById('results');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorMsg.style.display = 'none';
+    results.style.display = 'none';
+
+    const code = document.getElementById('code').value.trim().toUpperCase();
+    const pin = document.getElementById('pin').value.trim();
+
+    if (!code || pin.length !== 4) {
+      showError('Enter a valid code and 4-digit PIN.');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Checking...';
+
+    try {
+      const codeDoc = await db.collection('referralCodes').doc(code).get();
+
+      if (!codeDoc.exists) {
+        showError('Referral code not found.');
+        return;
+      }
+
+      const data = codeDoc.data();
+
+      if (data.pin !== pin) {
+        showError('Incorrect PIN for this code.');
+        return;
+      }
+
+      // Query registrations referred by this code
+      const regsSnap = await db.collection('registrations')
+        .where('referredBy', '==', code)
+        .get();
+
+      // "Paid" only counts admin-approved registrations. Rejected
+      // registrations are excluded entirely — they were never a
+      // successful referral, so they shouldn't count as pending
+      // (still owed) or paid (commission earned).
+      let paid = 0, pending = 0, rejected = 0;
+      regsSnap.forEach(doc => {
+        const status = doc.data().status;
+        if (status === 'approved') paid++;
+        else if (status === 'rejected') rejected++;
+        else pending++;
+      });
+
+      const rate = data.commissionRate ?? 0.25;
+      const totalPaidOut = data.totalPaid ?? 0;
+      const commEarned = paid * 1500 * rate;
+      const commOwed = commEarned - totalPaidOut;
+
+      document.getElementById('friendName').textContent = data.friendName || code;
+      document.getElementById('codeTag').textContent = code;
+      document.getElementById('totalReferred').textContent = paid + pending + rejected;
+      document.getElementById('paidCount').textContent = paid;
+      document.getElementById('pendingCount').textContent = pending;
+      document.getElementById('rejectedCount').textContent = rejected;
+      document.getElementById('commRate').textContent = Math.round(rate * 100) + '%';
+      document.getElementById('commEarned').textContent = '₨' + commEarned.toLocaleString();
+      document.getElementById('totalPaidOut').textContent = '₨' + totalPaidOut.toLocaleString();
+      document.getElementById('commOwed').textContent = '₨' + Math.max(0, commOwed).toLocaleString();
+
+      results.style.display = 'block';
+
+    } catch (err) {
+      console.error(err);
+      showError('Something went wrong. Try again, or contact admin.');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Check Status';
+    }
+  });
+
+  function showError(msg) {
+    errorMsg.textContent = msg;
+    errorMsg.style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
