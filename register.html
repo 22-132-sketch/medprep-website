@@ -1056,6 +1056,14 @@
                 </div>
               </div>
 
+              <div class="form-group">
+                <label class="form-label" for="referral-code">Referral Code <span style="color: var(--text-muted); font-weight:400;">(optional)</span></label>
+                <input class="form-input" type="text" id="referral-code" name="referral_code"
+                  placeholder="e.g. AHM001" autocomplete="off" maxlength="10"
+                  oninput="this.value = this.value.toUpperCase()" onblur="checkReferralCode()" />
+                <div class="form-hint" id="referral-hint">Got a code from a friend? Enter it here.</div>
+              </div>
+
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label" for="university">University <span>*</span></label>
@@ -1303,7 +1311,7 @@
   <!-- Firebase (v9 modular) — writes registrations to Firestore -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCQflJTJ9WWnoVwL_EwTzh0hSsznzYRbtA",
@@ -1326,11 +1334,79 @@
           ...data,
           createdAt: serverTimestamp()
         });
+      },
+      // Writes a lightweight, no-PII companion doc used ONLY so a friend's
+      // public referral-status page can count paid/pending/rejected
+      // referrals without ever reading a student's name, email, phone, or
+      // payment screenshot. Best-effort — a failure here must never block
+      // the real registration, which has already been saved by this point.
+      addReferralEvent: function (registrationId, referredBy) {
+        if (!referredBy) return Promise.resolve(null);
+        return addDoc(collection(db, "referralEvents"), {
+          registrationId: registrationId,
+          referredBy: referredBy,
+          status: 'pending',
+          createdAt: serverTimestamp()
+        });
+      },
+      // Looks up a referral code doc. Resolves to the doc data if it exists,
+      // or null if the code isn't found. Never throws to the caller —
+      // a failed lookup should never block registration.
+      lookupReferralCode: function (code) {
+        return getDoc(doc(db, "referralCodes", code))
+          .then(function (snap) {
+            return snap.exists() ? snap.data() : null;
+          })
+          .catch(function (err) {
+            console.error('Referral lookup error:', err);
+            return null;
+          });
       }
     };
   </script>
 
   <script>
+    // ── REFERRAL CODE ──
+    // Holds the last validated code so submitRegistration() can attach it.
+    // Stays null if no code entered, code not found, or lookup fails —
+    // registration must never be blocked by this.
+    let validatedReferralCode = null;
+
+    function checkReferralCode() {
+      const input = document.getElementById('referral-code');
+      const hint = document.getElementById('referral-hint');
+      const code = input.value.trim().toUpperCase();
+
+      validatedReferralCode = null;
+      hint.style.color = 'var(--text-muted)';
+
+      if (!code) {
+        hint.textContent = 'Got a code from a friend? Enter it here.';
+        return;
+      }
+
+      if (!window.medprepDB || typeof window.medprepDB.lookupReferralCode !== 'function') {
+        // Firebase module not ready yet — don't block, just skip silent validation.
+        // The code will still be submitted as typed if the user proceeds.
+        validatedReferralCode = code;
+        return;
+      }
+
+      hint.textContent = 'Checking code...';
+
+      window.medprepDB.lookupReferralCode(code).then(function (data) {
+        if (data) {
+          validatedReferralCode = code;
+          hint.style.color = 'var(--gold)';
+          hint.textContent = 'Referred by ' + (data.friendName || code) + ' ✓';
+        } else {
+          validatedReferralCode = null;
+          hint.style.color = '#e05252';
+          hint.textContent = 'Code not recognized — you can still continue without it.';
+        }
+      });
+    }
+
     // ── PLAN SELECTION ──
     function selectPlan(planId, label) {
       document.querySelectorAll('.plan-option').forEach(function(el) {
@@ -1724,6 +1800,7 @@
           currency:        'PKR',
           screenshotUrl:   screenshotUrl,
           referenceNumber: ref,
+          referredBy:      validatedReferralCode || null,
           status:          'pending',
           submittedAt:     new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })
         };
@@ -1735,10 +1812,13 @@
         }
 
         window.medprepDB.addRegistration(registration)
-          .then(function() {
+          .then(function(docRef) {
             showSuccess(ref);
-            // Confirmation email is best-effort and never blocks the success
+            // Both of these are best-effort and never block the success
             // state — the registration is already safely saved in Firestore.
+            window.medprepDB.addReferralEvent(docRef.id, registration.referredBy).catch(function(err) {
+              console.error('Referral event tracking error:', err);
+            });
             sendRegistrationEmail(registration).catch(function(err) {
               console.error('Registration email error:', err);
             });

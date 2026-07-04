@@ -133,8 +133,11 @@
         return;
       }
 
-      // Query registrations referred by this code
-      const regsSnap = await db.collection('registrations')
+      // Query referralEvents referred by this code — a lightweight,
+      // no-PII mirror of registrations (no name/email/phone/screenshot),
+      // since this page is public/unauthenticated and Firestore rules
+      // rightly keep the real registrations collection creator-only.
+      const regsSnap = await db.collection('referralEvents')
         .where('referredBy', '==', code)
         .get();
 
