@@ -931,7 +931,7 @@
                   <div class="plan-desc">Until exam results &bull; This year only</div>
                 </div>
               </div>
-              <div class="plan-price">PKR 1,500</div>
+              <div class="plan-price" id="plan-price-display"><span style="text-decoration: line-through; color: var(--text-muted); font-size: 0.75em; margin-right: 6px;">PKR 2,500</span>PKR 1,700</div>
             </div>
           </label>
 
@@ -1114,7 +1114,7 @@
                   <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Until exam results &bull; This year only</div>
                 </div>
                 <div style="text-align: right;">
-                  <div class="selected-plan-price">PKR 1,500</div>
+                  <div class="selected-plan-price" id="selected-plan-price-display"><span style="text-decoration: line-through; color: var(--text-muted); font-size: 0.75em; margin-right: 6px;">PKR 2,500</span>PKR 1,700</div>
                 </div>
               </div>
 
@@ -1216,7 +1216,7 @@
                 </div>
                 <div class="bank-row">
                   <span class="bank-label">Amount</span>
-                  <span class="bank-value" style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 16px;">PKR 1,500</span>
+                  <span class="bank-value" id="review-amount" style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 16px;">PKR 1,700</span>
                 </div>
                 <div class="bank-row">
                   <span class="bank-label">Screenshot</span>
@@ -1228,7 +1228,7 @@
               <label style="display: flex; gap: 10px; align-items: flex-start; cursor: pointer; margin-bottom: 24px;">
                 <input type="checkbox" id="agree-check" style="margin-top: 3px; accent-color: var(--gold); width: 15px; height: 15px; flex-shrink: 0;" />
                 <span style="font-size: 12px; color: var(--text-secondary); line-height: 1.6;">
-                  I confirm that all details above are correct and I have transferred PKR 1,500 to the MCB Bank account provided. I understand that access will be sent to my email within 24 hours after verification.
+                  I confirm that all details above are correct and I have transferred <span id="agree-amount">PKR 1,700</span> to the MCB Bank account provided. I understand that access will be sent to my email within 24 hours after verification.
                 </span>
               </label>
               <div class="field-error" id="err-agree">
@@ -1372,6 +1372,33 @@
     // registration must never be blocked by this.
     let validatedReferralCode = null;
 
+    // Base price is PKR 1,700. A valid referral code drops it to PKR 1,500
+    // (a flat PKR 200 discount). Ambassador/referrer commissions are still
+    // calculated off the PKR 1,500 referred-price base, not the full price.
+    function getCurrentAmount() {
+      return validatedReferralCode ? 1500 : 1700;
+    }
+
+    function updatePriceDisplay() {
+      const amount = getCurrentAmount();
+      const strike = amount === 1500
+        ? '<span style="text-decoration: line-through; color: var(--text-muted); font-size: 0.75em; margin-right: 6px;">PKR 1,700</span>'
+        : '<span style="text-decoration: line-through; color: var(--text-muted); font-size: 0.75em; margin-right: 6px;">PKR 2,500</span>';
+      const priceHtml = strike + 'PKR ' + amount.toLocaleString('en-PK');
+
+      const planPrice = document.getElementById('plan-price-display');
+      if (planPrice) planPrice.innerHTML = priceHtml;
+
+      const selectedPrice = document.getElementById('selected-plan-price-display');
+      if (selectedPrice) selectedPrice.innerHTML = priceHtml;
+
+      const reviewAmount = document.getElementById('review-amount');
+      if (reviewAmount) reviewAmount.textContent = 'PKR ' + amount.toLocaleString('en-PK');
+
+      const agreeAmount = document.getElementById('agree-amount');
+      if (agreeAmount) agreeAmount.textContent = 'PKR ' + amount.toLocaleString('en-PK');
+    }
+
     function checkReferralCode() {
       const input = document.getElementById('referral-code');
       const hint = document.getElementById('referral-hint');
@@ -1379,6 +1406,7 @@
 
       validatedReferralCode = null;
       hint.style.color = 'var(--text-muted)';
+      updatePriceDisplay();
 
       if (!code) {
         hint.textContent = 'Got a code from a friend? Enter it here.';
@@ -1389,6 +1417,7 @@
         // Firebase module not ready yet — don't block, just skip silent validation.
         // The code will still be submitted as typed if the user proceeds.
         validatedReferralCode = code;
+        updatePriceDisplay();
         return;
       }
 
@@ -1404,6 +1433,7 @@
           hint.style.color = '#e05252';
           hint.textContent = 'Code not recognized — you can still continue without it.';
         }
+        updatePriceDisplay();
       });
     }
 
@@ -1619,6 +1649,7 @@
       document.getElementById('review-phone').textContent = document.getElementById('phone').value.trim();
       document.getElementById('review-university').textContent = document.getElementById('university').value;
       document.getElementById('review-year').textContent = document.getElementById('year').value;
+      updatePriceDisplay();
 
       const file = document.getElementById('screenshot').files[0];
       if (file) {
@@ -1796,7 +1827,7 @@
           year:            document.getElementById('year').value,
           plan:            'launch',
           planLabel:       'Launch Special, Full Session',
-          amount:          1500,
+          amount:          getCurrentAmount(),
           currency:        'PKR',
           screenshotUrl:   screenshotUrl,
           referenceNumber: ref,

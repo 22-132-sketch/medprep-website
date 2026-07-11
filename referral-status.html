@@ -74,7 +74,7 @@
     <div class="row"><span class="label">Paid (confirmed)</span><span class="val good" id="paidCount">-</span></div>
     <div class="row"><span class="label">Pending payment</span><span class="val pending" id="pendingCount">-</span></div>
     <div class="row"><span class="label">Rejected</span><span class="val" id="rejectedCount">-</span></div>
-    <div class="row"><span class="label">Commission rate</span><span class="val" id="commRate">-</span></div>
+    <div class="row"><span class="label">Per referral</span><span class="val" id="commRate">-</span></div>
     <div class="row"><span class="label">Commission earned</span><span class="val good" id="commEarned">-</span></div>
     <div class="row"><span class="label">Already paid out</span><span class="val" id="totalPaidOut">-</span></div>
     <div class="row"><span class="label">Owed to you</span><span class="val pending" id="commOwed">-</span></div>
@@ -153,9 +153,11 @@
         else pending++;
       });
 
-      const rate = data.commissionRate ?? 0.25;
+      // Flat PKR 200 per paid referral for all ambassadors (Referrers and
+      // Campus Ambassadors alike) — for now. Was previously %-based off the
+      // PKR 1,500 referred price via data.commissionRate.
       const totalPaidOut = data.totalPaid ?? 0;
-      const commEarned = paid * 1500 * rate;
+      const commEarned = paid * 200;
       const commOwed = commEarned - totalPaidOut;
 
       document.getElementById('friendName').textContent = data.friendName || code;
@@ -164,7 +166,7 @@
       document.getElementById('paidCount').textContent = paid;
       document.getElementById('pendingCount').textContent = pending;
       document.getElementById('rejectedCount').textContent = rejected;
-      document.getElementById('commRate').textContent = Math.round(rate * 100) + '%';
+      document.getElementById('commRate').textContent = '₨200';
       document.getElementById('commEarned').textContent = '₨' + commEarned.toLocaleString();
       document.getElementById('totalPaidOut').textContent = '₨' + totalPaidOut.toLocaleString();
       document.getElementById('commOwed').textContent = '₨' + Math.max(0, commOwed).toLocaleString();
