@@ -1090,6 +1090,14 @@
                 </div>
               </div>
 
+              <div class="form-group">
+                <label class="form-label" for="referral-code">Referral Code <span style="color: var(--text-muted); font-weight:400;">(optional)</span></label>
+                <input class="form-input" type="text" id="referral-code" name="referral_code"
+                  placeholder="e.g. AHM001" autocomplete="off" maxlength="10"
+                  oninput="this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '')" onblur="checkReferralCode()" />
+                <div class="form-hint" id="referral-hint">Got a code from a friend? Enter it here.</div>
+              </div>
+
               <div class="form-nav">
                 <button type="button" class="btn-primary" onclick="goToStep(2)" style="flex: 1;">
                   Continue to Payment
@@ -1316,7 +1324,7 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCQflJTJ9WWnoVwL_EwTzh0hSsznzYRbtA",
@@ -1339,6 +1347,30 @@
           ...data,
           createdAt: serverTimestamp()
         });
+      },
+      // Writes a lightweight, no-PII companion doc used ONLY so an
+      // ambassador's public referral-status page can count paid/pending/
+      // rejected referrals without ever reading a student's name, email,
+      // phone, or payment screenshot. Best-effort: a failure here must never
+      // block the real registration, which is already saved by this point.
+      addReferralEvent: function (registrationId, referredBy) {
+        if (!referredBy) return Promise.resolve(null);
+        return addDoc(collection(db, "referralEvents"), {
+          registrationId: registrationId,
+          referredBy: referredBy,
+          status: 'pending',
+          createdAt: serverTimestamp()
+        });
+      },
+      // Resolves to the code doc data, or null if the code doesn't exist or
+      // the lookup fails. Never throws: a failed lookup must not block signup.
+      lookupReferralCode: function (code) {
+        return getDoc(doc(db, "referralCodes", code))
+          .then(function (snap) { return snap.exists() ? snap.data() : null; })
+          .catch(function (err) {
+            console.error('Referral lookup error:', err);
+            return null;
+          });
       }
     };
   </script>
@@ -1350,6 +1382,60 @@
     function getCurrentAmount() {
       return window.MEDPREP_PRICING ? window.MEDPREP_PRICING.active : 1700;
     }
+
+    // ── REFERRAL CODE (optional) ──
+    // Holds the last validated code so submitRegistration() can attach it.
+    // Stays null if no code was entered or the code isn't recognised; the
+    // registration is never blocked by this and the price is not affected.
+    let validatedReferralCode = null;
+
+    function checkReferralCode() {
+      const input = document.getElementById('referral-code');
+      const hint = document.getElementById('referral-hint');
+      const code = input.value.trim().toUpperCase();
+
+      validatedReferralCode = null;
+      hint.style.color = 'var(--text-muted)';
+
+      if (!code) {
+        hint.textContent = 'Got a code from a friend? Enter it here.';
+        return Promise.resolve(null);
+      }
+      if (!window.medprepDB || typeof window.medprepDB.lookupReferralCode !== 'function') {
+        return Promise.resolve(null);
+      }
+
+      hint.textContent = 'Checking code...';
+      return window.medprepDB.lookupReferralCode(code).then(function (data) {
+        if (data) {
+          validatedReferralCode = code;
+          hint.style.color = 'var(--gold)';
+          hint.textContent = 'Referred by ' + (data.friendName || code) + ' \u2713';
+          return code;
+        }
+        hint.style.color = '#e05252';
+        hint.textContent = 'Code not recognized. You can still continue without it.';
+        return null;
+      });
+    }
+
+    // Pre-fill from a shared link such as register.html?ref=AHM001
+    document.addEventListener('DOMContentLoaded', function () {
+      try {
+        const ref = new URLSearchParams(window.location.search).get('ref');
+        if (ref) {
+          const input = document.getElementById('referral-code');
+          input.value = ref.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 10);
+          const wait = setInterval(function () {
+            if (window.medprepDB && window.medprepDB.lookupReferralCode) {
+              clearInterval(wait);
+              checkReferralCode();
+            }
+          }, 200);
+          setTimeout(function () { clearInterval(wait); }, 8000);
+        }
+      } catch (e) { /* ignore */ }
+    });
 
     // ── PLAN SELECTION ──
     function selectPlan(planId, label) {
@@ -1760,11 +1846,21 @@
           return;
         }
 
-        window.medprepDB.addRegistration(registration)
+        // Re-check the typed code at submit time so a slow or skipped blur
+        // check can't drop a valid referral. Never blocks the registration.
+        checkReferralCode()
+          .catch(function () { return null; })
+          .then(function (code) {
+            registration.referredBy = code || null;
+            return window.medprepDB.addRegistration(registration);
+          })
           .then(function(docRef) {
             showSuccess(ref);
             // Best-effort — never blocks the success state, since the
             // registration is already safely saved in Firestore.
+            window.medprepDB.addReferralEvent(docRef.id, registration.referredBy).catch(function(err) {
+              console.error('Referral event tracking error:', err);
+            });
             sendRegistrationEmail(registration).catch(function(err) {
               console.error('Registration email error:', err);
             });
