@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3-Day Free Trial — MedPREP</title>
+  <meta name="description" content="Try MedPREP Premium free for 3 days. Share your WhatsApp number and we will activate your trial." />
+  <link rel="canonical" href="https://register.medprepapp.me/trial.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="images/logo-icon.png" />
+  <link rel="apple-touch-icon" href="images/logo-icon.png" />
+  <style>
+    :root { --gold:#C9A84C; --bg:#050505; --card:#0e0e0e; --line:rgba(255,255,255,0.09); --text:#f2f2f2; --muted:#9a9a9a; --danger:#ef4444; --ok:#22c55e; }
+    * { box-sizing: border-box; }
+    html, body { margin:0; background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+    a { color:var(--gold); }
+    .top { display:flex; align-items:center; justify-content:space-between; max-width:560px; margin:0 auto; padding:20px 20px 0; }
+    .top img { height:34px; display:block; }
+    .top a.back { font-size:14px; color:var(--muted); text-decoration:none; }
+    .wrap { max-width:560px; margin:0 auto; padding:28px 20px 64px; }
+    h1 { font-family:'Playfair Display',serif; font-size:32px; line-height:1.15; margin:0 0 10px; }
+    h1 span { color:var(--gold); }
+    .lead { color:var(--muted); font-size:15px; line-height:1.6; margin:0 0 24px; }
+    form, .done { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px; }
+    label { display:block; font-size:13px; font-weight:600; margin:0 0 6px; }
+    .field { margin-bottom:16px; }
+    input, select { width:100%; padding:13px 14px; font:inherit; font-size:16px; color:var(--text); background:#050505; border:1px solid var(--line); border-radius:10px; outline:none; }
+    input:focus, select:focus { border-color:var(--gold); }
+    .hint { font-size:12px; color:var(--muted); margin-top:6px; line-height:1.5; }
+    .err { color:var(--danger); font-size:13px; margin:0 0 14px; display:none; }
+    button { width:100%; padding:14px; font:inherit; font-size:16px; font-weight:600; color:#000; background:var(--gold); border:0; border-radius:10px; cursor:pointer; }
+    button:disabled { opacity:.6; cursor:default; }
+    .perks { list-style:none; padding:0; margin:0 0 22px; display:grid; gap:8px; font-size:14px; color:var(--muted); }
+    .perks li::before { content:'✓'; color:var(--gold); margin-right:8px; font-weight:700; }
+    .hp { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+    .done { display:none; text-align:center; }
+    .done h2 { font-family:'Playfair Display',serif; margin:0 0 10px; color:var(--gold); }
+    .done p { color:var(--muted); line-height:1.6; font-size:15px; margin:0 0 12px; }
+    .wa { display:inline-block; margin-top:6px; padding:11px 18px; border-radius:10px; border:1px solid rgba(37,211,102,.35); background:rgba(37,211,102,.12); color:#25D366; text-decoration:none; font-size:14px; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <a href="index.html" aria-label="MedPREP home"><img src="logo-lockup-dark.png" alt="MedPREP" /></a>
+    <a class="back" href="register.html">See full plans →</a>
+  </div>
+
+  <main class="wrap">
+    <h1>Try MedPREP <span>free for 3 days</span></h1>
+    <p class="lead">Full Premium access for 3 days, no payment. Tell us where to reach you on WhatsApp and we will activate your trial.</p>
+
+    <ul class="perks">
+      <li>All Premium notes and the full question bank</li>
+      <li>One trial per student</li>
+      <li>We message you on WhatsApp once it is active</li>
+    </ul>
+
+    <form id="trial-form" novalidate>
+      <div class="field">
+        <label for="fullName">Full name</label>
+        <input id="fullName" name="fullName" type="text" autocomplete="name" maxlength="120" required />
+      </div>
+      <div class="field">
+        <label for="email">Email you use to sign in to the MedPREP app</label>
+        <input id="email" name="email" type="email" autocomplete="email" maxlength="150" required />
+        <div class="hint">Create your account in the app first with this email, so we can switch your trial on.</div>
+      </div>
+      <div class="field">
+        <label for="whatsapp">WhatsApp number <span style="color:var(--gold)">(required)</span></label>
+        <input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" placeholder="0300 1234567 or +44 7700 900123" maxlength="25" required />
+      </div>
+      <div class="field">
+        <label for="university">University / college</label>
+        <input id="university" name="university" type="text" maxlength="200" placeholder="e.g. Khyber Medical University" required />
+      </div>
+      <div class="field">
+        <label for="year">Year</label>
+        <select id="year" name="year" required>
+          <option value="">Select year</option>
+          <option>1st Year</option><option>2nd Year</option><option>3rd Year</option>
+          <option>4th Year</option><option>Final Year</option><option>Other</option>
+        </select>
+      </div>
+      <div class="hp" aria-hidden="true"><label>Leave empty <input id="website" name="website" tabindex="-1" autocomplete="off" /></label></div>
+      <p class="err" id="err"></p>
+      <button type="submit" id="submit">Request my free trial</button>
+    </form>
+
+    <div class="done" id="done" role="status">
+      <h2>Request received</h2>
+      <p>Thank you. We will review it and message you on WhatsApp when your 3-day trial is active. Make sure you have signed in to the MedPREP app with the email you gave.</p>
+      <a class="wa" href="https://wa.me/923073005231" rel="noopener">Questions? WhatsApp us</a>
+    </div>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const app = initializeApp({
+      apiKey: "AIzaSyCQflJTJ9WWnoVwL_EwTzh0hSsznzYRbtA",
+      authDomain: "medprep-4f53e.firebaseapp.com",
+      projectId: "medprep-4f53e",
+      storageBucket: "medprep-4f53e.firebasestorage.app",
+      messagingSenderId: "284986365323",
+      appId: "1:284986365323:web:fbbd0951533e8721318b8e"
+    });
+    const db = getFirestore(app);
+
+    // Same rules as the admin panel: returns +<countrycode><digits> or null.
+    function normalizeWhatsapp(raw) {
+      let s = String(raw || '').trim().replace(/[\s\-().]/g, '');
+      if (!s) return null;
+      if (s.startsWith('00')) s = '+' + s.slice(2);
+      if (s.startsWith('+')) return /^\+[1-9]\d{9,14}$/.test(s) ? s : null;
+      if (!/^\d+$/.test(s)) return null;
+      if (/^03\d{9}$/.test(s)) return '+92' + s.slice(1);
+      if (/^3\d{9}$/.test(s)) return '+92' + s;
+      if (/^923\d{9}$/.test(s)) return '+' + s;
+      return null;
+    }
+
+    const form = document.getElementById('trial-form');
+    const errEl = document.getElementById('err');
+    const btn = document.getElementById('submit');
+    const doneEl = document.getElementById('done');
+    const showErr = (m) => { errEl.textContent = m; errEl.style.display = 'block'; };
+
+    function showDone() { form.style.display = 'none'; doneEl.style.display = 'block'; }
+    try { if (localStorage.getItem('medprep_trial_requested')) showDone(); } catch (e) {}
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errEl.style.display = 'none';
+      if (document.getElementById('website').value) return;            // bot trap
+
+      const fullName   = form.fullName.value.trim();
+      const email      = form.email.value.trim();
+      const university = form.university.value.trim();
+      const year       = form.year.value;
+      const whatsapp   = normalizeWhatsapp(form.whatsapp.value);
+
+      if (!fullName)                                   return showErr('Please enter your full name.');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))   return showErr('Please enter a valid email.');
+      if (!whatsapp)                                   return showErr('A valid WhatsApp number is required, e.g. 0300 1234567 or +44 7700 900123.');
+      if (!university)                                 return showErr('Please enter your university or college.');
+      if (!year)                                       return showErr('Please select your year.');
+
+      btn.disabled = true; btn.textContent = 'Sending…';
+      try {
+        await addDoc(collection(db, "trialRequests"), {
+          fullName, email, whatsapp, university, year,
+          status: 'pending',
+          createdAt: serverTimestamp()
+        });
+        try { localStorage.setItem('medprep_trial_requested', '1'); } catch (e) {}
+        showDone();
+      } catch (err) {
+        console.error('Trial request error:', err);
+        showErr('Could not send your request right now. Please try again, or WhatsApp us.');
+        btn.disabled = false; btn.textContent = 'Request my free trial';
+      }
+    });
+  </script>
+</body>
+</html>
