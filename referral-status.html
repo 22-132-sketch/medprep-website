@@ -172,7 +172,9 @@
   function showError(msg) { const e = $('err'); e.textContent = msg; e.style.display = 'block'; }
 
   function render(code, data, counts) {
-    const r = compute(counts.approved);
+    // Admin "quick progress" adjustment (+1/+2/-1) counts toward stage progress
+    // only; the approved number shown below stays the real approved count.
+    const r = compute(Math.max(0, counts.approved + (Number(data.manualProgress) || 0)));
     $('ambName').textContent = data.friendName || 'Ambassador';
     $('ambCode').textContent = code;
     $('nApproved').textContent = counts.approved;
@@ -248,8 +250,6 @@
         else if (s === 'rejected') counts.rejected++;
         else counts.pending++;
       });
-      // Admin "quick progress" adjustment (+1/+2/-1) lives on the code doc.
-      counts.approved = Math.max(0, counts.approved + (Number(data.manualProgress) || 0));
       render(code, data, counts);
     } catch (err) {
       console.error(err);
