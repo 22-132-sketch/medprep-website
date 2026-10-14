@@ -72,8 +72,44 @@
         <input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" placeholder="0300 1234567 or +44 7700 900123" maxlength="25" required />
       </div>
       <div class="field">
-        <label for="university">University / college</label>
-        <input id="university" name="university" type="text" maxlength="200" placeholder="e.g. Khyber Medical University" required />
+        <label for="university">University</label>
+        <select id="university" name="university" required>
+          <option value="KMU" selected>Khyber Medical University (KMU)</option>
+          <option value="OTHER">My university isn't listed</option>
+        </select>
+      </div>
+      <div class="field" id="college-field">
+        <label for="college">Medical college</label>
+        <select id="college" name="college" required>
+          <option value="">Select your college…</option>
+          <optgroup label="Government colleges">
+            <option>Khyber Medical College (KMC)</option>
+            <option>Khyber Girls Medical College (KGMC)</option>
+            <option>Ayub Medical College (AMC)</option>
+            <option>Saidu Medical College (SMC)</option>
+            <option>Gomal Medical College (GMC)</option>
+            <option>Bannu Medical College (BMC)</option>
+            <option>Bacha Khan Medical College (BKMC)</option>
+            <option>Nowshera Medical College (NMC)</option>
+            <option>Gajju Khan Medical College (GKMC)</option>
+            <option>KMU Institute of Medical Sciences (KIMS)</option>
+          </optgroup>
+          <optgroup label="Private colleges">
+            <option>Rehman Medical College (RMC)</option>
+            <option>Pak International Medical College (PIMC)</option>
+            <option>Kabir Medical College (KbMC)</option>
+            <option>Northwest School of Medicine (NWSM)</option>
+            <option>Muhammad College of Medicine (MCM)</option>
+            <option>Abbottabad Intl Medical College (AIMC)</option>
+            <option>Women Medical College (WMC)</option>
+            <option>Jinnah Medical College (JMC)</option>
+          </optgroup>
+        </select>
+        <div class="hint">KMU-affiliated colleges such as KGMC or RMC: choose <b>KMU</b> above, then your college here.</div>
+      </div>
+      <div class="field" id="other-uni-field" style="display:none">
+        <label for="otherUniversity">Your university and college</label>
+        <input id="otherUniversity" name="otherUniversity" type="text" maxlength="200" placeholder="e.g. University name, college name" />
       </div>
       <div class="field">
         <label for="year">Year</label>
@@ -123,6 +159,15 @@
     }
 
     const form = document.getElementById('trial-form');
+    // University = KMU (default) shows the college list; "not listed" shows a free-text box instead.
+    const uniEl = document.getElementById('university');
+    function syncUni() {
+      const kmu = uniEl.value === 'KMU';
+      document.getElementById('college-field').style.display = kmu ? '' : 'none';
+      document.getElementById('other-uni-field').style.display = kmu ? 'none' : '';
+      document.getElementById('college').required = kmu;
+    }
+    uniEl.addEventListener('change', syncUni); syncUni();
     const errEl = document.getElementById('err');
     const btn = document.getElementById('submit');
     const doneEl = document.getElementById('done');
@@ -138,14 +183,18 @@
 
       const fullName   = form.fullName.value.trim();
       const email      = form.email.value.trim();
-      const university = form.university.value.trim();
+      const uniSel     = form.university.value;
+      const college    = form.college.value;
+      const otherUni   = form.otherUniversity.value.trim();
+      const university = uniSel === 'KMU' ? ('KMU - ' + college) : otherUni;
       const year       = form.year.value;
       const whatsapp   = normalizeWhatsapp(form.whatsapp.value);
 
       if (!fullName)                                   return showErr('Please enter your full name.');
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))   return showErr('Please enter a valid email.');
       if (!whatsapp)                                   return showErr('A valid WhatsApp number is required, e.g. 0300 1234567 or +44 7700 900123.');
-      if (!university)                                 return showErr('Please enter your university or college.');
+      if (uniSel === 'KMU' && !college)                return showErr('Please select your medical college.');
+      if (uniSel !== 'KMU' && !otherUni)               return showErr('Please enter your university and college.');
       if (!year)                                       return showErr('Please select your year.');
 
       btn.disabled = true; btn.textContent = 'Sending…';
