@@ -1340,7 +1340,7 @@
       "name": "How much does MedPREP Premium cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Premium costs PKR 1,700 for full session access until exam results. The pricing section above always shows the current plans."
+        "text": "MedPREP has four plans, all valid until exam results: MCQs + Flashcards PKR 999, Notes + Flashcards PKR 999, OSPE + Flashcards PKR 999, and Full (everything) PKR 1,699. Buying a second plan later is an upgrade to Full for PKR 700 more. The pricing section above always shows the current plans."
       }
     },
     {
@@ -1437,7 +1437,7 @@
     <a href="blog.html" onclick="toggleMenu()">Blog</a>
     <a href="about.html" onclick="toggleMenu()">About</a>
     <a href="contact.html" onclick="toggleMenu()">Contact</a>
-    <a href="register.html" class="btn-primary" style="margin-top: 8px; justify-content: center;">Register Now, PKR <span data-price="active-num">1,700</span></a>
+    <a href="register.html" class="btn-primary" style="margin-top: 8px; justify-content: center;">Register Now, PKR <span data-price="active-num">1,699</span></a>
   </div>
 
   <!-- ── HERO ── -->
@@ -1464,7 +1464,7 @@
 
         <div class="hero-actions">
           <a href="register.html" class="btn-primary btn-primary-lg">
-            Register Now, PKR <span data-price="active-num">1,700</span>
+            Register Now, PKR <span data-price="active-num">1,699</span>
             <i class="ti ti-arrow-right" aria-hidden="true"></i>
           </a>
           <a href="#features" class="btn-secondary btn-primary-lg">
@@ -1513,21 +1513,56 @@
       <div class="section-header reveal">
         <div class="tag">Pricing</div>
         <h2 class="section-title">Simple <span class="gold">Pricing.</span></h2>
-        <p class="section-desc">Pay once and study for the full session. No monthly renewals, no hidden charges.</p>
+        <p class="section-desc">Pick the plan you need. Pay once and study for the full session. No monthly renewals, no hidden charges.</p>
       </div>
 
       <div class="pricing-grid reveal">
+
+        <!-- Single plans (999) -->
+        <div class="pricing-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="pricing-tier">This Year</div>
+            <div class="pricing-name">MCQs + Flashcards</div>
+            <div class="pricing-amount pricing-amount-sm"><sup style="font-size:13px;">PKR</sup> <span data-price="plan-mcq_fc">999</span></div>
+            <div class="pricing-unit">Access until your exam results</div>
+            <div class="pricing-divider"></div>
+            <div class="pricing-features"><span class="pricing-pill">All MCQs</span><span class="pricing-pill">Flashcards</span><span class="pricing-pill">Challenge a friend</span></div>
+          </div>
+          <a href="register.html?plan=mcq_fc" class="btn-secondary" style="width: 100%; justify-content: center; margin-top: 12px;">Choose MCQs + Flashcards</a>
+        </div>
+        <div class="pricing-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="pricing-tier">This Year</div>
+            <div class="pricing-name">Notes + Flashcards</div>
+            <div class="pricing-amount pricing-amount-sm"><sup style="font-size:13px;">PKR</sup> <span data-price="plan-notes_fc">999</span></div>
+            <div class="pricing-unit">Access until your exam results</div>
+            <div class="pricing-divider"></div>
+            <div class="pricing-features"><span class="pricing-pill">Notes</span><span class="pricing-pill">Flashcards</span></div>
+          </div>
+          <a href="register.html?plan=notes_fc" class="btn-secondary" style="width: 100%; justify-content: center; margin-top: 12px;">Choose Notes + Flashcards</a>
+        </div>
+        <div class="pricing-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="pricing-tier">This Year</div>
+            <div class="pricing-name">OSPE + Flashcards</div>
+            <div class="pricing-amount pricing-amount-sm"><sup style="font-size:13px;">PKR</sup> <span data-price="plan-ospe">999</span></div>
+            <div class="pricing-unit">Access until your exam results</div>
+            <div class="pricing-divider"></div>
+            <div class="pricing-features"><span class="pricing-pill">OSPE</span><span class="pricing-pill">Flashcards</span></div>
+          </div>
+          <a href="register.html?plan=ospe" class="btn-secondary" style="width: 100%; justify-content: center; margin-top: 12px;">Choose OSPE + Flashcards</a>
+        </div>
 
         <!-- Featured -->
         <div class="pricing-card pricing-card-featured">
           <div class="pricing-badge">Launch Price, This Year Only</div>
           <div style="margin-top: 12px;">
             <div class="pricing-tier">This Year</div>
-            <div class="pricing-name">Full Session Subscription</div>
+            <div class="pricing-name">Full: everything</div>
             <div class="pricing-original">PKR <span data-price="original-num">2,500</span></div>
-            <div class="pricing-amount"><sup>PKR</sup> <span data-price="active-num">1,700</span></div>
+            <div class="pricing-amount"><sup>PKR</sup> <span data-price="active-num">1,699</span></div>
             <div class="pricing-unit">Access until your exam results</div>
-            <span class="pricing-save"><span data-price="label">32% off</span> launch price</span>
+            <span class="pricing-save">Best value: any two PKR 999 plans cost more than Full</span>
             <div class="pricing-original" style="margin-top: 6px;">Next session price: PKR 3,500</div>
             <span class="pricing-save">51% off next session price</span>
             <div class="pricing-divider"></div>
@@ -1537,10 +1572,11 @@
               <span class="pricing-pill">360° View</span>
               <span class="pricing-pill">Flashcards</span>
               <span class="pricing-pill">Analytics</span>
-              <span class="pricing-pill">All 3 Modes</span>
+              <span class="pricing-pill">OSPE</span>
+              <span class="pricing-pill">Challenge a friend</span>
             </div>
-            <a href="register.html" class="btn-primary" style="width: 100%; justify-content: center;">
-              Register Now
+            <a href="register.html?plan=full" class="btn-primary" style="width: 100%; justify-content: center;">
+              Register for Full
               <i class="ti ti-arrow-right" aria-hidden="true"></i>
             </a>
           </div>
@@ -1864,7 +1900,7 @@
         </details>
         <details class="faq-item">
           <summary>How much does MedPREP Premium cost?</summary>
-          <p>Premium costs PKR <span data-price="active-num">1,700</span> for full session access until exam results. The pricing section above always shows the current plans.</p>
+          <p>There are four plans, all valid until exam results: MCQs + Flashcards PKR <span data-price="plan-mcq_fc">999</span>, Notes + Flashcards PKR <span data-price="plan-notes_fc">999</span>, OSPE + Flashcards PKR <span data-price="plan-ospe">999</span>, and Full (everything) PKR <span data-price="plan-full">1,699</span>. Buying a second plan later is an upgrade to Full for PKR <span data-price="plan-upgrade">700</span> more. The pricing section above always shows the current plans.</p>
         </details>
         <details class="faq-item">
           <summary>How do I pay?</summary>
@@ -1904,12 +1940,12 @@
           Ready to <span class="gold">Get Started?</span>
         </h2>
         <p class="cta-sub">
-          PKR <span data-price="active-num">1,700</span> gets you full access for the entire session (down from PKR <span data-price="original-num">2,500</span>). This price is only for this year.
+          PKR <span data-price="active-num">1,699</span> gets you full access for the entire session (down from PKR <span data-price="original-num">2,500</span>). This price is only for this year.
         </p>
         <p class="cta-note">Open for KMU students now</p>
         <div class="cta-actions">
           <a href="register.html" class="btn-primary btn-primary-lg">
-            Register Now, PKR <span data-price="active-num">1,700</span>
+            Register Now, PKR <span data-price="active-num">1,699</span>
             <i class="ti ti-arrow-right" aria-hidden="true"></i>
           </a>
           <a href="#features" class="btn-secondary" style="padding: 15px 28px; font-size: 15px;">
@@ -2000,7 +2036,7 @@
   <!-- ── FLOATING REGISTER BUTTON ── -->
   <button id="float-reg" onclick="window.location.href='register.html'" aria-label="Register now">
     <i class="ti ti-user-plus" aria-hidden="true"></i>
-    Register, PKR <span data-price="active-num">1,700</span>
+    Register, PKR <span data-price="active-num">1,699</span>
   </button>
 
   <!-- ── WHATSAPP BUTTON ── -->

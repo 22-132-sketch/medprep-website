@@ -38,3 +38,13 @@ Scope: `medprep-website` and `medprep-admin` only. Work on `main`, small commits
 - **5.4 and MedPREP-APP** not touched, as instructed.
 - **Update by hand when they change:** the "7,800+ MCQs" figure (FAQ + `llms.txt`) and the PKR 1,700 text in the FAQ markup.
 - **Not yet on `features.html`:** OSPE. Offered to the owner as a next step.
+
+## Session 2b: plans (website)
+| Item | Result |
+|---|---|
+| Price table | `assets/js/pricing.js` now holds `PLANS` (full 1,699; mcq_fc / notes_fc / ospe 999; upgrade 700). `data-price="plan-<key>"` fills any span. Full replaces the old 1,700 (`active-num` = 1,699) |
+| Pricing section | `index.html`: three 999 cards + Full card (best value). "Save PKR 1,298" is NOT used: the true claim is "any two 999 plans cost more than Full" |
+| Register | `register.html`: 5-option selector (4 plans + Upgrade to Full, +700), `?plan=` preselects, amount follows the plan. Registration doc now has `planKey`, `upgrade`, `amount` (matches the admin amount check) |
+| Text | FAQ JSON-LD + visible FAQ, `terms.html`, `llms.txt` updated and consistent |
+| Not changed | Next-session prices (3,500 / 500 month) untouched |
+| Launch | Held on branch `plans-website`, not on `main`, until the rules are deployed (students could otherwise buy a partial plan the admin cannot grant yet) |

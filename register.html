@@ -950,26 +950,80 @@
         <!-- Plan Selector -->
         <div class="plan-selector" role="radiogroup" aria-label="Select a plan">
 
-          <label class="plan-option selected" id="plan-launch-label" onclick="selectPlan('launch', this)">
-            <input type="radio" name="plan" value="launch" id="plan-launch" checked />
+          <label class="plan-option selected" id="plan-full-label" onclick="selectPlan('full', this)">
+            <input type="radio" name="plan" value="full" id="plan-full" checked />
             <div class="plan-badge">Best Value</div>
             <div class="plan-option-inner">
               <div class="plan-option-left">
-                <div class="plan-radio">
-                  <div class="plan-radio-dot"></div>
-                </div>
+                <div class="plan-radio"><div class="plan-radio-dot"></div></div>
                 <div>
-                  <div class="plan-name">Launch Special, Full Session</div>
-                  <div class="plan-desc">Until exam results &bull; This year only</div>
+                  <div class="plan-name">Full: everything</div>
+                  <div class="plan-desc">MCQs, Notes, Flashcards, OSPE, Challenge a friend &bull; Until exam results</div>
                 </div>
               </div>
-              <div class="plan-price" id="plan-price-display"><span style="text-decoration: line-through; color: var(--text-muted); font-size: 0.75em; margin-right: 6px;">PKR <span data-price="original-num">2,500</span></span>PKR <span data-price="active-num">1,700</span></div>
+              <div class="plan-price">PKR <span data-price="plan-full">1,699</span></div>
+            </div>
+          </label>
+          <label class="plan-option" id="plan-mcq_fc-label" onclick="selectPlan('mcq_fc', this)">
+            <input type="radio" name="plan" value="mcq_fc" id="plan-mcq_fc" />
+
+            <div class="plan-option-inner">
+              <div class="plan-option-left">
+                <div class="plan-radio"><div class="plan-radio-dot"></div></div>
+                <div>
+                  <div class="plan-name">MCQs + Flashcards</div>
+                  <div class="plan-desc">MCQs, Flashcards, Challenge a friend &bull; Until exam results</div>
+                </div>
+              </div>
+              <div class="plan-price">PKR <span data-price="plan-mcq_fc">999</span></div>
+            </div>
+          </label>
+          <label class="plan-option" id="plan-notes_fc-label" onclick="selectPlan('notes_fc', this)">
+            <input type="radio" name="plan" value="notes_fc" id="plan-notes_fc" />
+
+            <div class="plan-option-inner">
+              <div class="plan-option-left">
+                <div class="plan-radio"><div class="plan-radio-dot"></div></div>
+                <div>
+                  <div class="plan-name">Notes + Flashcards</div>
+                  <div class="plan-desc">Notes and Flashcards &bull; Until exam results</div>
+                </div>
+              </div>
+              <div class="plan-price">PKR <span data-price="plan-notes_fc">999</span></div>
+            </div>
+          </label>
+          <label class="plan-option" id="plan-ospe-label" onclick="selectPlan('ospe', this)">
+            <input type="radio" name="plan" value="ospe" id="plan-ospe" />
+
+            <div class="plan-option-inner">
+              <div class="plan-option-left">
+                <div class="plan-radio"><div class="plan-radio-dot"></div></div>
+                <div>
+                  <div class="plan-name">OSPE + Flashcards</div>
+                  <div class="plan-desc">OSPE and Flashcards &bull; Until exam results</div>
+                </div>
+              </div>
+              <div class="plan-price">PKR <span data-price="plan-ospe">999</span></div>
+            </div>
+          </label>
+          <label class="plan-option" id="plan-upgrade-label" onclick="selectPlan('upgrade', this)">
+            <input type="radio" name="plan" value="upgrade" id="plan-upgrade" />
+
+            <div class="plan-option-inner">
+              <div class="plan-option-left">
+                <div class="plan-radio"><div class="plan-radio-dot"></div></div>
+                <div>
+                  <div class="plan-name">Upgrade to Full</div>
+                  <div class="plan-desc">Already on a PKR 999 plan? Pay the difference</div>
+                </div>
+              </div>
+              <div class="plan-price">PKR <span data-price="plan-upgrade">700</span></div>
             </div>
           </label>
 
         </div>
 
-        <span data-price="label" style="display:inline-block; background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid var(--gold-border); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; margin-top:-16px; margin-bottom:16px;">32% off</span>
+        <p style="font-size: 11px; color: var(--text-faint); margin-top: -16px; margin-bottom: 8px;">Any two PKR 999 plans cost more than Full, so a second plan is always an upgrade to Full for PKR 700 more. Offline use is included in every plan.</p>
 
         <p style="font-size: 11px; color: var(--text-faint); margin-top: -16px; margin-bottom: 28px;">
           Next session plans (PKR 3,500 full / PKR 500/month) will be available when the new session begins.
@@ -1148,11 +1202,11 @@
 
               <div class="selected-plan-box">
                 <div>
-                  <div class="selected-plan-name">Launch Special, Full Session</div>
+                  <div class="selected-plan-name" id="selected-plan-name-display">Full: everything</div>
                   <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Until exam results &bull; This year only</div>
                 </div>
                 <div style="text-align: right;">
-                  <div class="selected-plan-price" id="selected-plan-price-display"><span style="text-decoration: line-through; color: var(--text-muted); font-size: 0.75em; margin-right: 6px;">PKR <span data-price="original-num">2,500</span></span>PKR <span data-price="active-num">1,700</span></div>
+                  <div class="selected-plan-price" id="selected-plan-price-display">PKR <span id="selected-plan-amount">1,699</span></div>
                 </div>
               </div>
 
@@ -1250,11 +1304,11 @@
 
                 <div class="bank-row">
                   <span class="bank-label">Plan</span>
-                  <span class="bank-value">Launch Special, Full Session</span>
+                  <span class="bank-value" id="review-plan-name">Full: everything</span>
                 </div>
                 <div class="bank-row">
                   <span class="bank-label">Amount</span>
-                  <span class="bank-value" id="review-amount" style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 16px;">PKR <span data-price="active-num">1,700</span></span>
+                  <span class="bank-value" id="review-amount" style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 16px;">PKR <span id="review-amount-num">1,699</span></span>
                 </div>
                 <div class="bank-row">
                   <span class="bank-label">Screenshot</span>
@@ -1266,7 +1320,7 @@
               <label style="display: flex; gap: 10px; align-items: flex-start; cursor: pointer; margin-bottom: 24px;">
                 <input type="checkbox" id="agree-check" style="margin-top: 3px; accent-color: var(--gold); width: 15px; height: 15px; flex-shrink: 0;" />
                 <span style="font-size: 12px; color: var(--text-secondary); line-height: 1.6;">
-                  I confirm that all details above are correct and I have transferred <span id="agree-amount">PKR <span data-price="active-num">1,700</span></span> to the MCB Bank account provided. I understand that access will be sent to my email within 24 hours after verification.
+                  I confirm that all details above are correct and I have transferred <span id="agree-amount">PKR <span id="agree-amount-num">1,699</span></span> to the MCB Bank account provided. I understand that access will be sent to my email within 24 hours after verification.
                 </span>
               </label>
               <div class="field-error" id="err-agree">
@@ -1415,8 +1469,16 @@
     // Current price comes from the shared, date-based pricing config
     // (assets/js/pricing.js) — same source of truth as the rest of the
     // site, so this page never needs its own toggle or cutoff logic.
-    function getCurrentAmount() {
-      return window.MEDPREP_PRICING ? window.MEDPREP_PRICING.active : 1700;
+    var FALLBACK_PLANS = { full: { label: 'Full: everything', price: 1699 }, mcq_fc: { label: 'MCQs + Flashcards', price: 999 }, notes_fc: { label: 'Notes + Flashcards', price: 999 }, ospe: { label: 'OSPE + Flashcards', price: 999 }, upgrade: { label: 'Upgrade to Full', price: 700 } };
+    var currentPlanKey = 'full';
+    function planInfo(k) { var t = window.MEDPREP_PLANS || FALLBACK_PLANS; return t[k] || FALLBACK_PLANS[k]; }
+    function planDisplayName(k) { return k === 'full' ? 'Full: everything' : planInfo(k).label; }
+    // Amount follows the selected plan (999 / 1,699 / 700 upgrade); the admin checks it before approving.
+    function getCurrentAmount() { return planInfo(currentPlanKey).price; }
+    function renderPlanAmounts() {
+      var n = getCurrentAmount().toLocaleString('en-PK'), name = planDisplayName(currentPlanKey);
+      ['selected-plan-amount', 'review-amount-num', 'agree-amount-num'].forEach(function (id) { var e = document.getElementById(id); if (e) e.textContent = n; });
+      ['selected-plan-name-display', 'review-plan-name'].forEach(function (id) { var e = document.getElementById(id); if (e) e.textContent = name; });
     }
 
     // ── REFERRAL CODE (optional) ──
@@ -1480,7 +1542,17 @@
       });
       label.classList.add('selected');
       document.getElementById('plan-' + planId).checked = true;
+      currentPlanKey = planId;
+      renderPlanAmounts();
     }
+    // ?plan=mcq_fc on the link preselects a plan (pricing cards use this).
+    document.addEventListener('DOMContentLoaded', function () {
+      try {
+        var q = new URLSearchParams(location.search).get('plan');
+        if (q && document.getElementById('plan-' + q + '-label')) selectPlan(q, document.getElementById('plan-' + q + '-label'));
+        else renderPlanAmounts();
+      } catch (e) { renderPlanAmounts(); }
+    });
 
     // ── COPY TO CLIPBOARD ──
     function copyText(text, btn) {
@@ -1866,8 +1938,10 @@
           phone:           document.getElementById('phone').value.trim(),
           university:      document.getElementById('university').value,
           year:            document.getElementById('year').value,
-          plan:            'launch',
-          planLabel:       'Launch Special, Full Session',
+          plan:            currentPlanKey === 'upgrade' ? 'full' : currentPlanKey,
+          planKey:         currentPlanKey === 'upgrade' ? 'full' : currentPlanKey,
+          upgrade:         currentPlanKey === 'upgrade',
+          planLabel:       (currentPlanKey === 'upgrade' ? 'Upgrade to Full' : planDisplayName(currentPlanKey)) + ', Full Session',
           amount:          getCurrentAmount(),
           currency:        'PKR',
           screenshotUrl:   screenshotUrl,

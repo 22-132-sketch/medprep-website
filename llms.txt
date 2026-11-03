@@ -14,7 +14,7 @@ Tagline: Where Pakistan's Best Doctors Begin.
 - Leaderboard
 
 ## Access and pricing
-- Premium subscription, paid by bank transfer or other methods that reach the MedPREP bank account, then activated manually by the team. Current prices are on the pricing section of the home page.
+- Premium subscription, paid by bank transfer or other methods that reach the MedPREP bank account, then activated manually by the team. Four plans, all valid until exam results: MCQs + Flashcards PKR 999, Notes + Flashcards PKR 999, OSPE + Flashcards PKR 999, Full (everything) PKR 1,699. A second plan is an upgrade to Full for PKR 700 more. Current prices are also on the pricing section of the home page.
 - Free trial: 1 day of full Premium, one per student, requested on the trial page and activated by the team on WhatsApp.
 - The app works in the browser and can be installed on Windows, Android and iOS.
 
