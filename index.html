@@ -1094,6 +1094,19 @@
       line-height: 1.7;
     }
 
+    /* ── FAQ ── */
+    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+    .faq-item { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .faq-item[open] { border-color: var(--gold-border); }
+    .faq-item summary { cursor: pointer; list-style: none; padding: 16px 20px; min-height: 44px; font-size: 15px; font-weight: 500; color: var(--text-primary); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: "+"; color: var(--gold); font-size: 20px; line-height: 1; flex-shrink: 0; }
+    .faq-item[open] summary::after { content: "\2212"; }
+    .faq-item summary:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+    .faq-item p { padding: 0 20px 18px; color: var(--text-secondary); font-size: 14px; line-height: 1.75; }
+    .faq-more { text-align: center; margin-top: 24px; font-size: 14px; color: var(--text-secondary); }
+    .faq-more a { color: var(--gold); }
+
     /* ── SCROLL ANIMATIONS ── */
     .reveal {
       opacity: 0;
@@ -1243,6 +1256,86 @@
   "publisher": {
     "@id": "https://register.medprepapp.me/#organization"
   }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is MedPREP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MedPREP is an exam preparation platform for Pakistani medical students. It brings together an MCQ bank with explanations, structured notes and flashcards in one app."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which students is MedPREP for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MedPREP is built for Khyber Medical University (KMU) students today, and we are expanding across Pakistan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does MedPREP Premium cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Premium costs PKR 1,700 for full session access until exam results. The pricing section above always shows the current plans."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I pay?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can pay by bank transfer or another method, such as JazzCash or Easypaisa, as long as the money reaches our bank account. After paying, upload your proof of payment when you register. Our team verifies it manually and sends your access within 24 hours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the free trial work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can try full Premium free for 1 day. Request it on the trial page, share your WhatsApp number, and our team will activate it. One trial is available per student."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which devices does MedPREP work on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MedPREP works on Windows, Android and iOS. You can open it in your browser or install it without an app store. Steps are on the download page."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does MedPREP guarantee that I will pass?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. MedPREP is a study aid that supports your preparation. It does not replace your official university material or teachers, and we cannot guarantee exam results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I pay and do not get access?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Please contact us right away if you do not receive your access within 48 hours of paying. We will deliver it or arrange a fair resolution. We also encourage you to try the 1-day free trial before you pay. Full details are in our Terms of Use."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I contact support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Message us on WhatsApp at +92 307 3005231 or use the contact page. We aim to respond within 24 hours."
+      }
+    }
+  ]
 }
   </script>
 </head>
@@ -1667,6 +1760,56 @@
   </div>
 
   <div class="divider"></div>
+
+  <!-- ── FAQ ── -->
+  <section id="faq" class="section section-alt" aria-label="Frequently asked questions">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="tag">FAQ</div>
+        <h2 class="section-title">Frequently Asked <span class="gold">Questions</span></h2>
+        <p class="section-desc">Quick answers before you register.</p>
+      </div>
+      <div class="faq-list reveal">
+        <details class="faq-item">
+          <summary>What is MedPREP?</summary>
+          <p>MedPREP is an exam preparation platform for Pakistani medical students. It brings together an MCQ bank with explanations, structured notes and flashcards in one app.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Which students is MedPREP for?</summary>
+          <p>MedPREP is built for Khyber Medical University (KMU) students today, and we are expanding across Pakistan.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How much does MedPREP Premium cost?</summary>
+          <p>Premium costs PKR <span data-price="active-num">1,700</span> for full session access until exam results. The pricing section above always shows the current plans.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How do I pay?</summary>
+          <p>You can pay by bank transfer or another method, such as JazzCash or Easypaisa, as long as the money reaches our bank account. After paying, upload your proof of payment when you register. Our team verifies it manually and sends your access within 24 hours.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does the free trial work?</summary>
+          <p>You can try full Premium free for 1 day. Request it on the trial page, share your WhatsApp number, and our team will activate it. One trial is available per student.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Which devices does MedPREP work on?</summary>
+          <p>MedPREP works on Windows, Android and iOS. You can open it in your browser or install it without an app store. Steps are on the download page.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does MedPREP guarantee that I will pass?</summary>
+          <p>No. MedPREP is a study aid that supports your preparation. It does not replace your official university material or teachers, and we cannot guarantee exam results.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What if I pay and do not get access?</summary>
+          <p>Please contact us right away if you do not receive your access within 48 hours of paying. We will deliver it or arrange a fair resolution. We also encourage you to try the 1-day free trial before you pay. Full details are in our Terms of Use.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How do I contact support?</summary>
+          <p>Message us on WhatsApp at +92 307 3005231 or use the contact page. We aim to respond within 24 hours.</p>
+        </details>
+      </div>
+      <p class="faq-more">More questions? <a href="contact.html">Contact us</a> or <a href="https://wa.me/923073005231" target="_blank" rel="noopener">message us on WhatsApp</a>.</p>
+    </div>
+  </section>
 
   <!-- ── FINAL CTA ── -->
   <section id="cta" class="section-alt2" aria-label="Call to action">

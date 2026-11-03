@@ -29,7 +29,7 @@ Scope: `medprep-website` and `medprep-admin` only. Work on `main`, small commits
 | Lawyer review | Recommended before launch. Not legal advice |
 
 ## Deviations and notes
-- **No `FAQPage` markup:** no page has a visible FAQ, and markup must match visible text. Needs owner-approved FAQ text first.
+- **FAQ added to the home page** (9 questions, owner-approved scope and price) with matching `FAQPage` JSON-LD. The visible price follows `assets/js/pricing.js`; the JSON-LD text says PKR 1,700, so update it if the price changes.
 - **No `Course` / `EducationalOrganization` markup:** not enough verified facts on the site. `Organization` has no `legalName` or `contactPoint` yet, pending the 3.4 answers.
 - **Admin "Ending soon / ended" filter** (`js/trial-requests.js`, window of 2 days) now matches every active 1-day trial. Left as is; tell me if you want a shorter window.
 - **Sitemap lastmod** uses the last git commit date per file, so today's tag edits moved every date to 3 Nov 2026.
