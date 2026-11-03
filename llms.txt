@@ -5,7 +5,9 @@
 Tagline: Where Pakistan's Best Doctors Begin.
 
 ## What it offers
-- MCQ bank with explanations, with practice, timed and exam-style modes
+- MCQ bank (7,800+ MCQs for 4th year in 2026, expanding where gaps are found) with a full explanation for every question: why the right answer is right, why each wrong option is wrong, the trap and a high-yield pearl
+- Tutor, Timed and Exam study modes and a custom session builder
+- OSPE preparation: image-based slide stations for Eye and ENT, instrument stations, theory cheat sheets for the viva, and pharmacology prescriptions
 - Structured notes aligned to university syllabi
 - Flashcards, including cards generated from wrongly answered MCQs
 - Syllabus tracker, weak-area detection and performance analytics
