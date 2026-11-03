@@ -1,0 +1,30 @@
+# Progress: website + admin (session of 4 Nov 2026)
+
+Scope: `medprep-website` and `medprep-admin` only. Work on `main`, small commits, no force-push.
+
+## Done
+| Item | Repo | Result |
+|---|---|---|
+| 3.3 Trial = 1 day | admin | `TRIAL_DAYS` 3 to 1 (`js/premium.js`); "3-Day" strings in `student-detail.html` and comments updated. Messages built from `TRIAL_DAYS` now say "1-day" automatically |
+| 3.3 Trial = 1 day | website | `trial.html` (title, description, h1, lead, success text) and `register.html` link text |
+| 5.1 Open Graph | website | Full `og:*` + `twitter:*` on all 13 indexable pages; new `images/og-share.png` (1200x630). `404` and `referral-status` untouched |
+| 5.2 JSON-LD | website | `Organization` + `WebSite` on home; `BreadcrumbList` on 12 inner pages |
+| 5.3 Sitemap + robots | website | `scripts/build-sitemap.mjs` regenerates `sitemap.xml` (real lastmod from git, skips noindex pages). `robots.txt` unchanged for now |
+| 5.5 Blog structure | website | `scripts/build-blog.mjs` + `assets/blog.css` + `docs/BLOG_GUIDE.md`. No articles written |
+| 5.7 Performance | website | Tabler icons pinned to 3.49.0 (was `@latest`) + CDN preconnect |
+| 5.8 Owner checklist | website | `docs/OWNER_CHECKLIST.md` |
+
+## Waiting on the owner
+| Item | Question |
+|---|---|
+| 3.4 Legal | Business name, support email, payment methods (spec open items 1 and 2) |
+| 5.6 llms.txt + robots | Allow AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended)? |
+
+## Deviations and notes
+- **No `FAQPage` markup:** no page has a visible FAQ, and markup must match visible text. Needs owner-approved FAQ text first.
+- **No `Course` / `EducationalOrganization` markup:** not enough verified facts on the site. `Organization` has no `legalName` or `contactPoint` yet, pending the 3.4 answers.
+- **Admin "Ending soon / ended" filter** (`js/trial-requests.js`, window of 2 days) now matches every active 1-day trial. Left as is; tell me if you want a shorter window.
+- **Sitemap lastmod** uses the last git commit date per file, so today's tag edits moved every date to 3 Nov 2026.
+- **5.7 not measured:** no browser in this environment, so no before/after Lighthouse numbers. Fonts are still on Google Fonts (preconnect + `display=swap` already present). Steps in `OWNER_CHECKLIST.md` item 12.
+- **App locked-screen text** (`firebase.js`) still says "3-day": left for the later app session, as instructed.
+- **5.4 and MedPREP-APP** not touched, as instructed.
