@@ -1,0 +1,12 @@
+{
+  "status": "draft",
+  "slug": "example-article-slug",
+  "title": "Title that states the question or topic",
+  "description": "One sentence, under 160 characters, shown in Google results.",
+  "question": "The one question this article answers?",
+  "answer": "The direct answer in one or two sentences.",
+  "date": "2026-11-04",
+  "author": "MedPREP Team",
+  "category": "Exam Guides",
+  "bodyHtml": "<h2>First heading</h2><p>Approved text goes here.</p>"
+}
