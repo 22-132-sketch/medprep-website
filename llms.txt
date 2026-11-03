@@ -1,0 +1,34 @@
+# MedPREP
+
+> MedPREP is an exam preparation platform for Pakistani medical students, with an MCQ bank, structured notes and flashcards. It is built for students of Khyber Medical University (KMU) and is expanding across Pakistan. MedPREP is operated by Exonovo in Abbottabad, Pakistan.
+
+Tagline: Where Pakistan's Best Doctors Begin.
+
+## What it offers
+- MCQ bank with explanations, with practice, timed and exam-style modes
+- Structured notes aligned to university syllabi
+- Flashcards, including cards generated from wrongly answered MCQs
+- Syllabus tracker, weak-area detection and performance analytics
+- Leaderboard
+
+## Access and pricing
+- Premium subscription, paid by bank transfer or other methods that reach the MedPREP bank account, then activated manually by the team. Current prices are on the pricing section of the home page.
+- Free trial: 1 day of full Premium, one per student, requested on the trial page and activated by the team on WhatsApp.
+- The app works in the browser and can be installed on Windows, Android and iOS.
+
+## Key pages
+- [Home](https://register.medprepapp.me/): overview and pricing
+- [Features](https://register.medprepapp.me/features.html): everything the platform includes
+- [Free trial](https://register.medprepapp.me/trial.html): request the 1-day trial
+- [Register](https://register.medprepapp.me/register.html): subscribe to Premium
+- [Download](https://register.medprepapp.me/download.html): install the app
+- [About](https://register.medprepapp.me/about.html): the story behind MedPREP
+- [Blog](https://register.medprepapp.me/blog.html): exam guides and updates
+- [Contact](https://register.medprepapp.me/contact.html): support
+- [Privacy Policy](https://register.medprepapp.me/privacy.html) and [Terms of Use](https://register.medprepapp.me/terms.html)
+
+## App
+- The app itself is at https://medprepapp.me (sign-in required for the full question bank).
+
+## Notes for assistants
+- MedPREP is a study aid. It does not guarantee exam results and does not replace official university material.
