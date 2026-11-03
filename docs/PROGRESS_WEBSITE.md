@@ -14,11 +14,19 @@ Scope: `medprep-website` and `medprep-admin` only. Work on `main`, small commits
 | 5.7 Performance | website | Tabler icons pinned to 3.49.0 (was `@latest`) + CDN preconnect |
 | 5.8 Owner checklist | website | `docs/OWNER_CHECKLIST.md` |
 
-## Waiting on the owner
-| Item | Question |
+## Also done (after owner answers)
+| Item | Result |
 |---|---|
-| 3.4 Legal | Business name, support email, payment methods (spec open items 1 and 2) |
-| 5.6 llms.txt + robots | Allow AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended)? |
+| 3.4 Legal | `privacy.html` and `terms.html` updated, effective 4 Nov 2026. Added Firebase, Sentry replay, Resend, WhatsApp, flashcard sync, trial, guest mode, deletion, payment methods. Fixed wrong domain `medprep.pk`. Name "Exonovo" and the Gmail kept |
+| 5.6 GEO | `llms.txt` added; `robots.txt` explicitly allows GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-User, Claude-SearchBot, PerplexityBot, Google-Extended, Applebot-Extended |
+
+## Owner to confirm
+| Item | Why |
+|---|---|
+| Sentry masking | Policy says text and inputs are masked by default. Confirm in the Sentry project settings |
+| Guest mode wording | Written as "where available", since guest mode is not built yet |
+| Payment wording | Read as: any method is fine if the money reaches the bank account (bank transfer, JazzCash, Easypaisa). Bank details unchanged |
+| Lawyer review | Recommended before launch. Not legal advice |
 
 ## Deviations and notes
 - **No `FAQPage` markup:** no page has a visible FAQ, and markup must match visible text. Needs owner-approved FAQ text first.
