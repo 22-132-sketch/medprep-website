@@ -1403,18 +1403,18 @@
         <div class="download-card" id="card-windows">
           <div class="download-icon"><i class="ti ti-brand-windows" aria-hidden="true"></i></div>
           <div class="download-platform">Windows</div>
-          <div class="download-desc">Install as a desktop app straight from your browser.</div>
-          <button class="download-btn" onclick="medprepDownload('windows')">
-            Get for Windows <i class="ti ti-arrow-right" aria-hidden="true"></i>
+          <div class="download-desc" id="desc-windows">Install as a desktop app straight from your browser.</div>
+          <button class="download-btn" id="btn-windows" onclick="medprepDownload('windows')">
+            <span class="btn-label">Get for Windows</span> <i class="ti ti-arrow-right" aria-hidden="true"></i>
           </button>
         </div>
 
         <div class="download-card" id="card-android">
           <div class="download-icon"><i class="ti ti-brand-android" aria-hidden="true"></i></div>
           <div class="download-platform">Android</div>
-          <div class="download-desc">One tap to install. No storage-heavy APK, no Play Store wait.</div>
-          <button class="download-btn" onclick="medprepDownload('android')">
-            Get for Android <i class="ti ti-arrow-right" aria-hidden="true"></i>
+          <div class="download-desc" id="desc-android">One tap to install. No storage-heavy APK, no Play Store wait.</div>
+          <button class="download-btn" id="btn-android" onclick="medprepDownload('android')">
+            <span class="btn-label">Get for Android</span> <i class="ti ti-arrow-right" aria-hidden="true"></i>
           </button>
         </div>
 
@@ -1694,6 +1694,23 @@
     // ── DOWNLOAD SECTION: platform detect + routing ──
     const APP_URL = 'https://medprepapp.me/';
 
+    // Direct links to the native app files (the Android APK and the Windows installer).
+    // Leave a value empty and that platform keeps the browser install below, so there is never a dead button.
+    // The release step fills these in once the files are publicly downloadable.
+    const NATIVE_DOWNLOADS = { android: '', windows: '' };
+    const NATIVE_TEXT = {
+      android: { desc: 'The full MedPREP app with offline study. Download, then tap the file to install. If your phone asks, allow installs from this browser.', label: 'Download for Android' },
+      windows: { desc: 'The full MedPREP app with offline study. Download and run the installer.', label: 'Download for Windows' }
+    };
+    (function showNativeOffers() {
+      ['android', 'windows'].forEach(function (p) {
+        if (!NATIVE_DOWNLOADS[p]) return;
+        const d = document.getElementById('desc-' + p), b = document.getElementById('btn-' + p);
+        if (d) d.textContent = NATIVE_TEXT[p].desc;
+        const l = b && b.querySelector('.btn-label'); if (l) l.textContent = NATIVE_TEXT[p].label;
+      });
+    })();
+
     function detectPlatform() {
       const ua = navigator.userAgent || '';
       const platform = navigator.platform || '';
@@ -1719,6 +1736,10 @@
       const url = APP_URL + '?autoinstall=1&utm_source=website&utm_medium=download_section&utm_campaign=' + platform;
       if (platform === 'ios') {
         document.getElementById('iosModal').classList.add('active');
+        return;
+      }
+      if (NATIVE_DOWNLOADS[platform]) {
+        window.location.href = NATIVE_DOWNLOADS[platform];
         return;
       }
       // Windows / Android: open the app with ?autoinstall=1. pwa-install.js
