@@ -1697,10 +1697,13 @@
     // Direct links to the native app files (the Android APK and the Windows installer).
     // Leave a value empty and that platform keeps the browser install below, so there is never a dead button.
     // The release step fills these in once the files are publicly downloadable.
-    const NATIVE_DOWNLOADS = { android: '', windows: '' };
+    const NATIVE_DOWNLOADS = {
+      android: 'https://github.com/22-132-sketch/medprep-releases/releases/latest/download/MedPREP-Android.apk',
+      windows: 'https://github.com/22-132-sketch/medprep-releases/releases/latest/download/MedPREP-Windows-Setup.exe'
+    };
     const NATIVE_TEXT = {
       android: { desc: 'The full MedPREP app with offline study. Download, then tap the file to install. If your phone asks, allow installs from this browser.', label: 'Download for Android' },
-      windows: { desc: 'The full MedPREP app with offline study. Download and run the installer.', label: 'Download for Windows' }
+      windows: { desc: 'The full MedPREP app with offline study. Download and run the installer. If Windows shows a blue warning, tap "More info", then "Run anyway".', label: 'Download for Windows' }
     };
     (function showNativeOffers() {
       ['android', 'windows'].forEach(function (p) {
