@@ -1,0 +1,5 @@
+{
+  "_note": "RELEASE-DAY ONLY: fill in version, size (bytes) and sha256 for each file from the published release (SHA256SUMS.txt). Left empty, the page shows file names without sizes.",
+  "version": null,
+  "files": {}
+}
