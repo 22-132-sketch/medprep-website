@@ -1,0 +1,12 @@
+{
+  "android": {
+    "version": "0.2.0",
+    "minSupported": "0.1.0",
+    "page": "https://register.medprepapp.me/download.html",
+    "notes": [
+      "Offline study for Premium students: questions, notes, flashcards and OSPE.",
+      "Calmer update messages."
+    ]
+  },
+  "updated": "2026-11-07"
+}

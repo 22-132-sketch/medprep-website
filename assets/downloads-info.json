@@ -1,5 +1,8 @@
 {
-  "_note": "RELEASE-DAY ONLY: fill in version, size (bytes) and sha256 for each file from the published release (SHA256SUMS.txt). Left empty, the page shows file names without sizes.",
-  "version": null,
-  "files": {}
+  "version": "0.2.0",
+  "files": {
+    "MedPREP-Android.apk": { "size": 25534550, "sha256": "c1e4f02832ec9221ddc7be66eabf5e8ca60d113e8a09ad482a497b86b4a57d04" },
+    "MedPREP-Windows-Setup.exe": { "size": 8154948, "sha256": "190f750d396848a1da873ad71b98efd8379c5d0336fdd98ebcf579a31a86a071" },
+    "MedPREP-Windows.msi": { "size": 8904704, "sha256": "ad4fea69c6674eeaa4fefcbc469290f6a6a065a78c6172ce10a782af937a5100" }
+  }
 }
