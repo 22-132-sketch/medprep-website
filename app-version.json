@@ -1,12 +1,13 @@
 {
   "android": {
-    "version": "0.2.0",
+    "version": "0.2.4",
     "minSupported": "0.1.0",
     "page": "https://register.medprepapp.me/download.html",
     "notes": [
-      "Offline study for Premium students: questions, notes, flashcards and OSPE.",
-      "Calmer update messages."
+      "Faster opening of Practice, Topic-wise Practice and Home.",
+      "Fixes for the app freezing while you study.",
+      "Your offline content and progress stay as they are."
     ]
   },
-  "updated": "2026-11-07"
+  "updated": "2026-11-25"
 }

@@ -1,8 +1,8 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.4",
   "files": {
-    "MedPREP-Android.apk": { "size": 25534550, "sha256": "c1e4f02832ec9221ddc7be66eabf5e8ca60d113e8a09ad482a497b86b4a57d04" },
-    "MedPREP-Windows-Setup.exe": { "size": 8154948, "sha256": "190f750d396848a1da873ad71b98efd8379c5d0336fdd98ebcf579a31a86a071" },
-    "MedPREP-Windows.msi": { "size": 8904704, "sha256": "ad4fea69c6674eeaa4fefcbc469290f6a6a065a78c6172ce10a782af937a5100" }
+    "MedPREP-Android.apk": { "size": 25800385, "sha256": "56e4df10be4bbd639ba96dfad33f0f4e6639a48b024a9a49ce183e3b8931b9dc" },
+    "MedPREP-Windows-Setup.exe": { "size": 8200082, "sha256": "c3b6845ca0f33a1ecfc36b7e4f76dbecb263b1e56d9971b1137c244e2b03a839" },
+    "MedPREP-Windows.msi": { "size": 8953856, "sha256": "9adfa6cc20da7ba8a1a0b1e5b69c12d94500ae42b1b386625070bfcfb45b165b" }
   }
 }
